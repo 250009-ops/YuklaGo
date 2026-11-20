@@ -1,0 +1,49 @@
+# Dependencies and builds
+node_modules/
+.pnpm-store/
+dist/
+build/
+out/
+.next/
+.turbo/
+.expo/
+.capacitor/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+*.key
+secrets/
+
+# Logs and local data
+*.log
+npm-debug.log*
+coverage/
+.nyc_output/
+tmp/
+.cache/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Electron
+apps/desktop/release/
+
+# Object-storage local stand-in
+.minio/
+data/local-uploads/
+
+# Prisma generated client (schema in contracts/ is the contract)
+services/api/src/generated/
+
+# Graphify output is regenerable
+graphify-out/
