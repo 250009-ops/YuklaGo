@@ -1,0 +1,179 @@
+{
+  "generated": "2026-11-18",
+  "source_checked_date": "2026-11-18",
+  "customs_clearance_fee": {
+    "legal_basis": "Vazirlar Mahkamasining 31.01.2025 dagi 55-son qarori, 1-ilova, 1-pozitsiya 'a' kichik bandi (1-ilova VM 06.11.2025 dagi 700-son qarori tahririda, kuchga kirish 08.02.2026; izohga ko'ra 1-pozitsiya 'a' va 3-pozitsiya 01.01.2026 dan kuchda). Keyingi o'zgartirish: VM 20.07.2026 dagi 393-son (izohga tranzit xatboshisi qo'shilgan).",
+    "source_url": "https://lex.uz/docs/-7357270",
+    "applies_to": "BYD orqali rasmiylashtiriladigan tovarlar ('vaqtincha saqlash', 'davlat foydasiga voz kechish', 'yo'q qilish' va 1-pozitsiya b–d kichik bandlaridagilardan tashqari). Bitta BYD uchun bitta summa (tovar pozitsiyasi soniga bog'liq emas).",
+    "basis": "BYD bo'yicha jami bojxona qiymatining AQSH dollaridagi ekvivalenti",
+    "conversion_note": "Ekvivalent qaysi kurs bo'yicha hisoblanishi 55-son qarorda yozilmagan; Bojxona kodeksi 326-modda bo'yicha deklaratsiya qabul qilingan kundagi MB kursi taxmin qilinadi — ASSUMPTION.",
+    "edge_semantics_as_written": "Matn: '10 000 AQSH dollarigacha', '10 000 dan 20 000 AQSH dollarigacha', ..., '1 000 000 AQSH dollari va undan ortiq'. Faqat oxirgi band chegarani aniq o'z ichiga oladi ('va undan ortiq'). Qolgan chegaralar (aynan 10 000, 20 000, ... $) qaysi bandga tushishi matnda aniq emas.",
+    "engine_convention": "lower_inclusive / upper_exclusive (oxirgi band bilan izchil) — ASSUMPTION, rasmiy emas. Aynan chegaraviy qiymatda UI 'chegara noaniq' ogohlantirishi chiqarsin.",
+    "bands": [
+      {
+        "usd_from": null,
+        "usd_to": 10000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 1,
+        "text_as_written": "10 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 10000,
+        "usd_to": 20000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 1.5,
+        "text_as_written": "10 000 dan 20 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 20000,
+        "usd_to": 40000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 2.5,
+        "text_as_written": "20 000 dan 40 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 40000,
+        "usd_to": 60000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 4,
+        "text_as_written": "40 000 dan 60 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 60000,
+        "usd_to": 100000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 7,
+        "text_as_written": "60 000 dan 100 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 100000,
+        "usd_to": 200000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 10,
+        "text_as_written": "100 000 dan 200 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 200000,
+        "usd_to": 500000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 15,
+        "text_as_written": "200 000 dan 500 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 500000,
+        "usd_to": 1000000,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 20,
+        "text_as_written": "500 000 dan 1 000 000 AQSH dollarigacha",
+        "edge_verified": false
+      },
+      {
+        "usd_from": 1000000,
+        "usd_to": null,
+        "lower_inclusive": true,
+        "upper_exclusive": true,
+        "bhm_multiplier": 25,
+        "text_as_written": "1 000 000 AQSH dollari va undan ortiq",
+        "edge_verified": true
+      }
+    ],
+    "other_items": [
+      {
+        "item": "Tranzit / bojxona hududida va undan tashqarida qayta ishlash (bir deklaratsiya)",
+        "bhm_multiplier": 0.25
+      },
+      {
+        "item": "Yuridik shaxs olib kirayotgan naqd chet el valyutasi (bir deklaratsiya)",
+        "bhm_multiplier": 2.5
+      },
+      {
+        "item": "Umumiy shakldagi bojxona kirim orderi (bir order)",
+        "bhm_multiplier": 0.25
+      },
+      {
+        "item": "Xalqaro kuryerlik jo'natmalari (1 kg brutto)",
+        "bhm_multiplier": 0.02
+      },
+      {
+        "item": "BYDga o'zgartirish/qo'shimcha (deklarant murojaati bilan, bir BYD yoki bir tuzatish shakli)",
+        "bhm_multiplier": 0.25
+      },
+      {
+        "item": "Ish vaqtidan tashqari / dam olish kunlari rasmiylashtirish (har bir BYD; avtomatlashtirilgan BYDlar bundan mustasno)",
+        "bhm_multiplier": 0.25
+      },
+      {
+        "item": "Tovar bo'yicha dastlabki qaror (TIF TN tasnif) qabul qilish",
+        "bhm_multiplier": 0.75,
+        "note": "qaror bekor/o'zgartirilsa to'lov qaytarilmaydi"
+      }
+    ],
+    "free_regimes": "'vaqtincha saqlash', 'davlat foydasiga voz kechish', 'yo'q qilish' rejimlari uchun yig'im undirilmaydi (1-ilova, * izoh).",
+    "one_fee_for_staged_declaration": "Dastlabki, vaqtinchalik, to'liq bo'lmagan va davriy deklaratsiyalashda yig'im faqat dastlabki deklaratsiyalashda bir marta undiriladi (1-ilova, * izoh)."
+  },
+  "pre_arrival_discount": {
+    "rate_pct": 20,
+    "text_vm55": "'Tovarlar bo'yicha dastlabki deklaratsiyalash amalga oshirilganda bojxona yig'imining 20% miqdorida chegirma taqdim etiladi.' (VM 55, 1-ilova, * izoh — joriy tahrir)",
+    "text_pf250": "PF-250 (17.12.2025, kuchga kirish 23.12.2025), 2-band: '2026-yil 1-martdan boshlab tovarlarni ular chegara o'tkazish punktiga yetib kelguniga qadar dastlabki deklaratsiyalash orqali erkin muomalaga chiqarish bojxona rejimiga joylashtirishda: (a) bojxona rasmiylashtiruvi uchun bojxona yig'imi miqdori 20 foizga pasaytirilsin; (b) bo'lib-bo'lib (kechiktirib) to'lashda 14 kungacha foizlar hisoblamaslik'",
+    "effective_from": "2026-03-01",
+    "conditions": [
+      "rejim: erkin muomalaga chiqarish (import, IM-40)",
+      "dastlabki deklaratsiya tovar chegara o'tkazish punktiga yetib kelguniga qadar berilgan (Bojxona kodeksi dastlabki deklaratsiya qoidalari; 262-modda — 30 kunlik muddat)"
+    ],
+    "how_applied": "Avval band jami bojxona qiymatining USD ekvivalenti bo'yicha tanlanadi (chegirma bandni o'zgartirmaydi), so'ng fee = BHM × multiplier × 0.8. Chegirma faqat 1-pozitsiya 'a' (rasmiylashtirish yig'imi) ga — ASSUMPTION: VM 55 izohi 'bojxona yig'imi' deydi, PF-250 'bojxona rasmiylashtiruvi uchun bojxona yig'imi' deydi; boshqa yig'imlarga (saqlash, kuzatish) qo'llanmaydi deb hisoblaymiz.",
+    "legal_basis_urls": [
+      "https://lex.uz/docs/-7357270",
+      "https://lex.uz/uz/docs/-7934915"
+    ],
+    "which_vm_edit_inserted_it": "UNVERIFIED — lex.uz da izoh 'Oldingi tahrirga qarang' bilan belgilangan, lekin kiritgan qaror rekvizitlari sahifa matnidan o'qilmadi.",
+    "note_for_spec": "Spec v2 da '20% chegirmani e'lon qilmang' degan taqiq endi eskirgan: chegirma rasmiy matnda bor."
+  },
+  "bhm": {
+    "current": {
+      "value_uzs": 440000,
+      "effective_from": "2026-09-01",
+      "legal_basis": "Prezidentning 23.06.2026 dagi PF-115-son Farmoni, 3-band (b)(ii)",
+      "url": "https://www.lex.uz/uz/docs/-8283656"
+    },
+    "previous": {
+      "value_uzs": 412000,
+      "effective_from": "2025-08-01",
+      "effective_to": "2026-08-31",
+      "legal_basis": "Prezidentning 02.06.2025 dagi PF-91-son Farmoni",
+      "url": null,
+      "verified": false,
+      "note": "412 000 va PF-91 qiymati uzobmen.uz / leaderaudit.uz ikkilamchi manbalaridan; lex.uz da hali ochilmagan — UNVERIFIED."
+    },
+    "which_date_applies": "Bojxona kodeksi 324-modda: bojxona deklaratsiyasi qabul qilingan kuni amalda bo'lgan stavkalar — BHM ham shu kun bo'yicha olinadi (ASSUMPTION: 324-modda 'stavkalar' deydi, BHMni alohida tilga olmaydi)."
+  },
+  "worked_examples_illustrative": [
+    {
+      "customs_value_usd": 4671.64,
+      "band_bhm": 1,
+      "fee_uzs": 440000,
+      "fee_with_pre_arrival_uzs": 352000,
+      "note": "YG-0412 qayta hisob (tariff-payments.md)"
+    },
+    {
+      "customs_value_usd": 10650,
+      "band_bhm": 1.5,
+      "fee_uzs": 660000,
+      "fee_with_pre_arrival_uzs": 528000
+    }
+  ]
+}

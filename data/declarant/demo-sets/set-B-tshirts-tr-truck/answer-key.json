@@ -1,0 +1,230 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "set_id": "set-B-tshirts-tr-truck",
+  "title": "Set B – Cotton T-shirts from Turkey by truck (2 seeded discrepancies + HS warning)",
+  "scenario": "Clothing wholesaler imports knitted cotton T-shirts from Istanbul, CPT Tashkent, Turkish truck, enters at Alat (Bukhara), cleared at Tashkent-tovarniy. CMR is wrong on packages and gross weight; seller's invoice shows the wrong HS subheading. Shows: specific minimum (0.5 USD/pc) beats ad valorem; inland-freight deduction under Art. 305.",
+  "rates_note": "EXAMPLE exchange rates (not CBU data): 1 USD = 12 100.00 UZS, 1 CNY = 1 700.00 UZS. Replace with the CBU rate on the GTD acceptance date (Customs Code Art. 326; Instruction 2773 grafa 23).",
+  "assumptions": [
+    "Packing list and invoice are correct; CMR is the erroneous document (carrier must issue a corrected CMR or the declarant must explain) – expected GTD values below assume the corrected state.",
+    "Inland carriage 450 USD deducted under Customs Code Art. 305 (separately documented). Without the carrier statement CV would be 12 600 USD.",
+    "Specific minimum 0.5 USD/pc × 6 000 = 3 000 USD > 20% × 12 150 = 2 430 USD → specific applies (Customs Code Art. 293 'not less than', per data/tariff).",
+    "UZS amounts rounded half-up to 2 decimals – official rounding rule for grafa 47 not confirmed ⚠️.",
+    "VAT = 12% × (customs value + duty + excise) per Tax Code Arts. 254, 258 as used in data/tariff (no excise for these codes).",
+    "Additional duty (code 21, Customs Code Art. 300¹ per data/tariff) NOT applied: origin is documented and the country is on the MFN list (data/tariff/tariff_demo.json common.mfn_list_url).",
+    "Grafa 46 computed from customs value (assumes customs value ≈ CIP/CIF border value) ⚠️."
+  ],
+  "expected_cross_checks": [
+    {
+      "check_id": "pkg_count",
+      "result": "FAIL – error_blocking",
+      "detail": "invoice 120, packing list 120, CMR 118"
+    },
+    {
+      "check_id": "gross_weight_docs",
+      "result": "FAIL – error_blocking",
+      "detail": "packing list 1344 kg vs CMR 1430 kg: diff 86 kg = 6.40%; T = max(1% × 1344, 20) = 20 kg → 86 > 20"
+    },
+    {
+      "check_id": "hs_prefix",
+      "result": "WARN – warning_ack",
+      "detail": "invoice/CMR 610990 vs chosen 610910 (100% cotton)"
+    },
+    {
+      "check_id": "qty_supp_unit",
+      "result": "pass",
+      "detail": "6000 = 6000"
+    },
+    {
+      "check_id": "value_sum",
+      "result": "pass",
+      "detail": "6000 × 2.10 = 12600.00"
+    },
+    {
+      "check_id": "net_weight_docs",
+      "result": "pass",
+      "detail": "1260 = 1260"
+    },
+    {
+      "check_id": "customs_value_logic",
+      "result": "pass",
+      "detail": "12600 − 450 (Art. 305) = 12150.00 USD"
+    },
+    {
+      "check_id": "origin",
+      "result": "pass",
+      "detail": "TR"
+    },
+    {
+      "check_id": "invoice_annex1a",
+      "result": "pass",
+      "detail": "all 12 items present (HS present but wrong subheading)"
+    },
+    {
+      "check_id": "dates",
+      "result": "pass",
+      "detail": "20.08 ≤ 02.11 ≤ 03.11 ≤ 19.11 ≤ 24.11"
+    }
+  ],
+  "seeded_discrepancies": [
+    {
+      "check_id": "pkg_count",
+      "what": "CMR box 7 says 118 packages; invoice and packing list say 120",
+      "expected_severity": "error_blocking",
+      "fix": "Recount at unloading; corrected CMR or carrier act; if 2 cartons really missing → declare 5 900 pcs and use VMQ 605 cl. 30 amendment route"
+    },
+    {
+      "check_id": "gross_weight_docs",
+      "what": "CMR box 11 gross 1 430 kg vs packing list 1 344 kg (+6.4%)",
+      "expected_severity": "error_blocking",
+      "fix": "Ask carrier; weigh if needed; do not copy CMR weight into grafa 35"
+    },
+    {
+      "check_id": "hs_prefix",
+      "what": "Seller HS 6109.90 vs composition 100% cotton (→ 6109.10)",
+      "expected_severity": "warning_ack",
+      "fix": "Declare 6109100000 with reason; same duty row (6109 → 20% / 0.5 USD) so no payment impact, but description must match"
+    }
+  ],
+  "expected_outcome": "BLOCKED at review: 2 blocking errors + 1 warning. After a corrected CMR (120 pkgs, 1 344 kg) and acknowledging the HS warning, the expected GTD values below apply.",
+  "expected_gtd": {
+    "header": {
+      "1": "ИМ | 40 |",
+      "2": "Anka Tekstil Sanayi ve Ticaret A.Ş. (SYNTHETIC), Турция, Merter Mah. 12, Güngören, İstanbul, Türkiye",
+      "3": "1/1",
+      "5": "1",
+      "7": "26002 (declarant) – rest assigned by customs",
+      "8": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC), г. Ташкент, Юнусабадский р-н, ул. Амира Темура, 100 (SYNTHETIC), тел. +998 71 000 00 02, info@modatekstil.example | upper №: (empty) | № 100000002/1726266",
+      "9": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC) ... | № 100000002/1726266",
+      "11": "792 | 2",
+      "12": "12150.00",
+      "13": "12100,00 (EXAMPLE)",
+      "14": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC) (self-filing) | № 100000002",
+      "15": "ТУРЦИЯ",
+      "15a": "792",
+      "18": "1 АВТО: 34ABC123/34XYZ45 | 792",
+      "19": "0",
+      "20": "07 | CPT Tashkent | 50/01",
+      "21": "1 АВТО: 34ABC123/34XYZ45 | 792",
+      "22": "840 | 12600.00",
+      "23": "1/12100,00 (EXAMPLE)",
+      "24": "01 | 840",
+      "25": "30",
+      "26": "30",
+      "28": "100000002",
+      "29": "06010 Алат",
+      "30": "г. Ташкент, Юнусабадский р-н, зона таможенного контроля (SYNTHETIC address) | 1726266",
+      "50": "Ответственность за представленные документы и сведения несет Usmonova Dilnoza Rustamovna (SYNTHETIC), директор, +998 90 000 00 02 | ПИНФЛ 40000000000002",
+      "54": "1) г. Ташкент\n2) Usmonova Dilnoza Rustamovna (SYNTHETIC), info@modatekstil.example\n3) +998 90 000 00 02\n5) 40000000000002/24.11.2026/000003",
+      "C": "1) 2026-UZ-000000456 (SYNTHETIC)\n2) 19.11.2026"
+    },
+    "items": [
+      {
+        "32": "1",
+        "31": "1) Футболки мужские трикотажные (кулирная гладь), 100% хлопок, 160 г/м2, размеры S-XXL, бренд ANKA BASIC, арт. AB-100\n2) 120 мест, картонные коробки\n11) 02",
+        "31_bottom_left": "100000002/1726266",
+        "31_bottom_right": "6000",
+        "33": "6109100000",
+        "34": "792",
+        "35": "1344.000",
+        "37": "4000000",
+        "38": "1260.000",
+        "40": "ТД 06010/19.11.2026/0004567 — 1 — 1344.000 кг — 1260.000 кг — 6000 шт",
+        "41": "796 (шт) ⚠️ verify unit code",
+        "42": "12600.00",
+        "43": "0",
+        "44": "202 СМР № TR-UZ-20931 от 03.11.2026 (after correction)\n220 ИНВ № ANK-2026-0917 от 02.11.2026\n222 УПЛИСТ № ANK-PL-0917 от 02.11.2026\n301 КНТ № TR-07/2026 от 20.08.2026\n701 СПТИМ № TR-ITO-SYN-778899 от 02.11.2026",
+        "45": "12150.00",
+        "46": "12.150",
+        "47": [
+          {
+            "vid": "10",
+            "osnova": "1 ГТД (band: total CV ≈ 12150.00 USD)",
+            "stavka": "1.5 БРВ",
+            "summa": "660000.00",
+            "sp": "БН",
+            "note": "⚠️ how the fee base is written in the cabinet is not specified"
+          },
+          {
+            "vid": "20",
+            "osnova": "6000 шт",
+            "stavka": "0.5 USD/dona",
+            "summa": "36300000.00",
+            "sp": "БН"
+          },
+          {
+            "vid": "29",
+            "osnova": "183315000.00",
+            "stavka": "12%",
+            "summa": "21997800.00",
+            "sp": "БН"
+          }
+        ],
+        "hs_reasoning": "Knitted → Chapter 61; T-shirt → 6109; 100% cotton → 6109 10 → 6109 10 000 0. Seller's 6109.90 ('other textile materials') contradicts the composition → warn."
+      }
+    ]
+  },
+  "payments": {
+    "per_item": [
+      {
+        "item_no": 1,
+        "code10": "6109100000",
+        "invoice_value": "12600.00",
+        "addback": "0",
+        "deduction": "450.00",
+        "customs_value": "12150.00",
+        "customs_value_uzs": "147015000.00",
+        "duty": {
+          "code": "20",
+          "rate_ad_valorem_pct": 20,
+          "ad_valorem_uzs": "29403000.00",
+          "specific_min": {
+            "amount": 0.5,
+            "currency": "USD",
+            "unit": "dona",
+            "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+          },
+          "specific_min_uzs": "36300000.00",
+          "applied": "specific minimum 0.5 USD/dona (> ad valorem)",
+          "amount_uzs": "36300000.00"
+        },
+        "vat": {
+          "code": "29",
+          "rate_pct": 12,
+          "base_uzs": "183315000.00",
+          "amount_uzs": "21997800.00"
+        },
+        "statistical_value_kusd": "12.150",
+        "rate_source": {
+          "file": "data/tariff/tariff_demo.json",
+          "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+          "url": "https://lex.uz/uz/docs/-7533457",
+          "checked": "2026-11-18",
+          "verified": true,
+          "notes": "Qator: '6109 — 20, lekin har bir donasi uchun 0,5 AQSH dollaridan kam bo'lmagan'. Turkiya PTA I-B ilovasida 6109 yo'q → imtiyoz yo'q."
+        }
+      }
+    ],
+    "fee": {
+      "code": "10",
+      "band": "10 000 dan 20 000 AQSH dollarigacha",
+      "multiplier_bhm": "1.5",
+      "bhm_uzs": "440000",
+      "amount_uzs": "660000.00",
+      "shown_on": "item 1 only (Instruction 2773 grafa 47)",
+      "source": "VM No. 55 Annex 1 pos.1(a) via data/tariff/fees.json",
+      "url": "https://lex.uz/docs/-7357270",
+      "preliminary_discount_applied": false,
+      "band_edge_note": "lower_inclusive / upper_exclusive (oxirgi band bilan izchil) — ASSUMPTION, rasmiy emas. Aynan chegaraviy qiymatda UI 'chegara noaniq' ogohlantirishi chiqarsin."
+    },
+    "totals": {
+      "customs_value": "12150.00",
+      "currency": "USD",
+      "customs_value_usd_equiv": "12150.00",
+      "fee_uzs": "660000.00",
+      "duty_uzs": "36300000.00",
+      "vat_uzs": "21997800.00",
+      "grand_total_uzs": "58957800.00"
+    }
+  },
+  "deadline": "Presented 21.11.2026 (Sat) → day 15 conservative = 05.12.2026 (Sat) → shifted to Mon 07.12.2026 if the post is closed at weekends; legal max reading also 07.12.2026. See deadlines.json."
+}

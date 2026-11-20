@@ -1,0 +1,97 @@
+import json, datetime as dt
+BK="https://lex.uz/docs/2876354"; BKUZ="https://lex.uz/uz/docs/-2876354"; VMQ605="https://lex.uz/uz/docs/-3844549"; MJTK="https://lex.uz/uz/docs/-97664"; FK="https://lex.uz/docs/111181"; VM55="https://lex.uz/docs/-7357270"; PF250="https://lex.uz/uz/docs/-7934915"; I2773="https://lex.uz/docs/2924953"
+def d(s): return dt.date.fromisoformat(s)
+def wd(x): return x.strftime('%a')
+def nextwork(x):
+    while x.weekday()>=5: x+=dt.timedelta(days=1)
+    return x
+def ex(pres):
+    p=d(pres); a=p+dt.timedelta(days=14); b=p+dt.timedelta(days=15)
+    return dict(presented_on=f"{p} ({wd(p)})",
+      reading_A_conservative=dict(last_day_raw=f"{a} ({wd(a)})",after_nonworking_shift=f"{nextwork(a)} ({wd(nextwork(a))})",method="presentation day counted as day 1"),
+      reading_B_next_day_start=dict(last_day_raw=f"{b} ({wd(b)})",after_nonworking_shift=f"{nextwork(b)} ({wd(nextwork(b))})",method="count starts next day (Civil Code Art. 146 analogy)"),
+      note="Shift assumes the post does not work Sat/Sun; real schedule and public holidays must come from a maintained calendar.")
+clocks=[
+ dict(id="advance_info",name_uz="Dastlabki axborot",name_ru="Предварительная информация",applies="road, rail, air imports",duration=None,unit=None,
+  start_event="before actual arrival",rule="Authorised persons MUST submit advance information on goods and vehicles expected by road, rail and air through the Internet into the customs information system before they actually arrive; they are liable for its accuracy.",
+  legal_basis=[dict(ref="Customs Code Art. 206 parts 3–4",url=BK)],uncertain="Minimum lead time (hours before arrival) and the exact system/format are not stated in the Code ⚠️. Prior lesson (dars-01) cited Art. 17 as 'right, not duty' – Art. 206 part 3 makes it mandatory for road/rail/air; reconcile."),
+ dict(id="transit_declaration",name_uz="Tranzit deklaratsiyasi",name_ru="Транзитная декларация",duration=None,unit=None,start_event="border crossing",
+  rule="For goods entering the territory, the transit declaration is filed before or at the moment of crossing the customs border.",legal_basis=[dict(ref="Customs Code Art. 261 part 3",url=BK)]),
+ dict(id="arrival_notification",name_uz="Yetib kelganini xabar qilish",name_ru="Уведомление о доставке",duration=30,unit="minutes",start_event="delivery of goods to the destination customs body (or start of its working hours if delivered outside them)",
+  rule="Carrier notifies the destination customs body by presenting accompanying documents and the goods, no later than 30 minutes after delivery; if delivered outside working hours, no later than 30 minutes after working hours start (goods wait in the customs control zone).",
+  legal_basis=[dict(ref="Customs Code Art. 226 parts 2–3",url=BK),dict(ref="VMQ No. 605 Regulation, clause 6",url=VMQ605)]),
+ dict(id="arrival_confirmation",name_uz="Yetkazib berilganini tasdiqlash",name_ru="Подтверждение доставки",duration=3,unit="hours",start_event="receipt of the carrier's notification",
+  rule="Destination customs body confirms delivery within 3 hours by marking the accompanying documents (suspended if an offence is found). From the moment of confirmation the goods have the status of goods under the temporary-storage regime.",
+  legal_basis=[dict(ref="Customs Code Art. 226 parts 4–5",url=BK)],product_note="This confirmation timestamp is the best machine-readable start for the temporary-storage clock."),
+ dict(id="short_gtd_temporary_storage",name_uz="Qisqa BYD (vaqtincha saqlash)",name_ru="Краткая ГТД",duration=1,unit="working_day",start_event="day goods are presented to the customs body",
+  rule="Short cargo customs declaration is filed by the carrier or other authorised person no later than the working day following the day of presentation; not needed if the goods are placed under another regime within that time.",
+  legal_basis=[dict(ref="Customs Code Art. 86 part 2",url=BK)],related=[dict(ref="VMQ No. 605 Regulation, clause 10: if goods stay under constant customs control and clearance finishes within 24 hours after hand-over, temporary storage is not applied as a separate stage",url=VMQ605)]),
+ dict(id="temporary_storage_max",name_uz="Vaqtincha saqlash muddati",name_ru="Срок временного хранения",duration=60,unit="calendar_days",perishable_duration=10,start_event="day goods acquire temporary-storage status (= delivery confirmation, Art. 226)",
+  rule="Period is set by the authorised person who declared the regime but may not exceed 60 calendar days (10 calendar days for perishable goods) unless the Code provides otherwise (Art. 177 – liquidated warehouses: 60/180 days). Count starts from the day the goods acquired temporary-storage status (Art. 85 part 4 referring to Art. 177 and Art. 226 part 5). Goods must be declared for another regime no later than the day the period ends (Art. 89 part 1) and removed from the storage place within 3 days after placement under the other regime (Art. 89 part 2).",
+  legal_basis=[dict(ref="Customs Code Art. 85",url=BK),dict(ref="Customs Code Art. 89",url=BK),dict(ref="Customs Code Art. 226 part 5",url=BK)],
+  storage_fee_note="Storage in a customs-body warehouse is charged per VM No. 55 (3% of BHM per tonne per day for the first 10 days, then 4% – per dars-01; see data/tariff/fees.json).",
+  uncertain="Whether the 15-day filing clock and the 60-day storage clock run in parallel from the same day for goods under temporary storage (practice: the stricter 15-day clock governs the import GTD) ⚠️."),
+ dict(id="import_gtd_filing",name_uz="Import BYD topshirish muddati",name_ru="Срок подачи ГТД при ввозе",duration=15,unit="calendar_days",start_event="day goods are presented to the destination customs body",
+  rule="Declaration for imported goods is filed no later than 15 calendar days from the day the goods were presented to the destination customs body, except cases in Chapters 22 (commercial vehicles), 23 (individuals, non-commercial) and 25 (pipeline / power lines). If the last day falls on a day the customs body does not work, the next working day of that customs body is the last day.",
+  quote_uz="…товар келиб тушадиган божхона органига товарлар тақдим этилган кундан эътиборан ўн беш календарь кундан кечиктирмай берилади… Агар … муддатининг тугаши божхона органи ишламайдиган кунга тўғри келиб қолса, божхона органининг навбатдаги иш куни шу муддат тугайдиган кун деб ҳисобланади.",
+  legal_basis=[dict(ref="Customs Code Art. 261 parts 1–2",url=BK)],
+  start_day_rule=dict(
+    text_says="'from the day of presentation' (кундан эътиборан); calendar days; end on non-working day of the customs body → next working day of that body.",
+    general_counting_article_in_customs_code="None found – the Customs Code has no general article on calculating periods (searched the full text 2026-11-18). Only Art. 261 part 2 covers the non-working-day shift for this deadline.",
+    civil_code_analogy=dict(ref="Civil Code Art. 146 (a period defined by a span of time starts on the day after the calendar date or event that marks its start); Art. 148 (an action may be done until 24:00 of the last day; in an organisation – until its working hours end; filings handed in before 24:00 count as on time)",url=FK,status="Applies to civil-law periods; whether it governs Customs Code periods is NOT confirmed ⚠️."),
+    product_rule_PROPOSAL="Show the conservative date (presentation day = day 1 → presentation + 14 days, shifted past non-working days) as the 'file by' date; show presentation + 15 days (shifted) as 'legal maximum (interpretation)'. Remind at T-5, T-2, T-1. Treat 'end of day' as the post's working hours end, not 24:00, until confirmed (Civil Code Art. 148 part 2 analogy)."),
+  examples=[ex("2026-11-12"),ex("2026-11-21")],
+  fines=[dict(ref="Administrative Liability Code Art. 227¹⁰ part 2",text="Failure to submit the customs declaration, documents or additional information within the established periods → fine of 3 × BHM (BHM = 440,000 UZS from 01.09.2026 → 1,320,000 UZS).",url=MJTK),
+         dict(ref="Administrative Liability Code Art. 227¹⁰ part 3",text="Repeated within one year after the penalty → citizens 5–10 × BHM, officials 10–15 × BHM.",url=MJTK),
+         dict(ref="Administrative Liability Code Art. 227¹⁰ part 1",text="Breach of declaration procedure (form, place, procedure) → citizens 2–5 × BHM, officials 3–7 × BHM.",url=MJTK)],
+  bhm_source=dict(ref="Presidential Decree PF-115 of 23.06.2026, item 3",url="https://www.lex.uz/uz/docs/-8283656",value_uzs=440000,from_date="2026-09-01")),
+ dict(id="preliminary_declaration",name_uz="Dastlabki deklaratsiya",name_ru="Предварительное декларирование",duration=30,unit="calendar_days",start_event="day the preliminary declaration is accepted",
+  rule="Optional declaring before goods arrive. If the goods are not presented to the customs body within 30 calendar days from acceptance, the preliminary declaration is deemed not filed. After comparison of copies with originals and payment (or security) before arrival, it is the single document for customs operations (unless data/documents incomplete).",
+  legal_basis=[dict(ref="Customs Code Art. 262",url=BK)],
+  incentive=[dict(ref="VM No. 55, Annex 1, note '*': 20% discount on the customs fee for preliminary declaration; fee charged once",url=VM55),dict(ref="PF-250 of 17.12.2025, item 2: from 01.03.2026 for IM40 via preliminary declaration before arrival at the border crossing point – clearance fee −20%; no interest for up to 14 days on instalment/deferral",url=PF250,checked_by="tariff team (data/tariff/fees.json)")]),
+ dict(id="gtd_acceptance",name_uz="BYDni qabul qilish",name_ru="Принятие ГТД",start_event="filing",rule="Acceptance is registered on the day of filing (Art. 264). E-system: an officer accepts the TED within 3 hours of receipt, otherwise it is accepted automatically (VMQ 605 Annex 1, stage 4). TED counts as accepted from the moment the e-notification is sent (VMQ 605 clause 15). The acceptance date fixes rates (Art. 324) and the exchange rate (Art. 326).",
+  duration=3,unit="hours",legal_basis=[dict(ref="Customs Code Art. 264",url=BK),dict(ref="VMQ No. 605, clause 15 and Annex 1 (stage 4)",url=VMQ605),dict(ref="Customs Code Arts. 324, 326",url=BK)]),
+ dict(id="clearance_time",name_uz="Rasmiylashtirish muddati",name_ru="Срок оформления",start_event="TED acceptance",
+  rule="Low risk, no amendments: 3 hours; medium risk, no amendments: 8 hours (except TED filed outside working hours); high risk or other cases: general term in law. General term (Code Art. 248 part 4): clearance and document check within one working day from the day the declaration is accepted and all documents/data are presented (extended for risk-management measures).",
+  legal_basis=[dict(ref="VMQ No. 605 Regulation, clause 15 (a)–(v)",url=VMQ605),dict(ref="Customs Code Art. 248 part 4",url=BK)]),
+ dict(id="payment",name_uz="Bojxona to'lovlarini to'lash",name_ru="Уплата таможенных платежей",start_event="GTD acceptance",
+  rule="Customs payments are paid before or simultaneously with acceptance of the declaration (exceptions in Art. 327). With deferral/instalments – by the last day of deferral / per the agreed schedule (Arts. 327, 333).",
+  legal_basis=[dict(ref="Customs Code Art. 327",url=BK),dict(ref="Customs Code Art. 333",url=BK)],
+  late_consequences=[dict(ref="Customs Code Art. 349",text="Penalty (penya) for each calendar day of non-payment: 1/300 of the CBU refinancing rate on the debt; total penya ≤ the debt; runs from the day the debt arises to the day actually paid.",url=BK),
+                     dict(ref="Administrative Liability Code Art. 227²⁶",text="Non-payment within established periods → citizens 3–7 × BHM, officials 5–10 × BHM.",url=MJTK)],
+  gtd_field="grafa 47 'СП' codes ОП/РП and grafa 48 for deferral/instalments (Instruction 2773)"),
+ dict(id="move_out_after_release",name_uz="Saqlash joyidan olib chiqish",name_ru="Вывоз с места хранения",duration=3,unit="days",start_event="day goods were placed under another regime",rule="Goods must leave the temporary-storage place within three days (unit 'days' – calendar vs working not stated ⚠️) after placement under another regime, except customs-warehouse regime.",legal_basis=[dict(ref="Customs Code Art. 89 part 2",url=BK)]),
+ dict(id="gtd_amendment_window",name_uz="BYDga o'zgartirish kiritish",name_ru="Изменение ГТД",duration=3,unit="years",start_event="day of GTD acceptance",rule="After clearance, the GTD may be amended, supplemented, re-issued or cancelled within 3 years from acceptance at customs' request or on application; withdrawal before release if reasons accepted. E-GTD changes via a correction form. Fee for declarant-initiated amendment per VM 55 (25% of BHM per correction form – per dars-01).",legal_basis=[dict(ref="Customs Code Art. 266",url=BK),dict(ref="VMQ No. 605 Regulation, clause 30 (right to request amendment when quantity/description discrepancies are found during or after unloading)",url=VMQ605)]),
+ dict(id="record_retention",name_uz="Hujjatlarni saqlash",name_ru="Хранение документов",duration=3,unit="years",start_event="year after the year in which goods lost the status of goods under customs control",rule="Customs declaration and other documents needed for customs control are kept for three years from the year following the year in which the goods lost the status of goods under customs control.",legal_basis=[dict(ref="Customs Code Art. 184 part 3",url=BK),dict(ref="Instruction 2773, point 14",url=I2773)]),
+ dict(id="post_release_audit",name_uz="Chiqarilgandan keyingi nazorat",name_ru="Контроль после выпуска",rule="Customs may audit after release (Art. 201) and charge additional payments (Art. 294) – informational.",legal_basis=[dict(ref="Customs Code Arts. 201, 294 (per dars-01)",url=BK)],duration=None,unit=None,start_event="release")]
+out=dict(meta=dict(title="Statutory clocks for IM40 import (YuklaGo deadline engine)",generated="2026-11-18",tz="Asia/Tashkent",
+  sources_read=[dict(doc="Customs Code of the Republic of Uzbekistan (O'RQ-400, 20.01.2016)",url=BK,read="2026-11-18 (lex.uz current edition)"),dict(doc="VMQ No. 605 of 31.07.2018 (TED Regulation)",url=VMQ605,read="edition with changes to 21.07.2026"),dict(doc="Administrative Liability Code",url=MJTK,read="lex.uz shows future editions dated 30.12.2026 and 05.02.2027 – re-check 227¹⁰/227²⁶ before those dates ⚠️"),dict(doc="Civil Code (Part 1), Arts. 145–148",url=FK)],
+  calendar_rule_summary="All Customs Code import clocks here are in CALENDAR days unless marked working_day. Only Art. 261 (filing) has an explicit non-working-day shift (to the customs body's next working day). The Code has no general term-calculation article; for other clocks no shift is stated ⚠️.",
+  disclaimer="Not legal advice. Re-check lex.uz before each release; amendments are frequent."),clocks=clocks)
+json.dump(out,open('/workspace/hackathon/data/declarant/deadlines.json','w'),ensure_ascii=False,indent=2)
+L=["# Deadlines & clocks – IM40 import","",f"*Generated 2026-11-18 (Asia/Tashkent). Machine-readable twin: `deadlines.json`. Not legal advice.*","",
+"## The start-day rule (read this first)","",
+"- **Art. 261 Customs Code**: the import BYD must be filed *no later than 15 **calendar** days from the day the goods are presented to the destination customs body* (exceptions: Chapters 22, 23, 25). If the last day falls on a day the customs body does not work, the **next working day of that customs body** is the last day. [lex.uz](%s)"%BK,
+"- **No general term-calculation article** exists in the Customs Code (full text searched 2026-11-18). So it is not stated whether the day of presentation counts as day 1.",
+"- **Civil Code Art. 146** (civil-law periods start the day *after* the event) and **Art. 148** (action allowed until 24:00 of the last day; in an organisation until its working hours end) – [lex.uz](%s). Applicability to customs periods is **not confirmed ⚠️**."%FK,
+"- **Product rule (PROPOSAL, not law):** show *File by* = presentation date + 14 days (presentation day = day 1), shifted past the post's non-working days; also show *Legal maximum (interpretation)* = presentation + 15 days, shifted. Reminders T-5/T-2/T-1. Treat the end of the last day as the end of the post's working hours.","",
+"| Example | Presented | File by (conservative) | Legal max (next-day reading) |","|---|---|---|---|"]
+for c in clocks:
+    if c['id']=='import_gtd_filing':
+        for e in c['examples']: L.append(f"| synthetic | {e['presented_on']} | {e['reading_A_conservative']['after_nonworking_shift']} (raw {e['reading_A_conservative']['last_day_raw']}) | {e['reading_B_next_day_start']['after_nonworking_shift']} (raw {e['reading_B_next_day_start']['last_day_raw']}) |")
+L+=["","Shift in the examples assumes the post is closed Sat/Sun; public holidays and each post's schedule must come from a maintained calendar.","","## Clocks","","| Clock | Duration | Unit | Starts | Legal basis |","|---|---|---|---|---|"]
+for c in clocks:
+    L.append(f"| {c['name_ru']} / {c['name_uz']} | {c.get('duration') or '—'} | {c.get('unit') or '—'} | {c.get('start_event') or '—'} | "+'; '.join(f"[{b['ref']}]({b['url']})" for b in c['legal_basis'])+" |")
+L+=["","## Details",""]
+for c in clocks:
+    L.append(f"### {c['name_ru']} / {c['name_uz']} (`{c['id']}`)"); L.append(f"- {c['rule']}")
+    for k in ['related','incentive','late_consequences','fines']:
+        for r in c.get(k,[]): L.append(f"- {k.replace('_',' ')}: [{r['ref']}]({r['url']}) — {r.get('text','')}")
+    for k in ['uncertain','product_note','storage_fee_note']:
+        if c.get(k): L.append(f"- {'⚠️ ' if k=='uncertain' else ''}{c[k]}")
+    L.append("")
+L+=["## Fines summary (BHM = 440,000 UZS from 01.09.2026, PF-115)","","| Breach | Article | Sanction |","|---|---|---|",
+"| Late GTD / documents / additional info | MJtK 227¹⁰ part 2 | 3 BHM = 1,320,000 UZS |","| Repeat within 1 year | MJtK 227¹⁰ part 3 | citizens 5–10 BHM; officials 10–15 BHM |","| Breach of declaration form/place/procedure | MJtK 227¹⁰ part 1 | citizens 2–5 BHM; officials 3–7 BHM |","| Late payment | MJtK 227²⁶ + Code Art. 349 penya | citizens 3–7 BHM; officials 5–10 BHM + 1/300 refinancing rate per day |",
+"",f"MJtK: {MJTK} — lex.uz lists editions dated 30.12.2026 and 05.02.2027; re-check these articles before those dates ⚠️."]
+open('/workspace/hackathon/data/declarant/deadlines.md','w').write('\n'.join(L))
+print('ok')

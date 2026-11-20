@@ -1,0 +1,294 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "set_id": "set-A-furniture-cn-truck",
+  "title": "Set A – Wooden furniture from China by truck (clean golden path)",
+  "scenario": "Small Tashkent furniture retailer imports dining tables and sideboards from Foshan (FCA), Uzbek carrier, enters at Dustlik (Andijan) under transit, cleared at Sergeli inland post. All documents consistent. Shows: two models under ONE code must be two items (Instruction 2773 point 8); freight to the border added to customs value (Customs Code Art. 304(a)); specific-minimum check (0.4 USD/kg) loses to ad valorem.",
+  "rates_note": "EXAMPLE exchange rates (not CBU data): 1 USD = 12 100.00 UZS, 1 CNY = 1 700.00 UZS. Replace with the CBU rate on the GTD acceptance date (Customs Code Art. 326; Instruction 2773 grafa 23).",
+  "assumptions": [
+    "Freight to the border (3 900 USD of 4 600 USD) added per Customs Code Art. 304(a); 700 USD inside Uzbekistan not added (Art. 305 – documented separately). Allocation between items by gross weight = PROPOSAL (no allocation rule found) ⚠️.",
+    "Specific minimum 0.4 USD/kg computed on NET kg (data/tariff marks net/gross UNVERIFIED); on gross it is also below ad valorem, so the outcome does not change.",
+    "Conformity-certificate requirement for furniture not verified – check Single Window list ⚠️ (none included).",
+    "UZS amounts rounded half-up to 2 decimals – official rounding rule for grafa 47 not confirmed ⚠️.",
+    "VAT = 12% × (customs value + duty + excise) per Tax Code Arts. 254, 258 as used in data/tariff (no excise for these codes).",
+    "Additional duty (code 21, Customs Code Art. 300¹ per data/tariff) NOT applied: origin is documented and the country is on the MFN list (data/tariff/tariff_demo.json common.mfn_list_url).",
+    "Grafa 46 computed from customs value (assumes customs value ≈ CIP/CIF border value) ⚠️."
+  ],
+  "expected_cross_checks": [
+    {
+      "check_id": "pkg_count",
+      "result": "pass",
+      "detail": "110 = 110 = 110"
+    },
+    {
+      "check_id": "qty_supp_unit",
+      "result": "pass",
+      "detail": "40/30 pcs match"
+    },
+    {
+      "check_id": "value_sum",
+      "result": "pass",
+      "detail": "5800+6300 = 12100.00"
+    },
+    {
+      "check_id": "gross_weight_docs",
+      "result": "pass",
+      "detail": "3500 = 3500 kg"
+    },
+    {
+      "check_id": "net_weight_docs",
+      "result": "pass",
+      "detail": "3080 = 3080 kg"
+    },
+    {
+      "check_id": "net_le_gross",
+      "result": "pass",
+      "detail": "ok"
+    },
+    {
+      "check_id": "hs_prefix",
+      "result": "pass",
+      "detail": "940360 = 940360"
+    },
+    {
+      "check_id": "origin",
+      "result": "pass",
+      "detail": "CN everywhere"
+    },
+    {
+      "check_id": "currency_incoterms",
+      "result": "pass",
+      "detail": "USD, FCA, 15/2026"
+    },
+    {
+      "check_id": "customs_value_logic",
+      "result": "pass",
+      "detail": "CV = 12100 + 3900 = 16000.00 USD"
+    },
+    {
+      "check_id": "invoice_annex1a",
+      "result": "pass",
+      "detail": "all 12 items present"
+    },
+    {
+      "check_id": "dates",
+      "result": "pass",
+      "detail": "05.09 ≤ 28.10 ≤ 01.11 ≤ 10.11 ≤ 13.11"
+    }
+  ],
+  "seeded_discrepancies": [],
+  "expected_outcome": "All checks pass → ready for review & ERI signing (green-path candidate; actual risk lane is decided by customs).",
+  "expected_gtd": {
+    "header": {
+      "1": "ИМ | 40 |",
+      "2": "Foshan Mingde Furniture Co., Ltd. (SYNTHETIC), Китай, Longjiang Rd 88, Shunde, Foshan, Guangdong, China",
+      "3": "1/2",
+      "5": "2",
+      "7": "26010 (declarant) – rest assigned by customs",
+      "8": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC), г. Ташкент, Чиланзарский р-н, ул. Бунёдкор, 1 (SYNTHETIC), тел. +998 71 000 00 01, info@uyjihoz.example | upper №: (empty) | № 100000001/1726294",
+      "9": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC) ... | № 100000001/1726294",
+      "11": "156 | 2",
+      "12": "16000.00",
+      "13": "12100,00 (EXAMPLE)",
+      "14": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC) (self-filing) | № 100000001",
+      "15": "КИТАЙ",
+      "15a": "156",
+      "18": "1 АВТО: 01A123BC/01XY456 | 860",
+      "19": "0",
+      "20": "02 | FCA Foshan | 10/01",
+      "21": "1 АВТО: 01A123BC/01XY456 | 860",
+      "22": "840 | 12100.00",
+      "23": "1/12100,00 (EXAMPLE)",
+      "24": "01 | 840",
+      "25": "30",
+      "26": "30",
+      "28": "100000001",
+      "29": "03002 Дустлик",
+      "30": "г. Ташкент, Сергелийский р-н, зона таможенного контроля поста «Сергели» (SYNTHETIC address) | 1726283",
+      "50": "Ответственность за представленные документы и сведения несет Каримов Азиз Бахромович (SYNTHETIC), директор, +998 90 000 00 01 | ПИНФЛ 30000000000001",
+      "54": "1) г. Ташкент\n2) Каримов Азиз Бахромович (SYNTHETIC), info@uyjihoz.example\n3) +998 90 000 00 01\n5) 30000000000001/13.11.2026/000017",
+      "C": "1) 2026-UZ-000000123 (SYNTHETIC)\n2) 10.11.2026"
+    },
+    "items": [
+      {
+        "32": "1",
+        "31": "1) Стол обеденный из массива гевеи, лакированный, 1600x900x750 мм, модель DT-1600, бренд MINGDE\n2) 80 мест, картонные коробки\n11) 02",
+        "31_bottom_left": "100000001/1726294",
+        "31_bottom_right": "40",
+        "33": "9403601000",
+        "34": "156",
+        "35": "1760.000",
+        "37": "4000000",
+        "38": "1520.000",
+        "40": "ТД 03002/10.11.2026/0012345 — 1 — 1760.000 кг — 1520.000 кг — 40 шт",
+        "41": "796 (шт) ⚠️ verify unit code",
+        "42": "5800.00",
+        "43": "0",
+        "44": "202 СМР № CN-UZ-77812 от 01.11.2026\n220 ИНВ № MD-2026-118 от 28.10.2026\n222 УПЛИСТ № MD-PL-118 от 28.10.2026\n301 КНТ № 15/2026 от 05.09.2026\n701 СПТИМ № CCPIT-SYN-2026-0001 от 30.10.2026\n(+ freight invoice for Art. 304 add-back – document code to confirm ⚠️)",
+        "45": "7761.14",
+        "46": "7.761",
+        "47": [
+          {
+            "vid": "10",
+            "osnova": "1 ГТД (band: total CV ≈ 16000.00 USD)",
+            "stavka": "1.5 БРВ",
+            "summa": "660000.00",
+            "sp": "БН",
+            "note": "⚠️ how the fee base is written in the cabinet is not specified"
+          },
+          {
+            "vid": "20",
+            "osnova": "93909794.00",
+            "stavka": "15%",
+            "summa": "14086469.10",
+            "sp": "БН"
+          },
+          {
+            "vid": "29",
+            "osnova": "107996263.10",
+            "stavka": "12%",
+            "summa": "12959551.57",
+            "sp": "БН"
+          }
+        ],
+        "hs_reasoning": "GRI 1/6: furniture, not seats (9401) → 9403; wooden → 9403 60; dining-room furniture → 9403 60 100 0 ('ошхона ва яшаш хоналари учун ёғоч мебель', PQ-181 Annex 1)."
+      },
+      {
+        "32": "2",
+        "31": "1) Тумба-комод из массива сосны, 1200x450x600 мм, модель SB-1200, бренд MINGDE\n2) 30 мест, картонные коробки\n11) 02",
+        "31_bottom_left": "100000001/1726294",
+        "31_bottom_right": "30",
+        "33": "9403601000",
+        "34": "156",
+        "35": "1740.000",
+        "37": "4000000",
+        "38": "1560.000",
+        "40": "ТД 03002/10.11.2026/0012345 — 1 — 1740.000 кг — 1560.000 кг — 30 шт",
+        "41": "796 (шт) ⚠️ verify unit code",
+        "42": "6300.00",
+        "43": "0",
+        "44": "202 СМР № CN-UZ-77812 от 01.11.2026\n220 ИНВ № MD-2026-118 от 28.10.2026\n222 УПЛИСТ № MD-PL-118 от 28.10.2026\n301 КНТ № 15/2026 от 05.09.2026\n701 СПТИМ № CCPIT-SYN-2026-0001 от 30.10.2026\n(+ freight invoice for Art. 304 add-back – document code to confirm ⚠️)",
+        "45": "8238.86",
+        "46": "8.239",
+        "47": [
+          {
+            "vid": "20",
+            "osnova": "99690206.00",
+            "stavka": "15%",
+            "summa": "14953530.90",
+            "sp": "БН"
+          },
+          {
+            "vid": "29",
+            "osnova": "114643736.90",
+            "stavka": "12%",
+            "summa": "13757248.43",
+            "sp": "БН"
+          }
+        ],
+        "hs_reasoning": "Same as item 1 (living-room wooden furniture → 9403 60 100 0). Separate item because model/name differ (Instruction 2773 point 8)."
+      }
+    ]
+  },
+  "payments": {
+    "per_item": [
+      {
+        "item_no": 1,
+        "code10": "9403601000",
+        "invoice_value": "5800.00",
+        "addback": "1961.14",
+        "deduction": "0",
+        "customs_value": "7761.14",
+        "customs_value_uzs": "93909794.00",
+        "duty": {
+          "code": "20",
+          "rate_ad_valorem_pct": 15,
+          "ad_valorem_uzs": "14086469.10",
+          "specific_min": {
+            "amount": 0.4,
+            "currency": "USD",
+            "unit": "kg",
+            "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+          },
+          "specific_min_uzs": "7356800.00",
+          "applied": "ad valorem",
+          "amount_uzs": "14086469.10"
+        },
+        "vat": {
+          "code": "29",
+          "rate_pct": 12,
+          "base_uzs": "107996263.10",
+          "amount_uzs": "12959551.57"
+        },
+        "statistical_value_kusd": "7.761",
+        "rate_source": {
+          "file": "data/tariff/tariff_demo.json",
+          "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+          "url": "https://lex.uz/uz/docs/-7533457",
+          "checked": "2026-11-18",
+          "verified": true,
+          "notes": "Qator: '9403 — 15, lekin har bir kilogrammi uchun 0,4 $'. Qo'shimcha birlik 'dona', lekin xos stavka kg da → og'irlik maydoni majburiy; netto/brutto UNVERIFIED."
+        }
+      },
+      {
+        "item_no": 2,
+        "code10": "9403601000",
+        "invoice_value": "6300.00",
+        "addback": "1938.86",
+        "deduction": "0",
+        "customs_value": "8238.86",
+        "customs_value_uzs": "99690206.00",
+        "duty": {
+          "code": "20",
+          "rate_ad_valorem_pct": 15,
+          "ad_valorem_uzs": "14953530.90",
+          "specific_min": {
+            "amount": 0.4,
+            "currency": "USD",
+            "unit": "kg",
+            "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+          },
+          "specific_min_uzs": "7550400.00",
+          "applied": "ad valorem",
+          "amount_uzs": "14953530.90"
+        },
+        "vat": {
+          "code": "29",
+          "rate_pct": 12,
+          "base_uzs": "114643736.90",
+          "amount_uzs": "13757248.43"
+        },
+        "statistical_value_kusd": "8.239",
+        "rate_source": {
+          "file": "data/tariff/tariff_demo.json",
+          "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+          "url": "https://lex.uz/uz/docs/-7533457",
+          "checked": "2026-11-18",
+          "verified": true,
+          "notes": "Qator: '9403 — 15, lekin har bir kilogrammi uchun 0,4 $'. Qo'shimcha birlik 'dona', lekin xos stavka kg da → og'irlik maydoni majburiy; netto/brutto UNVERIFIED."
+        }
+      }
+    ],
+    "fee": {
+      "code": "10",
+      "band": "10 000 dan 20 000 AQSH dollarigacha",
+      "multiplier_bhm": "1.5",
+      "bhm_uzs": "440000",
+      "amount_uzs": "660000.00",
+      "shown_on": "item 1 only (Instruction 2773 grafa 47)",
+      "source": "VM No. 55 Annex 1 pos.1(a) via data/tariff/fees.json",
+      "url": "https://lex.uz/docs/-7357270",
+      "preliminary_discount_applied": false,
+      "band_edge_note": "lower_inclusive / upper_exclusive (oxirgi band bilan izchil) — ASSUMPTION, rasmiy emas. Aynan chegaraviy qiymatda UI 'chegara noaniq' ogohlantirishi chiqarsin."
+    },
+    "totals": {
+      "customs_value": "16000.00",
+      "currency": "USD",
+      "customs_value_usd_equiv": "16000.00",
+      "fee_uzs": "660000.00",
+      "duty_uzs": "29040000.00",
+      "vat_uzs": "26716800.00",
+      "grand_total_uzs": "56416800.00"
+    }
+  },
+  "deadline": "Presented 12.11.2026 (Thu) → file by 26.11.2026 (conservative) / legal max 27.11.2026 (next-day reading). See deadlines.json."
+}

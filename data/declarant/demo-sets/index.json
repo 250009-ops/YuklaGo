@@ -1,0 +1,45 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "rates_note": "EXAMPLE exchange rates (not CBU data): 1 USD = 12 100.00 UZS, 1 CNY = 1 700.00 UZS. Replace with the CBU rate on the GTD acceptance date (Customs Code Art. 326; Instruction 2773 grafa 23).",
+  "sets": [
+    {
+      "set": "set-A-furniture-cn-truck",
+      "outcome": "All checks pass → ready for review & ERI signing (green-path candidate; actual risk lane is decided by customs).",
+      "totals": {
+        "customs_value": "16000.00",
+        "currency": "USD",
+        "customs_value_usd_equiv": "16000.00",
+        "fee_uzs": "660000.00",
+        "duty_uzs": "29040000.00",
+        "vat_uzs": "26716800.00",
+        "grand_total_uzs": "56416800.00"
+      }
+    },
+    {
+      "set": "set-B-tshirts-tr-truck",
+      "outcome": "BLOCKED at review: 2 blocking errors + 1 warning. After a corrected CMR (120 pkgs, 1 344 kg) and acknowledging the HS warning, the expected GTD values below apply.",
+      "totals": {
+        "customs_value": "12150.00",
+        "currency": "USD",
+        "customs_value_usd_equiv": "12150.00",
+        "fee_uzs": "660000.00",
+        "duty_uzs": "36300000.00",
+        "vat_uzs": "21997800.00",
+        "grand_total_uzs": "58957800.00"
+      }
+    },
+    {
+      "set": "set-C-electronics-cn-truck",
+      "outcome": "BLOCKED at review: 4 blocking errors from 2 root causes + 1 weight warning. After corrected packing list and invoice, the expected GTD values below apply.",
+      "totals": {
+        "customs_value": "88800.00",
+        "currency": "CNY",
+        "customs_value_usd_equiv": "12476.03",
+        "fee_uzs": "660000.00",
+        "duty_uzs": "20904000.00",
+        "vat_uzs": "20623680.00",
+        "grand_total_uzs": "42187680.00"
+      }
+    }
+  ]
+}

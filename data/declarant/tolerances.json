@@ -1,0 +1,441 @@
+{
+  "meta": {
+    "title": "Cross-check tolerances: invoice ↔ packing list ↔ CMR ↔ BYD (IM40)",
+    "generated": "2026-11-18",
+    "tz": "Asia/Tashkent",
+    "headline": "NO official numeric tolerance found in Uzbek law for weight, value, quantity or package differences. Everything under 'proposal' is a YuklaGo product default, NOT law, and must be labelled so in the UI.",
+    "severity_levels": {
+      "info": "shown, no action",
+      "warning_ack": "user must read and acknowledge (review screen Y13)",
+      "error_blocking": "cannot proceed to signing until fixed or overridden with written reason"
+    }
+  },
+  "official_rules": [
+    {
+      "topic": "No numeric tolerance",
+      "finding": "No official percentage or kg tolerance was found for differences in gross/net weight, quantity, number of packages or value between invoice, packing list, CMR and the BYD in: Customs Code, Instruction No. 2773, VMQ No. 605 (incl. Annex 1a). Searched 2026-11-18 (full-text keyword search + web search). Treat any difference as a discrepancy that must be explained or corrected.",
+      "status": "NOT FOUND – do not present any tolerance as law"
+    },
+    {
+      "topic": "Rounding (weights)",
+      "finding": "Gross (grafa 35) and net (grafa 38) weights are rounded mathematically to 3 decimals (6 decimals if < 1 g).",
+      "source": "https://lex.uz/docs/2924953#2927394 ; https://lex.uz/docs/2924953#2927413",
+      "ref": "Instruction 2773, ch.5 p.25 sub-points 30, 33"
+    },
+    {
+      "topic": "Rounding (values)",
+      "finding": "Invoice value (grafa 42) and customs value (grafa 45) are rounded mathematically to 2 decimals; statistical value (grafa 46) to 3 decimals in thousand USD.",
+      "source": "https://lex.uz/docs/2924953#2927453 ; https://lex.uz/docs/2924953#2927498 ; https://lex.uz/docs/2924953#2927503",
+      "ref": "sub-points 37, 40, 41"
+    },
+    {
+      "topic": "Rounding (supplementary quantity)",
+      "finding": "Quantity in supplementary unit: 2 decimals; below 0.01 → 6 decimals.",
+      "source": "https://lex.uz/docs/2924953#2927362",
+      "ref": "sub-point 26 (grafa 31)"
+    },
+    {
+      "topic": "Totals must equal sums",
+      "finding": "Grafa 22 total invoice value = Σ grafa 42; grafa 12 total customs value = Σ grafa 45; grafa 5 = number of grafa 31 items.",
+      "source": "https://lex.uz/docs/2924953#2927326 ; https://lex.uz/docs/2924953#2927273 ; https://lex.uz/docs/2924953#2927231",
+      "ref": "sub-points 18, 9, 4"
+    },
+    {
+      "topic": "Gross weight definition",
+      "finding": "Gross = goods + all packaging needed to keep them intact until entering circulation, EXCLUDING containers and other transport equipment. CMR gross may legitimately differ if it includes pallets/transport equipment – reason must be shown.",
+      "source": "https://lex.uz/docs/2924953#2927394",
+      "ref": "sub-point 30"
+    },
+    {
+      "topic": "Net weight definition",
+      "finding": "Net = without any packaging, except inseparable primary retail packaging.",
+      "source": "https://lex.uz/docs/2924953#2927413",
+      "ref": "sub-point 33"
+    },
+    {
+      "topic": "Carrier documents content",
+      "finding": "Road carrier must present CMR + commercial documents containing, among others: consignor/consignee, HS code (≥6 digits), gross weight (kg) and invoice value per code, number of packages, container numbers.",
+      "source": "https://lex.uz/docs/2876354",
+      "ref": "Customs Code Art. 18 part 1 item 1(v)"
+    },
+    {
+      "topic": "Invoice minimum data",
+      "finding": "Invoice must contain 12 items: seller (name, address, TIN), buyer (name, address, TIN, phone), HS code ≥6 digits, origin country, description, invoice value, gross kg, net kg, total packages, quantity in supplementary unit, Incoterms (2010), contract number and date.",
+      "source": "https://lex.uz/uz/docs/-3844549",
+      "ref": "VMQ 605 Annex 1a (added by VMQ 630, in force 07.01.2025)"
+    },
+    {
+      "topic": "Format-logic control",
+      "finding": "If the e-system finds errors, deficiencies or inconsistencies in the TED it is automatically returned with an e-notification stating reasons.",
+      "source": "https://lex.uz/uz/docs/-3844549",
+      "ref": "VMQ 605 clause 15; Annex 1 stage 3"
+    },
+    {
+      "topic": "Automatic clearance condition",
+      "finding": "Automatic (no-officer) clearance requires, among others, no inconsistencies in TED data and consistency with permit documents.",
+      "source": "https://lex.uz/uz/docs/-3844549",
+      "ref": "VMQ 605 clause 18 (per dars-01)"
+    },
+    {
+      "topic": "Discrepancy found at unloading",
+      "finding": "Declarant may request amendment/addition of the TED if differences in quantity, name, description or other features are found during or after unloading into temporary storage.",
+      "source": "https://lex.uz/uz/docs/-3844549",
+      "ref": "VMQ 605 clause 30"
+    },
+    {
+      "topic": "Voluntary correction",
+      "finding": "Declarant may, with customs permission, voluntarily correct errors that do not affect payment calculation or prohibitions/restrictions before customs finds them; customs may allow fixing spelling errors in words (not numbers/letter codes) within one working day.",
+      "source": "https://lex.uz/uz/docs/-3844549",
+      "ref": "VMQ 605 clauses 30–31"
+    },
+    {
+      "topic": "Value adjustment",
+      "finding": "Customs adjusts customs value/payments if, among others, declared value does not match actual value because quantity and/or quality deviate from the contract (evidence: inspection act; agreed claim; expert opinion).",
+      "source": "https://lex.uz/docs/2876354",
+      "ref": "Customs Code Art. 320"
+    },
+    {
+      "topic": "Liability",
+      "finding": "Incorrect declaration affecting payments/measures: MJtK Art. 227²² (confiscation + fine); not affecting the customs decision: 3 BHM (part 2) – per dars-01.",
+      "source": "https://lex.uz/uz/docs/-97664",
+      "ref": "MJtK 227²²"
+    }
+  ],
+  "checks": [
+    {
+      "id": "pkg_count",
+      "field": "Number of packages",
+      "compare": [
+        "invoice.total_packages",
+        "packing_list.total_packages",
+        "cmr.packages",
+        "gtd.grafa31_line2 (Σ items)"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs": 0,
+        "rel": null,
+        "severity_if_exceeded": "error_blocking"
+      },
+      "rationale": "Integer count; any difference means a lost/extra package or a document error. Art. 18 lists package count as mandatory carrier data.",
+      "msg_uz": "Joylar soni hujjatlarda bir xil emas: {a} va {b}. Bojxona yukni qayta sanashi yoki ko'rik tayinlashi mumkin. Tashuvchidan aniqlashtiring.",
+      "msg_ru": "Количество мест не совпадает: {a} и {b}. Возможен пересчёт или досмотр. Уточните у перевозчика."
+    },
+    {
+      "id": "qty_supp_unit",
+      "field": "Quantity in supplementary unit (pcs, pairs…)",
+      "compare": [
+        "invoice.lines.qty",
+        "packing_list.lines.qty",
+        "gtd.grafa31_bottom_right"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs": 0,
+        "severity_if_exceeded": "error_blocking"
+      },
+      "rationale": "Drives specific duty minimums (e.g. USD per piece) and marking; integer for piece goods.",
+      "msg_uz": "Dona soni invoys va qadoq varag'ida farq qiladi ({a} va {b}).",
+      "msg_ru": "Количество в доп. единицах в инвойсе и упаковочном листе различается ({a} и {b})."
+    },
+    {
+      "id": "value_sum",
+      "field": "Invoice arithmetic",
+      "compare": [
+        "Σ(invoice.lines.qty × unit_price)",
+        "invoice.lines.amount",
+        "invoice.total",
+        "gtd.grafa22",
+        "Σ gtd.grafa42"
+      ],
+      "official_tolerance": "Exact after rounding to 2 decimals (Instruction 2773 sub-points 18, 37)",
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs": 0.01,
+        "unit": "contract currency",
+        "severity_if_exceeded": "error_blocking",
+        "note": "0.01 only absorbs per-line rounding"
+      },
+      "rationale": "Grafa 22 must equal Σ grafa 42.",
+      "msg_uz": "Invoys summasi qatorlar yig'indisiga teng emas (farq {d}).",
+      "msg_ru": "Итог инвойса не равен сумме строк (разница {d})."
+    },
+    {
+      "id": "value_contract",
+      "field": "Price vs contract/specification",
+      "compare": [
+        "invoice.unit_price",
+        "contract.spec.unit_price"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs": 0,
+        "severity_if_exceeded": "warning_ack"
+      },
+      "rationale": "Grafa 42 = price actually paid or payable under the contract; mismatch needs a supplementary agreement (Annex 12 code 302).",
+      "msg_uz": "Invoys narxi kontrakt spetsifikatsiyasidan farq qiladi – qo'shimcha kelishuv kerak bo'lishi mumkin.",
+      "msg_ru": "Цена в инвойсе отличается от спецификации – может потребоваться доп. соглашение."
+    },
+    {
+      "id": "customs_value_logic",
+      "field": "Customs value build-up",
+      "compare": [
+        "gtd.grafa45",
+        "invoice value + Art.304 add-backs − Art.305 deductions"
+      ],
+      "official_tolerance": "Exact (deterministic engine)",
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs": 0.01,
+        "severity_if_exceeded": "error_blocking"
+      },
+      "rationale": "FCA/EXW/FOB etc.: freight & insurance to the place of entry must be added (Art. 304(a)); transport after entry deductible only if separately documented (Art. 305).",
+      "msg_uz": "Bojxona qiymatiga chegaragacha bo'lgan transport xarajati qo'shilmagan ko'rinadi.",
+      "msg_ru": "В таможенную стоимость, похоже, не включена доставка до границы."
+    },
+    {
+      "id": "gross_weight_docs",
+      "field": "Gross weight – documents vs each other",
+      "compare": [
+        "packing_list.total_gross",
+        "invoice.total_gross",
+        "cmr.gross",
+        "gtd Σ grafa35"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "info_if_abs_le_kg": 1,
+        "warning_if_rel_le_pct": 1.0,
+        "warning_if_abs_le_kg": 20,
+        "else_severity": "error_blocking",
+        "rule": "diff = 0 → pass; 0 < diff ≤ 1 kg → info; diff ≤ max(1% of declared gross, 20 kg) → warning_ack (user must explain, e.g. pallets); otherwise error_blocking",
+        "formula": {
+          "units": "kg; every weight rounded to 3 decimals first (Instruction 2773 sub-point 30)",
+          "declared": "D = declared gross weight = invoice total gross (the figure that goes to Σ grafa 35); when evaluating per item use the item's invoice line gross",
+          "pair": "A, B = the two figures being compared, any pair from {invoice, packing list, CMR, Σ grafa 35}",
+          "diff": "diff = abs(A − B); T is ALWAYS computed from D (the invoice/declared figure), never from A or B",
+          "warn_threshold_kg": "T = max(0.01 × D, 20)",
+          "info_threshold_kg": "1",
+          "decision": "if diff == 0: pass; elif diff <= 1: info; elif diff <= T: warning_ack; else: error_blocking",
+          "comparison_operators": "'<=' is inclusive: diff exactly equal to T is a warning, not a block",
+          "scope": "evaluate every pair (invoice↔packing list, invoice↔CMR, packing list↔CMR, invoice↔Σ grafa 35) at shipment total and, where a document has lines, per item line; the worst severity wins",
+          "worked_examples": [
+            "D=3798; A=CMR 3798, B=packing list 3780 → diff=18, T=max(37.98,20)=37.98 → warning_ack (Set C)",
+            "D=1344; A=packing list 1344, B=CMR 1430 → diff=86, T=max(13.44,20)=20 → error_blocking (Set B)",
+            "D=500; A=500, B=500.8 → diff=0.8 → info"
+          ]
+        }
+      },
+      "gross_weight_scope": {
+        "official": "Gross weight (grafa 35) = goods incl. all packaging needed to keep them intact until entering circulation, EXCLUDING containers and other transport equipment.",
+        "source_ru": "https://lex.uz/docs/2924953#2927394",
+        "source_uz": "https://lex.uz/uz/docs/2924955#2926849",
+        "ref": "Instruction 2773, ch.5 p.25 sub-point 30 (grafa 35); same wording for export: ch.4 p.22 sub-point 30",
+        "pallets": "⚠️ UNCONFIRMED: the Instruction does not name pallets. Whether a pallet is 'packaging' (included) or 'transport equipment' (excluded) is not settled in the text read; the UI must ask the user to state it and must not auto-subtract pallets."
+      },
+      "rationale": "Grafa 35 excludes containers and other transport equipment, so CMR gross may differ by e.g. pallet weight (status of pallets unconfirmed). Large unexplained gaps trigger weighing/inspection risk. Thresholds are a product choice to separate rounding/pallets from real gaps.",
+      "msg_uz": "Brutto vazn hujjatlarda farq qiladi: {a} kg va {b} kg ({p}%). Sababini (masalan, poddonlar) yozing yoki hujjatni tuzating.",
+      "msg_ru": "Вес брутто различается: {a} кг и {b} кг ({p}%). Укажите причину (напр., поддоны) или исправьте документ."
+    },
+    {
+      "id": "gross_weight_items_sum",
+      "field": "Σ item gross = packing list total",
+      "compare": [
+        "Σ gtd.grafa35",
+        "packing_list.total_gross"
+      ],
+      "official_tolerance": "Exact after 3-decimal rounding",
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "abs_kg": 0.001,
+        "severity_if_exceeded": "error_blocking"
+      },
+      "rationale": "Engine-generated split must sum back.",
+      "msg_uz": "Tovarlar bo'yicha brutto yig'indisi jami bilan mos emas.",
+      "msg_ru": "Сумма брутто по товарам не равна итогу."
+    },
+    {
+      "id": "net_weight_docs",
+      "field": "Net weight – invoice vs packing list vs GTD",
+      "compare": [
+        "invoice.lines.net",
+        "packing_list.lines.net",
+        "gtd.grafa38"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "warning_if_rel_le_pct": 0.5,
+        "warning_if_abs_le_kg": 5,
+        "else_severity": "error_blocking",
+        "rule": "diff = 0 → pass; diff ≤ max(0.5% of declared net, 5 kg) → warning_ack; otherwise error_blocking (no info tier for net)",
+        "formula": {
+          "units": "kg; every weight rounded to 3 decimals first (Instruction 2773 sub-point 33)",
+          "declared": "D = declared net weight = invoice net for that item line (the figure that goes to grafa 38); for the shipment total use invoice total net",
+          "pair": "A, B = the two figures being compared, any pair from {invoice, packing list, grafa 38}",
+          "diff": "diff = abs(A − B); T is ALWAYS computed from D (the invoice/declared figure)",
+          "warn_threshold_kg": "T = max(0.005 × D, 5)",
+          "decision": "if diff == 0: pass; elif diff <= T: warning_ack; else: error_blocking",
+          "comparison_operators": "'<=' is inclusive",
+          "scope": "evaluate per item line AND at shipment total; the worst severity wins (a per-line error is not hidden by a large shipment total)",
+          "worked_examples": [
+            "Set C LED line: D=84; A=84, B=70 (packing list) → diff=14, T=max(0.42,5)=5 → error_blocking",
+            "Set C total: D=3234; A=3234, B=3220 → diff=14, T=max(16.17,5)=16.17 → warning_ack; worst = error_blocking",
+            "D=2000; A=2000, B=2004 → diff=4, T=max(10,5)=10 → warning_ack"
+          ]
+        }
+      },
+      "rationale": "Net weight is the base for kg-specific duty minimums (e.g. furniture 0.4 USD/kg) – tighter than gross.",
+      "msg_uz": "Netto vazn hujjatlarda farq qiladi: {a} va {b} kg.",
+      "msg_ru": "Вес нетто различается: {a} и {b} кг."
+    },
+    {
+      "id": "net_le_gross",
+      "field": "Net ≤ gross; net > 0",
+      "compare": [
+        "grafa38",
+        "grafa35"
+      ],
+      "official_tolerance": "Logical (definitions in sub-points 30, 33)",
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "error_blocking"
+      },
+      "msg_uz": "Netto vazn brutto vazndan katta bo'lishi mumkin emas.",
+      "msg_ru": "Вес нетто не может превышать брутто."
+    },
+    {
+      "id": "weight_per_package",
+      "field": "Plausibility: gross per package",
+      "compare": [
+        "packing_list.gross / packages"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "rule": "flag if any packing-list line has gross/package outside [0.5×, 2×] of that line's median across the shipment",
+        "severity_if_exceeded": "info"
+      },
+      "msg_uz": "Bir joyning og'irligi g'ayrioddiy – tekshirib ko'ring.",
+      "msg_ru": "Необычный вес одного места – проверьте."
+    },
+    {
+      "id": "hs_prefix",
+      "field": "HS code",
+      "compare": [
+        "invoice.hs (≥6 digits, Annex 1a item 3)",
+        "cmr.hs (Art. 18)",
+        "gtd.grafa33[0:6]"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "warning_ack"
+      },
+      "rationale": "Declarant's classification governs, but a mismatch with the seller's HS is a classic risk flag; must be explained.",
+      "msg_uz": "Invoysdagi HS kod ({a}) siz tanlagan koddan ({b}) farq qiladi. Tanlov sababini tasdiqlang.",
+      "msg_ru": "HS-код в инвойсе ({a}) отличается от выбранного ({b}). Подтвердите обоснование."
+    },
+    {
+      "id": "origin",
+      "field": "Country of origin",
+      "compare": [
+        "invoice.origin",
+        "certificate_of_origin.country",
+        "gtd.grafa34"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "error_blocking"
+      },
+      "rationale": "Origin drives preferences and the Art. 300¹ surcharge (see data/tariff).",
+      "msg_uz": "Kelib chiqish mamlakati hujjatlarda har xil.",
+      "msg_ru": "Страна происхождения в документах разная."
+    },
+    {
+      "id": "currency_incoterms",
+      "field": "Currency, Incoterms, contract no./date",
+      "compare": [
+        "contract",
+        "invoice",
+        "gtd.grafa20/22/44"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "error_blocking"
+      },
+      "msg_uz": "Valyuta / Inkoterms / kontrakt raqami hujjatlarda mos emas.",
+      "msg_ru": "Валюта / Инкотермс / номер контракта не совпадают."
+    },
+    {
+      "id": "parties",
+      "field": "Seller/consignor, buyer/consignee names & TIN",
+      "compare": [
+        "contract",
+        "invoice",
+        "cmr box 1/2",
+        "gtd.grafa2/8/9"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "rule": "TIN exact; names fuzzy after normalising legal-form words, case, punctuation (similarity ≥ 0.9 → ok, else warning)",
+        "severity_if_exceeded": "warning_ack"
+      },
+      "msg_uz": "Sotuvchi/oluvchi nomi hujjatlarda farq qiladi.",
+      "msg_ru": "Наименование продавца/получателя различается."
+    },
+    {
+      "id": "vehicle",
+      "field": "Truck & trailer plates",
+      "compare": [
+        "cmr box 25",
+        "transit_declaration",
+        "gtd.grafa18/21"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "rule": "exact after removing spaces/hyphens, Latin↔Cyrillic look-alike normalisation",
+        "severity_if_exceeded": "error_blocking"
+      },
+      "msg_uz": "Mashina raqami CMR bilan mos emas.",
+      "msg_ru": "Номер ТС не совпадает с CMR."
+    },
+    {
+      "id": "invoice_annex1a",
+      "field": "Invoice completeness (12 Annex-1a items)",
+      "compare": [
+        "invoice fields"
+      ],
+      "official_tolerance": "All 12 items required (VMQ 605 Annex 1a)",
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "error_blocking"
+      },
+      "msg_uz": "Invoysda majburiy ma'lumot yo'q: {field} (VMQ 605, 1a-ilova).",
+      "msg_ru": "В инвойсе нет обязательного реквизита: {field} (ПКМ 605, прил. 1а)."
+    },
+    {
+      "id": "dates",
+      "field": "Document dates",
+      "compare": [
+        "contract.date ≤ invoice.date ≤ cmr.date ≤ grafa C arrival date ≤ filing date",
+        "certificate validity"
+      ],
+      "official_tolerance": null,
+      "proposal": {
+        "label": "PROPOSAL (product default, not law)",
+        "severity_if_exceeded": "warning_ack"
+      },
+      "msg_uz": "Hujjat sanalari ketma-ketligi mantiqsiz.",
+      "msg_ru": "Нелогичная последовательность дат документов."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "packing_list",
+  "number": "HS-PL-26-0311",
+  "date": "2026-10-25",
+  "invoice_ref": "HS-INV-26-0311",
+  "seller": "Ningbo Hanshi Electric Appliance Co., Ltd. (SYNTHETIC)",
+  "buyer": "«TEXNO UY SAVDO» MChJ (SYNTHETIC)",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Microwave oven, 20 L, 700 W, mechanical control, 220 V",
+      "model": "MW-20S",
+      "qty": "300",
+      "unit": "pcs",
+      "packages": 300,
+      "package_type": "cartons",
+      "net_kg": "3150.000",
+      "gross_kg": "3690.000",
+      "carton_marks": "HS-MW 1-300"
+    },
+    {
+      "line": 2,
+      "description": "LED lamp bulb A60, E27, 9 W, 806 lm, 6500 K (SMD chips, not filament)",
+      "model": "LB-9W",
+      "qty": "2000",
+      "unit": "pcs",
+      "packages": 20,
+      "package_type": "cartons, 100 pcs each",
+      "net_kg": "70.000",
+      "gross_kg": "90.000",
+      "carton_marks": "HS-LB 301-324"
+    }
+  ],
+  "total_packages": 320,
+  "total_net_kg": "3220.000",
+  "total_gross_kg": "3780.000"
+}

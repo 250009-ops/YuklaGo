@@ -1,0 +1,11 @@
+# Replace @yuklago/founders with the GitHub team or user who reviews the handbook.
+# Until that team exists, the founder reviews contracts and security docs.
+
+/contracts/ @yuklago/founders
+/docs/auth-rbac.md @yuklago/founders
+/docs/security-checklist.md @yuklago/founders
+/docs/documents-privacy.md @yuklago/founders
+/docs/ai-seams.md @yuklago/founders
+/contracts/ai/ @yuklago/founders
+/packages/i18n/banned-phrases.json @yuklago/founders
+/data/ @yuklago/founders

@@ -1,0 +1,298 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "set_id": "set-C-electronics-cn-truck",
+  "title": "Set C – Microwave ovens + LED lamps from China by truck (CNY contract; 2 seeded issues)",
+  "scenario": "Appliance shop imports microwave ovens and LED bulbs from Ningbo, DAP Yallama (border), contract in CNY, enters at Yallama, cleared at Keles. Packing list under-states LED quantity; invoice lacks buyer phone (VMQ 605 Annex 1a item 2). Shows: non-USD currency, fee band via USD equivalent, specific minimum (5 USD/pc) for microwaves.",
+  "rates_note": "EXAMPLE exchange rates (not CBU data): 1 USD = 12 100.00 UZS, 1 CNY = 1 700.00 UZS. Replace with the CBU rate on the GTD acceptance date (Customs Code Art. 326; Instruction 2773 grafa 23).",
+  "assumptions": [
+    "Invoice and CMR are correct (2 400 LED lamps, 24 cartons, 324 packages); packing list line 2 is the error.",
+    "DAP Yallama = delivered to the place of entry, so no Art. 304 add-back; CV = invoice value.",
+    "Fee band uses USD equivalent via UZS cross-rate: 88 800 CNY × 1 700 / 12 100 = 12 476.03 USD → band 10–20k (ASSUMPTION on conversion, see data/tariff/fees.json).",
+    "Microwave: 10% × 132 600 000 = 13 260 000 UZS < 5 USD × 300 × 12 100 = 18 150 000 UZS → specific minimum applies.",
+    "UZS amounts rounded half-up to 2 decimals – official rounding rule for grafa 47 not confirmed ⚠️.",
+    "VAT = 12% × (customs value + duty + excise) per Tax Code Arts. 254, 258 as used in data/tariff (no excise for these codes).",
+    "Additional duty (code 21, Customs Code Art. 300¹ per data/tariff) NOT applied: origin is documented and the country is on the MFN list (data/tariff/tariff_demo.json common.mfn_list_url).",
+    "Grafa 46 computed from customs value (assumes customs value ≈ CIP/CIF border value) ⚠️."
+  ],
+  "expected_cross_checks": [
+    {
+      "check_id": "qty_supp_unit",
+      "result": "FAIL – error_blocking",
+      "detail": "LED lamps: invoice 2400 vs packing list 2000"
+    },
+    {
+      "check_id": "pkg_count",
+      "result": "FAIL – error_blocking",
+      "detail": "invoice 324 = CMR 324 vs packing list 320"
+    },
+    {
+      "check_id": "gross_weight_docs",
+      "result": "WARN – warning_ack",
+      "detail": "packing list 3780 kg vs CMR/invoice 3798 kg: 18 kg = 0.47%; T = max(1% × 3798, 20) = 37.98 kg → 1 < 18 ≤ 37.98 (proposal band → explain)"
+    },
+    {
+      "check_id": "net_weight_docs",
+      "result": "FAIL – error_blocking",
+      "detail": "LED net: invoice 84 kg vs packing list 70 kg (14 kg = 16.7%; per-line T = max(0.5% × 84, 5) = 5 kg → 14 > 5; total 3234 vs 3220 would only warn, worst severity wins)"
+    },
+    {
+      "check_id": "invoice_annex1a",
+      "result": "FAIL – error_blocking",
+      "detail": "buyer phone number missing (Annex 1a item 2)"
+    },
+    {
+      "check_id": "value_sum",
+      "result": "pass",
+      "detail": "78000 + 10800 = 88800.00 CNY"
+    },
+    {
+      "check_id": "hs_prefix",
+      "result": "pass",
+      "detail": "851650 / 853952 match"
+    },
+    {
+      "check_id": "origin",
+      "result": "pass",
+      "detail": "CN"
+    },
+    {
+      "check_id": "currency_incoterms",
+      "result": "pass",
+      "detail": "CNY, DAP"
+    },
+    {
+      "check_id": "customs_value_logic",
+      "result": "pass",
+      "detail": "DAP border → CV = invoice"
+    },
+    {
+      "check_id": "dates",
+      "result": "pass",
+      "detail": "15.09 ≤ 25.10 ≤ 28.10 ≤ 14.11 ≤ 18.11"
+    }
+  ],
+  "seeded_discrepancies": [
+    {
+      "check_id": "qty_supp_unit / pkg_count / net_weight_docs",
+      "what": "Packing list line 2 shows 2 000 LED lamps in 20 cartons (70 kg net / 90 kg gross) instead of 2 400 in 24 cartons (84 / 108)",
+      "expected_severity": "error_blocking",
+      "fix": "Get a corrected packing list from the seller (one root cause, three failed checks – UI should group them)"
+    },
+    {
+      "check_id": "invoice_annex1a",
+      "what": "Invoice buyer block has no phone number (VMQ 605 Annex 1a item 2 requires name, legal address, TIN and phone)",
+      "expected_severity": "error_blocking",
+      "fix": "Corrected invoice from the seller"
+    }
+  ],
+  "expected_outcome": "BLOCKED at review: 4 blocking errors from 2 root causes + 1 weight warning. After corrected packing list and invoice, the expected GTD values below apply.",
+  "expected_gtd": {
+    "header": {
+      "1": "ИМ | 40 |",
+      "2": "Ningbo Hanshi Electric Appliance Co., Ltd. (SYNTHETIC), Китай, No. 66 Kexue Rd, Yinzhou, Ningbo, Zhejiang, China",
+      "3": "1/2",
+      "5": "2",
+      "7": "27020 (declarant) – rest assigned by customs",
+      "8": "«TEXNO UY SAVDO» MChJ (SYNTHETIC), Ташкентская обл., Ташкентский р-н, пос. Келес, ул. Навои, 5 (SYNTHETIC), тел. +998 71 000 00 03, info@texnouy.example | upper №: (empty) | № 100000003/1727265",
+      "9": "«TEXNO UY SAVDO» MChJ (SYNTHETIC) ... | № 100000003/1727265",
+      "11": "156 | 2",
+      "12": "88800.00",
+      "13": "12100,00 (EXAMPLE)",
+      "14": "«TEXNO UY SAVDO» MChJ (SYNTHETIC) (self-filing) | № 100000003",
+      "15": "КИТАЙ",
+      "15a": "156",
+      "18": "1 АВТО: 10A777CA/10XZ321 | 860",
+      "19": "0",
+      "20": "14 | DAP Яллама | 10/01",
+      "21": "1 АВТО: 10A777CA/10XZ321 | 860",
+      "22": "156 | 88800.00",
+      "23": "1/1700,00 (EXAMPLE)",
+      "24": "01 | 156",
+      "25": "30",
+      "26": "30",
+      "28": "100000003",
+      "29": "27001 Яллама",
+      "30": "Ташкентская обл., Ташкентский р-н, зона таможенного контроля поста «Келес» (SYNTHETIC address) | 1727265",
+      "50": "Ответственность за представленные документы и сведения несет Rahimov Jasur Olimovich (SYNTHETIC), директор, +998 90 000 00 03 | ПИНФЛ 50000000000003",
+      "54": "1) Ташкентская обл., Келес\n2) Rahimov Jasur Olimovich (SYNTHETIC), info@texnouy.example\n3) +998 90 000 00 03\n5) 50000000000003/18.11.2026/000041",
+      "C": "1) 2026-UZ-000000789 (SYNTHETIC)\n2) 14.11.2026"
+    },
+    "items": [
+      {
+        "32": "1",
+        "31": "1) Печь микроволновая бытовая, 20 л, 700 Вт, механическое управление, 220 В, модель MW-20S, бренд HANSHI\n2) 300 мест, картонные коробки\n11) 02",
+        "31_bottom_left": "100000003/1727265",
+        "31_bottom_right": "300",
+        "33": "8516500000",
+        "34": "156",
+        "35": "3690.000",
+        "37": "4000000",
+        "38": "3150.000",
+        "40": "ТД 27001/14.11.2026/0007788 — 1 — 3690.000 кг — 3150.000 кг — 300 шт",
+        "41": "796 (шт) ⚠️ verify unit code",
+        "42": "78000.00",
+        "43": "0",
+        "44": "202 СМР № CN-KZ-UZ-44120 от 28.10.2026\n220 ИНВ № HS-INV-26-0311 от 25.10.2026 (corrected)\n222 УПЛИСТ № HS-PL-26-0311 от 25.10.2026 (corrected)\n301 КНТ № HS-UZ-2026/03 от 15.09.2026\n417 ССТ № UZ.SMT.SYN.0001 (SYNTHETIC; requirement unverified)\n701 СПТИМ № CCPIT-SYN-2026-0003 от 26.10.2026",
+        "45": "78000.00",
+        "46": "10.959",
+        "47": [
+          {
+            "vid": "10",
+            "osnova": "1 ГТД (band: total CV ≈ 12476.03 USD)",
+            "stavka": "1.5 БРВ",
+            "summa": "660000.00",
+            "sp": "БН",
+            "note": "⚠️ how the fee base is written in the cabinet is not specified"
+          },
+          {
+            "vid": "20",
+            "osnova": "300 шт",
+            "stavka": "5 USD/dona",
+            "summa": "18150000.00",
+            "sp": "БН"
+          },
+          {
+            "vid": "29",
+            "osnova": "150750000.00",
+            "stavka": "12%",
+            "summa": "18090000.00",
+            "sp": "БН"
+          }
+        ],
+        "hs_reasoning": "Electro-thermic domestic appliance → 8516; microwave ovens → 8516 50 → 8516 50 000 0. ⚠️ Energy-efficiency class may be required in grafa 31 if microwaves are in the CM Res. 86/2015 annex – not verified."
+      },
+      {
+        "32": "2",
+        "31": "1) Лампа светодиодная A60, цоколь E27, 9 Вт, 806 лм, 6500 K, SMD (не филаментная), модель LB-9W, бренд HANSHI\n2) 24 мест, картонные коробки\n11) 02",
+        "31_bottom_left": "100000003/1727265",
+        "31_bottom_right": "2400",
+        "33": "8539520009",
+        "34": "156",
+        "35": "108.000",
+        "37": "4000000",
+        "38": "84.000",
+        "40": "ТД 27001/14.11.2026/0007788 — 2 — 108.000 кг — 84.000 кг — 2400 шт",
+        "41": "796 (шт) ⚠️ verify unit code",
+        "42": "10800.00",
+        "43": "0",
+        "44": "202 СМР № CN-KZ-UZ-44120 от 28.10.2026\n220 ИНВ № HS-INV-26-0311 от 25.10.2026 (corrected)\n222 УПЛИСТ № HS-PL-26-0311 от 25.10.2026 (corrected)\n301 КНТ № HS-UZ-2026/03 от 15.09.2026\n417 ССТ № UZ.SMT.SYN.0001 (SYNTHETIC; requirement unverified)\n701 СПТИМ № CCPIT-SYN-2026-0003 от 26.10.2026",
+        "45": "10800.00",
+        "46": "1.517",
+        "47": [
+          {
+            "vid": "20",
+            "osnova": "18360000.00",
+            "stavka": "15%",
+            "summa": "2754000.00",
+            "sp": "БН"
+          },
+          {
+            "vid": "29",
+            "osnova": "21114000.00",
+            "stavka": "12%",
+            "summa": "2533680.00",
+            "sp": "БН"
+          }
+        ],
+        "hs_reasoning": "LED light source/lamp → 8539 52; not phosphor-coated filament with ≥24 LEDs (…1), not straight tube ≥25 mm (…2) → 8539 52 000 9 (data/tariff notes 8539520000 does not exist)."
+      }
+    ]
+  },
+  "payments": {
+    "per_item": [
+      {
+        "item_no": 1,
+        "code10": "8516500000",
+        "invoice_value": "78000.00",
+        "addback": "0",
+        "deduction": "0",
+        "customs_value": "78000.00",
+        "customs_value_uzs": "132600000.00",
+        "duty": {
+          "code": "20",
+          "rate_ad_valorem_pct": 10,
+          "ad_valorem_uzs": "13260000.00",
+          "specific_min": {
+            "amount": 5,
+            "currency": "USD",
+            "unit": "dona",
+            "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+          },
+          "specific_min_uzs": "18150000.00",
+          "applied": "specific minimum 5 USD/dona (> ad valorem)",
+          "amount_uzs": "18150000.00"
+        },
+        "vat": {
+          "code": "29",
+          "rate_pct": 12,
+          "base_uzs": "150750000.00",
+          "amount_uzs": "18090000.00"
+        },
+        "statistical_value_kusd": "10.959",
+        "rate_source": {
+          "file": "data/tariff/tariff_demo.json",
+          "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+          "url": "https://lex.uz/uz/docs/-7533457",
+          "checked": "2026-11-18",
+          "verified": true,
+          "notes": "Qator: '851650 — 10, lekin har bir donasi uchun 5 $'. 8516 umumiy stavkasi 10%. Asl Belgisi: VM 737 (20.11.2020) 1-ilova 4-band 'Maishiy texnika' ro'yxatida 8516500000 bor — majburiy raqamli markirovka 15.04.2022 dan (1-ilova VM 23, 23.01.2026 tahririda): https://lex.uz/uz/docs/-5115923"
+        }
+      },
+      {
+        "item_no": 2,
+        "code10": "8539520009",
+        "invoice_value": "10800.00",
+        "addback": "0",
+        "deduction": "0",
+        "customs_value": "10800.00",
+        "customs_value_uzs": "18360000.00",
+        "duty": {
+          "code": "20",
+          "rate_ad_valorem_pct": 15,
+          "ad_valorem_uzs": "2754000.00",
+          "specific_min": null,
+          "specific_min_uzs": null,
+          "applied": "ad valorem",
+          "amount_uzs": "2754000.00"
+        },
+        "vat": {
+          "code": "29",
+          "rate_pct": 12,
+          "base_uzs": "21114000.00",
+          "amount_uzs": "2533680.00"
+        },
+        "statistical_value_kusd": "1.517",
+        "rate_source": {
+          "file": "data/tariff/tariff_demo.json",
+          "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+          "url": "https://lex.uz/uz/docs/-7533457",
+          "checked": "2026-11-18",
+          "verified": true,
+          "notes": "Qator: '853952 — 15'. DIQQAT: 8539520000 kodi rasmiy ro'yxatda YO'Q; 8539 52 000 faqat 1/2/9 ga bo'linadi (1 — fosforli kompozit bilan qoplangan ≥24 LED ipli; 2 — ≥25 mm to'g'ri quvur; 9 — boshqalar). Filament LED lampa 0001 ga tushishi mumkin — odam qaror qiladi. Asl Belgisi: VM 737 1-ilova 4-bandda 8539500000 (eski tahrirdagi LED lampa kodi) bor; HS2022 dagi 8539 52 000 x ga tatbiq etilishi — OCHIQ, Soliq qo'mitasi/Asl Belgisi operatoridan tasdiqlansin. 'Talab qilinmaydi' deb ko'rsatmang."
+        }
+      }
+    ],
+    "fee": {
+      "code": "10",
+      "band": "10 000 dan 20 000 AQSH dollarigacha",
+      "multiplier_bhm": "1.5",
+      "bhm_uzs": "440000",
+      "amount_uzs": "660000.00",
+      "shown_on": "item 1 only (Instruction 2773 grafa 47)",
+      "source": "VM No. 55 Annex 1 pos.1(a) via data/tariff/fees.json",
+      "url": "https://lex.uz/docs/-7357270",
+      "preliminary_discount_applied": false,
+      "band_edge_note": "lower_inclusive / upper_exclusive (oxirgi band bilan izchil) — ASSUMPTION, rasmiy emas. Aynan chegaraviy qiymatda UI 'chegara noaniq' ogohlantirishi chiqarsin."
+    },
+    "totals": {
+      "customs_value": "88800.00",
+      "currency": "CNY",
+      "customs_value_usd_equiv": "12476.03",
+      "fee_uzs": "660000.00",
+      "duty_uzs": "20904000.00",
+      "vat_uzs": "20623680.00",
+      "grand_total_uzs": "42187680.00"
+    }
+  },
+  "deadline": "Presented 16.11.2026 (Mon) → file by 30.11.2026 (conservative) / legal max 01.12.2026 (next-day reading)."
+}

@@ -1,0 +1,63 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "commercial_invoice",
+  "number": "HS-INV-26-0311",
+  "date": "2026-10-25",
+  "seller": {
+    "name": "Ningbo Hanshi Electric Appliance Co., Ltd. (SYNTHETIC)",
+    "address": "No. 66 Kexue Rd, Yinzhou, Ningbo, Zhejiang, China",
+    "tin": "91330212SYNTH0003",
+    "country_ru": "Китай"
+  },
+  "buyer": {
+    "name": "«TEXNO UY SAVDO» MChJ (SYNTHETIC)",
+    "address": "Ташкентская обл., Ташкентский р-н, пос. Келес, ул. Навои, 5 (SYNTHETIC)",
+    "tin": "100000003",
+    "district_code": "1727265",
+    "email": "info@texnouy.example"
+  },
+  "contract": {
+    "number": "HS-UZ-2026/03",
+    "date": "2026-09-15"
+  },
+  "incoterms": "DAP Yallama border crossing, Uzbekistan (Incoterms 2010)",
+  "currency": "CNY",
+  "payment_terms": "100% prepayment by T/T",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Microwave oven, 20 L, 700 W, mechanical control, 220 V",
+      "brand": "HANSHI",
+      "model": "MW-20S",
+      "hs_code": "8516.50",
+      "origin": "China",
+      "qty": "300",
+      "unit": "pcs",
+      "unit_price": "260.00",
+      "amount": "78000.00",
+      "net_kg": "3150.000",
+      "gross_kg": "3690.000",
+      "packages": 300
+    },
+    {
+      "line": 2,
+      "description": "LED lamp bulb A60, E27, 9 W, 806 lm, 6500 K (SMD chips, not filament)",
+      "brand": "HANSHI",
+      "model": "LB-9W",
+      "hs_code": "8539.52",
+      "origin": "China",
+      "qty": "2400",
+      "unit": "pcs",
+      "unit_price": "4.50",
+      "amount": "10800.00",
+      "net_kg": "84.000",
+      "gross_kg": "108.000",
+      "packages": 24
+    }
+  ],
+  "total_amount": "88800.00",
+  "total_packages": 324,
+  "total_net_kg": "3234.000",
+  "total_gross_kg": "3798.000",
+  "notes": null
+}

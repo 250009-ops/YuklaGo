@@ -1,0 +1,58 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "contract": {
+    "number": "TR-07/2026",
+    "date": "2026-08-20",
+    "e_system_id": "2026-UZ-000000456 (SYNTHETIC)",
+    "seller": "Anka Tekstil Sanayi ve Ticaret A.Ş. (SYNTHETIC)",
+    "buyer": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC)",
+    "incoterms": "CPT Tashkent (Incoterms 2010)",
+    "currency": "USD",
+    "settlement_currency": "USD",
+    "payment_form": "50/01 (mixed – larger share 'upon import')"
+  },
+  "certificate_of_origin": {
+    "code": "701 СПТИМ",
+    "number": "TR-ITO-SYN-778899",
+    "date": "2026-11-02",
+    "country": "Türkiye",
+    "note": "SYNTHETIC; 6109 not in Turkey PTA Annex I-B → no preference, MFN rate applies (data/tariff)"
+  },
+  "other_certificates": [],
+  "transit_declaration": {
+    "number": "06010/19.11.2026/0004567",
+    "type": "ТД",
+    "from_post": "06010",
+    "to_post": "26002",
+    "item_for": {
+      "1": 1
+    },
+    "note": "SYNTHETIC"
+  },
+  "freight": {
+    "carrier_statement": "AL-STM-2026-118 (SYNTHETIC)",
+    "border_to_tashkent_usd": "450.00"
+  },
+  "arrival": {
+    "destination_post": {
+      "code": "26002",
+      "name": "Ташкент-товарный"
+    },
+    "presented_on": "2026-11-21",
+    "delivery_confirmed": "2026-11-21T11:15+05:00"
+  },
+  "importer_profile": {
+    "name": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC)",
+    "address": "г. Ташкент, Юнусабадский р-н, ул. Амира Темура, 100 (SYNTHETIC)",
+    "tin": "100000002",
+    "district_code": "1726266",
+    "phone": "+998 71 000 00 02",
+    "email": "info@modatekstil.example"
+  },
+  "responsible_person": {
+    "name": "Usmonova Dilnoza Rustamovna (SYNTHETIC)",
+    "position": "директор",
+    "phone": "+998 90 000 00 02",
+    "pinfl": "40000000000002"
+  }
+}

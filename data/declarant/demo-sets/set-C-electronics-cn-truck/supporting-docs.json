@@ -1,0 +1,63 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "contract": {
+    "number": "HS-UZ-2026/03",
+    "date": "2026-09-15",
+    "e_system_id": "2026-UZ-000000789 (SYNTHETIC)",
+    "seller": "Ningbo Hanshi Electric Appliance Co., Ltd. (SYNTHETIC)",
+    "buyer": "«TEXNO UY SAVDO» MChJ (SYNTHETIC)",
+    "incoterms": "DAP Yallama border crossing, Uzbekistan (Incoterms 2010)",
+    "currency": "CNY",
+    "settlement_currency": "CNY",
+    "payment_form": "10/01"
+  },
+  "certificate_of_origin": {
+    "code": "701 СПТИМ",
+    "number": "CCPIT-SYN-2026-0003",
+    "date": "2026-10-26",
+    "country": "China",
+    "note": "SYNTHETIC"
+  },
+  "other_certificates": [
+    {
+      "code": "417 ССТ",
+      "number": "UZ.SMT.SYN.0001 (SYNTHETIC)",
+      "scope": "microwave ovens, LED lamps",
+      "note": "Whether a conformity certificate is mandatory for these codes was NOT verified – check Single Window / mandatory certification list ⚠️. Included only to show grafa 44 format."
+    }
+  ],
+  "transit_declaration": {
+    "number": "27001/14.11.2026/0007788",
+    "type": "ТД",
+    "from_post": "27001",
+    "to_post": "27020",
+    "item_for": {
+      "1": 1,
+      "2": 2
+    },
+    "note": "SYNTHETIC"
+  },
+  "freight": null,
+  "arrival": {
+    "destination_post": {
+      "code": "27020",
+      "name": "Келес"
+    },
+    "presented_on": "2026-11-16",
+    "delivery_confirmed": "2026-11-16T09:20+05:00"
+  },
+  "importer_profile": {
+    "name": "«TEXNO UY SAVDO» MChJ (SYNTHETIC)",
+    "address": "Ташкентская обл., Ташкентский р-н, пос. Келес, ул. Навои, 5 (SYNTHETIC)",
+    "tin": "100000003",
+    "district_code": "1727265",
+    "phone": "+998 71 000 00 03",
+    "email": "info@texnouy.example"
+  },
+  "responsible_person": {
+    "name": "Rahimov Jasur Olimovich (SYNTHETIC)",
+    "position": "директор",
+    "phone": "+998 90 000 00 03",
+    "pinfl": "50000000000003"
+  }
+}

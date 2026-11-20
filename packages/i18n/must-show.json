@@ -1,0 +1,15 @@
+{
+  "lines": [
+    { "id": "1", "uz": "Kodni siz tanlaysiz va javob berasiz.", "ru": "Код выбираете вы и отвечаете за него.", "where": "C-10, C-12" },
+    { "id": "2", "uz": "Siz oʻzingiz imzolab, oʻzingiz yuborasiz — faqat oʻz ERI kalitingiz bilan.", "ru": "Вы сами подписываете и отправляете — только своим ключом ЭЦП.", "where": "D-05" },
+    { "id": "6", "uz": "Brokersiz, oʻzingiz topshirasiz", "ru": "Без брокера — подаёте сами", "where": "C-01, C-05" },
+    { "id": "7", "uz": "Imzolovchi — deklaratsiyalovchi shaxslar roʻyxatiga kiritilgan shaxs.", "ru": "Подписант — лицо из списка декларирующих лиц.", "where": "C-05, S-03" },
+    { "id": "9", "uz": "Faqat oʻz ERI kalitingiz bilan imzolang. Boshqa odamning kalitini ishlatmang.", "ru": "Подписывайте только своим ключом ЭЦП. Не используйте чужой ключ.", "where": "C-05" },
+    { "id": "10", "uz": "Tayyor — asoschi tasdiqlagach yoqiladi", "ru": "Готово — включится после подтверждения основателя", "where": "C-12" },
+    { "id": "11", "uz": "YuklaGo parol yoki kalit soʻramaydi. Soʻrashsa — firibgarlik.", "ru": "YuklaGo не просит пароль или ключ. Просят — это мошенничество.", "where": "D-05" },
+    { "id": "12", "uz": "YuklaGo izohi, rasmiy kod emas", "ru": "Пояснение YuklaGo, не официальный код", "where": "C-16" },
+    { "id": "13", "uz": "Yordam xizmati faqat siz ruxsat bergan muddatda, yashirilgan maʼlumotni koʻradi. Imzolamaydi, yubormaydi, toʻlamaydi.", "ru": "Поддержка видит только скрытые данные и только в разрешённый срок. Не подписывает, не отправляет, не платит.", "where": "S-02" },
+    { "id": "14", "uz": "YuklaGo — mustaqil xizmat, davlat organi emas.", "ru": "YuklaGo — независимый сервис, не госорган.", "where": "C-01" },
+    { "id": "15", "uz": "Oʻz hisobingizdan toʻlaysiz. YuklaGo toʻlamaydi.", "ru": "Платите со своего счёта. YuklaGo не платит.", "where": "C-15" }
+  ]
+}
