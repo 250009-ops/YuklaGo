@@ -1,0 +1,510 @@
+{
+  "$meta": {
+    "name": "YuklaGo UI tokens",
+    "version": "0.2-ui",
+    "date": "2026-11-18",
+    "zone": "Asia/Tashkent (UTC+5)",
+    "derivedFrom": "/workspace/hackathon/team-review/brand-tokens.json",
+    "brandDirection": "B — Varaq (pending CEO approval; safe to build against)",
+    "contrastMethod": "WCAG 2.1 relative luminance, independently recalculated 2026-11-18",
+    "notes": [
+      "Status is never colour alone: always icon + word.",
+      "Petrol #0B5563 is retired. Primary is indigo #2E2BA0.",
+      "Saffron #F5B43C is reserved for the logo fold and the 'your turn' (ERI) moment. Not for buttons, links, or warnings.",
+      "Wordmark is one word, one colour ('YuklaGo'); use outlined SVGs in /workspace/yuklago-brand/export/, never retype it.",
+      "Use U+02BB (ʻ) in oʻ / gʻ. Normalise U+0027, U+2018, U+2019, U+02BC to U+02BB in UI strings. Do not use IBM Plex Sans."
+    ]
+  },
+  "color": {
+    "brand": {
+      "primary": "#2E2BA0",
+      "primaryHover": "#24218A",
+      "primaryPressed": "#1C1A70",
+      "onPrimary": "#FFFFFF",
+      "tint": "#ECEBFA",
+      "dark": "#14143F",
+      "accent": "#F5B43C",
+      "accentUse": "Logo fold (on indigo) and 'Endi sizning navbatingiz' panel only. Never as text, icons, links, or button fills on a light background."
+    },
+    "text": {
+      "ink": "#14152B",
+      "secondary": "#525570",
+      "muted": "#5E6178",
+      "link": "#2E2BA0",
+      "onDark": "#FFFFFF",
+      "onPrimary": "#FFFFFF"
+    },
+    "bg": {
+      "canvas": "#F5F5FA",
+      "surface": "#FFFFFF",
+      "sunken": "#EEEFF5",
+      "inverse": "#14152B",
+      "tint": "#ECEBFA"
+    },
+    "border": {
+      "line": "#E1E2EC",
+      "strong": "#C5CCD8",
+      "focusRing": "#2E2BA0",
+      "inputRecommended": {
+        "value": "#84899A",
+        "note": "APPROVED by Brand Designer 2026-11-18 as border.input (only outline of an input); line/strong are decorative dividers only. brand line (#E1E2EC, 1.29:1) and strong (#C5CCD8, 1.62:1) fail WCAG 1.4.11 (3:1) as the only outline of an input on white. #84899A is 3.48:1 on white, 3.21:1 on canvas, 3.04:1 on sunken. "
+      }
+    },
+    "button": {
+      "primary": {
+        "bg": "#2E2BA0",
+        "bgHover": "#24218A",
+        "bgPressed": "#1C1A70",
+        "fg": "#FFFFFF"
+      },
+      "secondary": {
+        "bg": "#FFFFFF",
+        "border": "#C5CCD8",
+        "fg": "#14152B",
+        "borderNote": "Resting border is 1.62:1 on white; rely on shape + label, and use focusRing #2E2BA0 on focus. Consider inputRecommended for a stronger resting outline."
+      },
+      "destructive": {
+        "bg": "#C0362C",
+        "fg": "#FFFFFF"
+      },
+      "doNotUse": "No black, pink, petrol, or saffron-filled buttons. If a saffron chip is ever needed, text must be ink #14152B, never white."
+    },
+    "status": {
+      "go": {
+        "role": "success",
+        "fg": "#12795A",
+        "bg": "#E7F5EF",
+        "border": "#B7DFCC",
+        "solid": "#12795A",
+        "icon": "check-circle",
+        "label": "Tasdiqlangan",
+        "aliases": [
+          "Yaxshi",
+          "Tayyor"
+        ]
+      },
+      "caution": {
+        "role": "warning",
+        "fg": "#A35C00",
+        "bg": "#FFF4E0",
+        "border": "#F0D3A0",
+        "solid": "#A35C00",
+        "icon": "warning-triangle",
+        "label": "Diqqat",
+        "aliases": [
+          "Tekshiring"
+        ]
+      },
+      "stop": {
+        "role": "error",
+        "fg": "#C0362C",
+        "bg": "#FDECEA",
+        "border": "#F3C1BC",
+        "solid": "#C0362C",
+        "icon": "x-circle",
+        "label": "Toʻsiq",
+        "aliases": [
+          "Toʻxtang",
+          "Yetishmayapti"
+        ]
+      },
+      "info": {
+        "role": "info",
+        "fg": "#2457A6",
+        "bg": "#EAF1FB",
+        "border": "#C3D5EF",
+        "solid": "#2457A6",
+        "icon": "info-circle",
+        "label": "Maʼlumot"
+      }
+    },
+    "yourTurn": {
+      "bg": "#14152B",
+      "accent": "#F5B43C",
+      "text": "#FFFFFF",
+      "label": "Endi sizning navbatingiz",
+      "use": "Panel header or reserved moment at ERI login/sign only. Never a full-screen yellow field. Saffron is the accent on ink, not a text colour on white."
+    },
+    "practice": {
+      "bannerBg": "#E8EBF1",
+      "bannerBorder": "#C5CCD8",
+      "bannerText": "#14152B",
+      "pillBg": "#3A4256",
+      "pillText": "#FFFFFF",
+      "link": "#2E2BA0",
+      "copyUzPill": "MASHQ",
+      "copyUz": "Mashq rejimi — bu haqiqiy bojxona kabineti emas. Hech narsa bojxonaga yuborilmaydi.",
+      "copyUzLink": "Haqiqiy rejim haqida",
+      "copyRuPill": "УЧЕБНЫЙ РЕЖИМ",
+      "copyRu": "Это не настоящий кабинет таможни. Ничего не отправляется.",
+      "sample": "/workspace/yuklago-brand/export/practice-banner.png",
+      "pattern": "One pinned graphite banner at the very top of the app, plus a small MASHQ pill in the cabinet URL bar so any screenshot crop still shows it. Keep mashq.yuklago.uz as a passive fourth signal. No magenta hatch, no diagonal watermark, no pink URL bar."
+    }
+  },
+  "contrast": {
+    "method": "WCAG 2.1, independently recalculated",
+    "aaNormal": 4.5,
+    "aaLarge": 3.0,
+    "uiGraphic": 3.0,
+    "pairs": {
+      "onPrimary/primary": {
+        "ratio": 10.66,
+        "wcag": "AAA",
+        "fg": "#FFFFFF",
+        "bg": "#2E2BA0"
+      },
+      "onPrimary/primaryHover": {
+        "ratio": 12.65,
+        "wcag": "AAA",
+        "fg": "#FFFFFF",
+        "bg": "#24218A"
+      },
+      "onPrimary/primaryPressed": {
+        "ratio": 14.67,
+        "wcag": "AAA",
+        "fg": "#FFFFFF",
+        "bg": "#1C1A70"
+      },
+      "ink/surface": {
+        "ratio": 17.92,
+        "wcag": "AAA",
+        "fg": "#14152B",
+        "bg": "#FFFFFF"
+      },
+      "ink/canvas": {
+        "ratio": 16.49,
+        "wcag": "AAA",
+        "fg": "#14152B",
+        "bg": "#F5F5FA"
+      },
+      "secondary/surface": {
+        "ratio": 7.26,
+        "wcag": "AAA",
+        "fg": "#525570",
+        "bg": "#FFFFFF"
+      },
+      "secondary/canvas": {
+        "ratio": 6.68,
+        "wcag": "AA",
+        "fg": "#525570",
+        "bg": "#F5F5FA"
+      },
+      "secondary/sunken": {
+        "ratio": 6.33,
+        "wcag": "AA",
+        "fg": "#525570",
+        "bg": "#EEEFF5"
+      },
+      "muted/surface": {
+        "ratio": 4.99,
+        "wcag": "AA",
+        "fg": "#5E6178",
+        "bg": "#FFFFFF"
+      },
+      "muted/canvas": {
+        "ratio": 4.6,
+        "wcag": "AA",
+        "fg": "#5E6178",
+        "bg": "#F5F5FA"
+      },
+      "muted/sunken": {
+        "ratio": 4.35,
+        "wcag": "fail-normal-AA",
+        "note": "4.35:1 is below 4.5:1. Do not use muted text on sunken. Use secondary or ink."
+      },
+      "muted/tint": {
+        "ratio": 4.24,
+        "wcag": "fail-normal-AA",
+        "note": "Do not use muted text on brand tint #ECEBFA."
+      },
+      "link/surface": {
+        "ratio": 10.66,
+        "wcag": "AAA",
+        "fg": "#2E2BA0",
+        "bg": "#FFFFFF"
+      },
+      "link/practiceBanner": {
+        "ratio": 8.93,
+        "wcag": "AAA",
+        "fg": "#2E2BA0",
+        "bg": "#E8EBF1"
+      },
+      "go.fg/bg": {
+        "ratio": 4.79,
+        "wcag": "AA",
+        "fg": "#12795A",
+        "bg": "#E7F5EF"
+      },
+      "go.fg/surface": {
+        "ratio": 5.37,
+        "wcag": "AA"
+      },
+      "go.solid/onSolid": {
+        "ratio": 5.37,
+        "wcag": "AA",
+        "fg": "#FFFFFF",
+        "bg": "#12795A"
+      },
+      "caution.fg/bg": {
+        "ratio": 4.71,
+        "wcag": "AA",
+        "fg": "#A35C00",
+        "bg": "#FFF4E0",
+        "note": "Tight but passes AA."
+      },
+      "caution.fg/surface": {
+        "ratio": 5.14,
+        "wcag": "AA"
+      },
+      "caution.solid/onSolid": {
+        "ratio": 5.14,
+        "wcag": "AA",
+        "fg": "#FFFFFF",
+        "bg": "#A35C00"
+      },
+      "stop.fg/bg": {
+        "ratio": 4.83,
+        "wcag": "AA",
+        "fg": "#C0362C",
+        "bg": "#FDECEA"
+      },
+      "stop.fg/surface": {
+        "ratio": 5.52,
+        "wcag": "AA"
+      },
+      "stop.solid/onSolid": {
+        "ratio": 5.52,
+        "wcag": "AA",
+        "fg": "#FFFFFF",
+        "bg": "#C0362C"
+      },
+      "info.fg/bg": {
+        "ratio": 6.18,
+        "wcag": "AA",
+        "fg": "#2457A6",
+        "bg": "#EAF1FB"
+      },
+      "yourTurn.accent/bg": {
+        "ratio": 9.79,
+        "wcag": "AAA",
+        "fg": "#F5B43C",
+        "bg": "#14152B"
+      },
+      "yourTurn.text/bg": {
+        "ratio": 17.92,
+        "wcag": "AAA",
+        "fg": "#FFFFFF",
+        "bg": "#14152B"
+      },
+      "ink/saffron": {
+        "ratio": 9.79,
+        "wcag": "AAA",
+        "fg": "#14152B",
+        "bg": "#F5B43C",
+        "note": "Only acceptable text-on-saffron pairing. Do not use as a default button."
+      },
+      "practice.pillText/pillBg": {
+        "ratio": 10.03,
+        "wcag": "AAA"
+      },
+      "practice.bannerText/bannerBg": {
+        "ratio": 15.01,
+        "wcag": "AAA"
+      },
+      "saffron/white": {
+        "ratio": 1.83,
+        "wcag": "fail",
+        "fg": "#F5B43C",
+        "bg": "#FFFFFF"
+      },
+      "white/saffron": {
+        "ratio": 1.83,
+        "wcag": "fail",
+        "fg": "#FFFFFF",
+        "bg": "#F5B43C"
+      },
+      "saffron/canvas": {
+        "ratio": 1.68,
+        "wcag": "fail"
+      },
+      "saffron/indigo": {
+        "ratio": 5.83,
+        "wcag": "AA",
+        "note": "Logo fold on the indigo sheet is fine."
+      },
+      "border.line/surface": {
+        "ratio": 1.29,
+        "wcag": "fail-ui-3:1"
+      },
+      "border.strong/surface": {
+        "ratio": 1.62,
+        "wcag": "fail-ui-3:1"
+      },
+      "border.inputRecommended/surface": {
+        "ratio": 3.48,
+        "wcag": "pass-ui-3:1",
+        "fg": "#84899A",
+        "bg": "#FFFFFF"
+      }
+    },
+    "flags": [
+      {
+        "id": "saffron-on-light",
+        "severity": "P0-usage",
+        "colors": [
+          "#F5B43C",
+          "#FFFFFF",
+          "#F5F5FA"
+        ],
+        "ratio": 1.83,
+        "issue": "Saffron fails WCAG AA (and AAA) for text on white/canvas (1.83:1 / 1.68:1). It also fails WCAG 1.4.11 non-text contrast (3:1) as a standalone icon or graphic on a light background. White text on saffron also fails (1.83:1).",
+        "okUse": "Saffron on ink #14152B is 9.79:1 (AAA). Saffron on indigo #2E2BA0 is 5.83:1 (AA) — this is how the Varaq fold sits on the mark. Ink text on a saffron fill would pass, but brand reserves saffron and forbids saffron buttons."
+      },
+      {
+        "id": "muted-on-sunken-or-tint",
+        "severity": "P1-usage",
+        "colors": [
+          "#5E6178",
+          "#EEEFF5",
+          "#ECEBFA"
+        ],
+        "ratio": 4.35,
+        "issue": "Muted text is 4.35:1 on sunken and 4.24:1 on brand tint — both below 4.5:1 AA for normal (13–16 px) text. It does pass on surface (4.99) and canvas (4.60).",
+        "okUse": "On sunken or tint backgrounds use secondary #525570 (6.33 / 6.17) or ink."
+      },
+      {
+        "id": "input-border-too-faint",
+        "severity": "P1-token-gap",
+        "colors": [
+          "#E1E2EC",
+          "#C5CCD8",
+          "#FFFFFF"
+        ],
+        "ratio": 1.62,
+        "issue": "Neither border.line (1.29:1) nor border.strong (1.62:1) meets the 3:1 non-text contrast needed for an input outline that is the only visible edge of a field.",
+        "okUse": "Focus ring #2E2BA0 on white is 10.66:1 (AAA). For the resting input, UI recommends #84899A until Brand Designer confirms a stronger border token."
+      }
+    ]
+  },
+  "font": {
+    "family": {
+      "ui": "Onest, 'Noto Sans', system-ui, sans-serif",
+      "code": "'JetBrains Mono', ui-monospace, monospace"
+    },
+    "source": "Google Fonts (OFL). Proof: /workspace/yuklago-brand/font-test.png",
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "numeric": "font-variant-numeric: tabular-nums for amounts in soʻm. Do not set money in mono.",
+    "monoUse": "TIF TN codes, grafa IDs and URLs only.",
+    "uzbekApostrophe": "U+02BB in oʻ / gʻ. Normalise U+0027, U+2018, U+2019, U+02BC to U+02BB in UI copy; accept all of them in search and input.",
+    "scale": {
+      "display": {
+        "size": 36,
+        "lineHeight": 40,
+        "weight": 700,
+        "tracking": "-0.02em",
+        "use": "marketing landing only"
+      },
+      "h1": {
+        "size": 28,
+        "lineHeight": 34,
+        "weight": 700,
+        "tracking": "-0.015em",
+        "use": "screen title"
+      },
+      "h2": {
+        "size": 20,
+        "lineHeight": 28,
+        "weight": 600,
+        "use": "section title"
+      },
+      "h3": {
+        "size": 16,
+        "lineHeight": 24,
+        "weight": 600,
+        "use": "card title"
+      },
+      "body": {
+        "size": 16,
+        "lineHeight": 24,
+        "weight": 400,
+        "use": "main reading"
+      },
+      "caption": {
+        "size": 13,
+        "lineHeight": 20,
+        "weight": 400,
+        "use": "source, help, chips"
+      },
+      "amount": {
+        "size": 14,
+        "lineHeight": 20,
+        "weight": 600,
+        "numeric": "tabular-nums",
+        "use": "soʻm amounts in tables; enlarge on hero totals as needed but keep tabular-nums"
+      },
+      "code": {
+        "size": 14,
+        "lineHeight": 20,
+        "weight": 400,
+        "family": "code",
+        "use": "TIF TN, grafa, URL"
+      }
+    }
+  },
+  "space": {
+    "unit": 8,
+    "scale": [
+      4,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "pageInset": [
+      24,
+      32
+    ],
+    "cardPadding": [
+      16,
+      20
+    ],
+    "tapMin": 48
+  },
+  "radius": {
+    "xs": 4,
+    "sm": 6,
+    "md": 10,
+    "lg": 14,
+    "xl": 20,
+    "pill": 999,
+    "appIcon": "22.5%"
+  },
+  "logo": {
+    "direction": "B — Varaq",
+    "lockup": "/workspace/yuklago-brand/export/lockup-horizontal.svg",
+    "lockupOnDark": "/workspace/yuklago-brand/export/lockup-horizontal-on-dark.svg",
+    "mark": "/workspace/yuklago-brand/export/mark.svg",
+    "favicon": [
+      "/workspace/yuklago-brand/export/favicon.ico",
+      "/workspace/yuklago-brand/export/favicon-32.png",
+      "/workspace/yuklago-brand/export/favicon.svg"
+    ],
+    "appIcon": [
+      "/workspace/yuklago-brand/export/app-icon-512.png",
+      "/workspace/yuklago-brand/export/app-icon-192.png",
+      "/workspace/yuklago-brand/export/apple-touch-icon.png",
+      "/workspace/yuklago-brand/export/app-icon-maskable-512.png"
+    ],
+    "clearSpace": "at least the height of the mark's fold on all sides; min lockup height 20 px; min mark 16 px",
+    "themeColor": "#2E2BA0",
+    "wordmark": "YuklaGo as one word, one colour. Never split Yukla + Go."
+  }
+}

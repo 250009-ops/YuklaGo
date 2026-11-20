@@ -1,0 +1,38 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "CMR",
+  "number": "TR-UZ-20931",
+  "date": "2026-11-03",
+  "box1_sender": "Anka Tekstil Sanayi ve Ticaret A.Ş. (SYNTHETIC), Merter Mah. 12, Güngören, İstanbul, Türkiye",
+  "box2_consignee": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC), г. Ташкент, Юнусабадский р-н, ул. Амира Темура, 100 (SYNTHETIC)",
+  "box3_place_of_delivery": "Tashkent, Uzbekistan",
+  "box4_place_date_taking_over": "İstanbul, Türkiye, 03.11.2026",
+  "box5_documents_attached": [
+    "Invoice ANK-2026-0917",
+    "Packing list ANK-PL-0917"
+  ],
+  "box6_marks": "ANK 1-120",
+  "box7_number_of_packages": 118,
+  "box8_packing": "cartons",
+  "box9_goods": "Cotton T-shirts",
+  "box10_hs": "610990",
+  "box11_gross_kg": "1430",
+  "box12_volume_m3": "9.6",
+  "box16_carrier": "Anadolu Lojistik Ltd. (SYNTHETIC)",
+  "vehicle": {
+    "tractor": "34ABC123",
+    "trailer": "34XYZ45",
+    "country": "792"
+  },
+  "border_crossing": {
+    "post": {
+      "code": "06010",
+      "name": "Алат"
+    },
+    "date": "2026-11-19",
+    "stamp": "SYNTHETIC"
+  },
+  "invoice_value_per_code": {
+    "610990": "12600.00 USD"
+  }
+}

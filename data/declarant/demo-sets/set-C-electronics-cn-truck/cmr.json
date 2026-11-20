@@ -1,0 +1,39 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "CMR",
+  "number": "CN-KZ-UZ-44120",
+  "date": "2026-10-28",
+  "box1_sender": "Ningbo Hanshi Electric Appliance Co., Ltd. (SYNTHETIC), No. 66 Kexue Rd, Yinzhou, Ningbo, Zhejiang, China",
+  "box2_consignee": "«TEXNO UY SAVDO» MChJ (SYNTHETIC), Ташкентская обл., Ташкентский р-н, пос. Келес, ул. Навои, 5 (SYNTHETIC)",
+  "box3_place_of_delivery": "Keles, Tashkent region, Uzbekistan",
+  "box4_place_date_taking_over": "Ningbo, China, 28.10.2026",
+  "box5_documents_attached": [
+    "Invoice HS-INV-26-0311",
+    "Packing list HS-PL-26-0311"
+  ],
+  "box6_marks": "HS 1-324",
+  "box7_number_of_packages": 324,
+  "box8_packing": "cartons",
+  "box9_goods": "Microwave ovens; LED lamps",
+  "box10_hs": "851650; 853952",
+  "box11_gross_kg": "3798",
+  "box12_volume_m3": "31.2",
+  "box16_carrier": "«TASHKENT EXPRESS CARGO» MChJ (SYNTHETIC)",
+  "vehicle": {
+    "tractor": "10A777CA",
+    "trailer": "10XZ321",
+    "country": "860"
+  },
+  "border_crossing": {
+    "post": {
+      "code": "27001",
+      "name": "Яллама"
+    },
+    "date": "2026-11-14",
+    "stamp": "SYNTHETIC"
+  },
+  "invoice_value_per_code": {
+    "851650": "78000.00 CNY",
+    "853952": "10800.00 CNY"
+  }
+}

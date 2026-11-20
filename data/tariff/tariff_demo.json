@@ -1,0 +1,289 @@
+{
+  "generated": "2026-11-18",
+  "tz": "Asia/Tashkent",
+  "disclaimer": "Demo ma'lumot. Stavkalar lex.uz joriy tahriridan 2026-11-18 da o'qildi; e'lon qilishdan oldin qayta tekshiring.",
+  "verified_meaning": "ad_valorem/specific qiymat lex.uz dagi rasmiy o'zbekcha (PQ-181 2-ilova) va konsolidatsiyalangan ruscha (PQ-3818 1-ilova, PQ-58 tahriri) matnlarida bir xil topildi; code10 PQ-181 1-ilova PDF ro'yxatida bor.",
+  "common": {
+    "mfn_surcharge": "Bojxona kodeksi 300¹ (28.02.2026 dan kuchda): MFN bo'lmagan yoki kelib chiqishi aniqlanmagan tovarga +5/10/15/20%",
+    "china_mfn": true,
+    "turkey_mfn": true,
+    "mfn_list_url": "https://lex.uz/uz/docs/-4911943",
+    "turkey_pta_annex_IB_hs6": [
+      "721049",
+      "841370",
+      "848180",
+      "850213",
+      "850490",
+      "853710",
+      "853720",
+      "853890",
+      "854442",
+      "854449",
+      "903289",
+      "940690"
+    ],
+    "turkey_pta_url": "https://lex.uz/en/docs/6489973"
+  },
+  "rows": [
+    {
+      "code10": "8517130000",
+      "description_uz": "Smartfonlar",
+      "ad_valorem_pct": 5,
+      "specific_min": null,
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Stavka qatori: '851711, 851713, 851714, 851718 — 5'. IMEI: VM 778 (17.09.2019) Nizom 14-band — import IMEI kodlari BYD 31-grafasida majburiy; IM-40 dan keyin UZIMEI ro'yxati, to'lov alohida (bojxona to'lovi emas). Xitoy — MFN ro'yxatida (MYU 3267), 300¹ ustama yo'q.",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "8471300000",
+      "description_uz": "Portativ hisoblash mashinalari (noutbuklar), 10 kg gacha",
+      "ad_valorem_pct": 0,
+      "specific_min": null,
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "8471 pozitsiyasi butunlay 0%, istisno qatorlar yo'q. 0% boj: 300¹ ustamasi 'o'n foizgacha → 5%' ostiga tushadimi — OCHIQ savol (qarang rules.md).",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "6109100000",
+      "description_uz": "Trikotaj futbolkalar, paxta ipidan",
+      "ad_valorem_pct": 20,
+      "specific_min": {
+        "amount": 0.5,
+        "currency": "USD",
+        "unit": "dona",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '6109 — 20, lekin har bir donasi uchun 0,5 AQSH dollaridan kam bo'lmagan'. Turkiya PTA I-B ilovasida 6109 yo'q → imtiyoz yo'q.",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "6404110000",
+      "description_uz": "Sport poyabzali, ustki qismi to'qimachilikdan",
+      "ad_valorem_pct": 20,
+      "specific_min": {
+        "amount": 3,
+        "currency": "USD",
+        "unit": "juft",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": "juft",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '6404 — 20, lekin har bir jufti uchun 3 AQSH dollaridan kam bo'lmagan'.",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "6403999600",
+      "description_uz": "Poyabzal, ustki qismi tabiiy charmdan, to'piqni yopmaydigan (6403 99), tasmali emas, patak ≥24 sm, erkaklarniki",
+      "ad_valorem_pct": 20,
+      "specific_min": {
+        "amount": 3,
+        "currency": "USD",
+        "unit": "juft",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": "juft",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '6403 — 20, lekin har bir jufti uchun 3 $' (istisno faqat 6403120000 — 5%). Ierarxiya: 6403 99 boshqa → tasmali emas → patak ≥24 sm → boshqa → erkaklarniki (PQ-181 1-ilova).",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "9503009500",
+      "description_uz": "Boshqa o'yinchoqlar, plastmassadan",
+      "ad_valorem_pct": 10,
+      "specific_min": null,
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "9503 — 10% (istisno: 9503002900 — 0%). O'yinchoqlar uchun muvofiqlik sertifikati/texnik reglament talabi alohida tekshirilishi kerak (bu faylda yo'q).",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "3304990000",
+      "description_uz": "Kosmetika/terini parvarishlash vositalari, boshqalar",
+      "ad_valorem_pct": 30,
+      "specific_min": {
+        "amount": 0.5,
+        "currency": "USD",
+        "unit": "kg",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": null,
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '3304 — 30, lekin har bir kilogrammi uchun 0,5 $'. TIF TNda qo'shimcha o'lchov birligi yo'q ('–'); kg — netto yoki brutto ekani hujjatda aniq yozilmagan → UNVERIFIED (netto taxmin).",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "8516500000",
+      "description_uz": "Mikroto'lqinli pechlar",
+      "ad_valorem_pct": 10,
+      "specific_min": {
+        "amount": 5,
+        "currency": "USD",
+        "unit": "dona",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '851650 — 10, lekin har bir donasi uchun 5 $'. 8516 umumiy stavkasi 10%. Asl Belgisi: VM 737 (20.11.2020) 1-ilova 4-band 'Maishiy texnika' ro'yxatida 8516500000 bor — majburiy raqamli markirovka 15.04.2022 dan (1-ilova VM 23, 23.01.2026 tahririda): https://lex.uz/uz/docs/-5115923",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "8539520009",
+      "description_uz": "LED lampalar, boshqalar",
+      "ad_valorem_pct": 15,
+      "specific_min": null,
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '853952 — 15'. DIQQAT: 8539520000 kodi rasmiy ro'yxatda YO'Q; 8539 52 000 faqat 1/2/9 ga bo'linadi (1 — fosforli kompozit bilan qoplangan ≥24 LED ipli; 2 — ≥25 mm to'g'ri quvur; 9 — boshqalar). Filament LED lampa 0001 ga tushishi mumkin — odam qaror qiladi. Asl Belgisi: VM 737 1-ilova 4-bandda 8539500000 (eski tahrirdagi LED lampa kodi) bor; HS2022 dagi 8539 52 000 x ga tatbiq etilishi — OCHIQ, Soliq qo'mitasi/Asl Belgisi operatoridan tasdiqlansin. 'Talab qilinmaydi' deb ko'rsatmang.",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    },
+    {
+      "code10": "9403601000",
+      "description_uz": "Oshxona va yashash xonalari uchun yog'och mebel",
+      "ad_valorem_pct": 15,
+      "specific_min": {
+        "amount": 0.4,
+        "currency": "USD",
+        "unit": "kg",
+        "rule": "max(ad_valorem, specific) — Bojxona kodeksi 293-modda ('...dan kam bo'lmagan')"
+      },
+      "supplementary_unit_tiftn": "dona",
+      "excise": {
+        "rate": null,
+        "basis": "Soliq kodeksi 289¹ (tamaki), 289² (alkogol), 289³ (neft mahsulotlari, polietilen granula, tabiiy gaz, qadoqlangan ichimliklar, energetik ichimliklar, chips) ro'yxatlarida bu tovar yo'q",
+        "basis_url": "https://lex.uz/docs/-4674902"
+      },
+      "vat_pct": 12,
+      "vat_basis": "Soliq kodeksi 258-modda (12%), baza 254-modda; ozod importlar 246-modda (bu kod uchun tekshirilmagan)",
+      "source_doc": "PQ-3818 (29.06.2018) 1-ilova, PQ-181 (14.05.2025) 2-ilova tahririda (1-ilova matni 01.06.2025 dan kuchda), PQ-58 (11.02.2026, 16.02.2026 dan) o'zgartirishi bilan",
+      "source_url": "https://lex.uz/uz/docs/-7533457",
+      "source_url_ru_consolidated": "https://lex.uz/docs/3802366",
+      "code_list_source": "PQ-181 1-ilova (TIF TN tasniflash kodlari ro'yxati, PDF): https://lex.uz/uz/files/7541055.zip",
+      "source_checked_date": "2026-11-18",
+      "verified": true,
+      "code10_in_official_list": true,
+      "notes": "Qator: '9403 — 15, lekin har bir kilogrammi uchun 0,4 $'. Qo'shimcha birlik 'dona', lekin xos stavka kg da → og'irlik maydoni majburiy; netto/brutto UNVERIFIED.",
+      "marking_asl_belgisi_source": "https://lex.uz/uz/docs/-5115923 (VM 737, 1-ilova, 23.01.2026 tahriri)"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "packing_list",
+  "number": "MD-PL-118",
+  "date": "2026-10-28",
+  "invoice_ref": "MD-2026-118",
+  "seller": "Foshan Mingde Furniture Co., Ltd. (SYNTHETIC)",
+  "buyer": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC)",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Dining table, solid rubberwood, 1600x900x750 mm, lacquered",
+      "model": "DT-1600",
+      "qty": "40",
+      "unit": "pcs",
+      "packages": 80,
+      "package_type": "cartons (top + legs)",
+      "net_kg": "1520.000",
+      "gross_kg": "1760.000",
+      "carton_marks": "MD-DT 1-80"
+    },
+    {
+      "line": 2,
+      "description": "Sideboard / TV stand, solid pine, 1200x450x600 mm",
+      "model": "SB-1200",
+      "qty": "30",
+      "unit": "pcs",
+      "packages": 30,
+      "package_type": "cartons",
+      "net_kg": "1560.000",
+      "gross_kg": "1740.000",
+      "carton_marks": "MD-SB 81-110"
+    }
+  ],
+  "total_packages": 110,
+  "total_net_kg": "3080.000",
+  "total_gross_kg": "3500.000"
+}

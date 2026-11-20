@@ -1,0 +1,38 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "CMR",
+  "number": "CN-UZ-77812",
+  "date": "2026-11-01",
+  "box1_sender": "Foshan Mingde Furniture Co., Ltd. (SYNTHETIC), Longjiang Rd 88, Shunde, Foshan, Guangdong, China",
+  "box2_consignee": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC), г. Ташкент, Чиланзарский р-н, ул. Бунёдкор, 1 (SYNTHETIC)",
+  "box3_place_of_delivery": "Tashkent, Uzbekistan",
+  "box4_place_date_taking_over": "Foshan, China, 01.11.2026",
+  "box5_documents_attached": [
+    "Invoice MD-2026-118",
+    "Packing list MD-PL-118"
+  ],
+  "box6_marks": "MD 1-110",
+  "box7_number_of_packages": 110,
+  "box8_packing": "cartons",
+  "box9_goods": "Wooden furniture (dining tables, sideboards)",
+  "box10_hs": "940360",
+  "box11_gross_kg": "3500",
+  "box12_volume_m3": "38.5",
+  "box16_carrier": "«TRANS SILK LOGISTICS» MChJ (SYNTHETIC), Toshkent",
+  "vehicle": {
+    "tractor": "01A123BC",
+    "trailer": "01XY456",
+    "country": "860"
+  },
+  "border_crossing": {
+    "post": {
+      "code": "03002",
+      "name": "Дустлик"
+    },
+    "date": "2026-11-10",
+    "stamp": "SYNTHETIC"
+  },
+  "invoice_value_per_code": {
+    "940360": "12100.00 USD"
+  }
+}

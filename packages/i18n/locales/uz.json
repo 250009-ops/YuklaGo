@@ -1,0 +1,15 @@
+{
+  "publicLine": "Brokersiz, oʻzingiz topshirasiz — tez va tushunarli",
+  "codeResponsibility": "Kodni siz tanlaysiz va javob berasiz.",
+  "youSign": "Siz oʻzingiz imzolab, oʻzingiz yuborasiz — faqat oʻz ERI kalitingiz bilan.",
+  "publicShort": "Brokersiz, oʻzingiz topshirasiz",
+  "signerListed": "Imzolovchi — deklaratsiyalovchi shaxslar roʻyxatiga kiritilgan shaxs.",
+  "ownKey": "Faqat oʻz ERI kalitingiz bilan imzolang. Boshqa odamning kalitini ishlatmang.",
+  "readyWhenFounder": "Tayyor — asoschi tasdiqlagach yoqiladi",
+  "noPassword": "YuklaGo parol yoki kalit soʻramaydi. Soʻrashsa — firibgarlik.",
+  "notOfficialCode": "YuklaGo izohi, rasmiy kod emas",
+  "supportLimits": "Yordam xizmati faqat siz ruxsat bergan muddatda, yashirilgan maʼlumotni koʻradi. Imzolamaydi, yubormaydi, toʻlamaydi.",
+  "notAStateBody": "YuklaGo — mustaqil xizmat, davlat organi emas.",
+  "youPay": "Oʻz hisobingizdan toʻlaysiz. YuklaGo toʻlamaydi.",
+  "stepper": ["Hujjatlar", "Tekshiruv", "Koʻrib chiqish", "Toʻldirish", "Holat"]
+}

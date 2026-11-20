@@ -1,0 +1,49 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "commercial_invoice",
+  "number": "ANK-2026-0917",
+  "date": "2026-11-02",
+  "seller": {
+    "name": "Anka Tekstil Sanayi ve Ticaret A.Ş. (SYNTHETIC)",
+    "address": "Merter Mah. 12, Güngören, İstanbul, Türkiye",
+    "tin": "TR-SYN-1234567890",
+    "country_ru": "Турция"
+  },
+  "buyer": {
+    "name": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC)",
+    "address": "г. Ташкент, Юнусабадский р-н, ул. Амира Темура, 100 (SYNTHETIC)",
+    "tin": "100000002",
+    "district_code": "1726266",
+    "phone": "+998 71 000 00 02",
+    "email": "info@modatekstil.example"
+  },
+  "contract": {
+    "number": "TR-07/2026",
+    "date": "2026-08-20"
+  },
+  "incoterms": "CPT Tashkent (Incoterms 2010)",
+  "currency": "USD",
+  "payment_terms": "30% prepayment, 70% within 30 days after import",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Men's T-shirt, knitted single jersey, 100% cotton, 160 g/m2, sizes S-XXL, assorted colours",
+      "brand": "ANKA BASIC",
+      "model": "AB-100",
+      "hs_code": "6109.90",
+      "origin": "Türkiye",
+      "qty": "6000",
+      "unit": "pcs",
+      "unit_price": "2.10",
+      "amount": "12600.00",
+      "net_kg": "1260.000",
+      "gross_kg": "1344.000",
+      "packages": 120
+    }
+  ],
+  "total_amount": "12600.00",
+  "total_packages": 120,
+  "total_net_kg": "1260.000",
+  "total_gross_kg": "1344.000",
+  "notes": "Price includes carriage to Tashkent. Carrier statement attached: carriage from UZ border (Alat) to Tashkent = 450.00 USD."
+}

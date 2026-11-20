@@ -1,0 +1,17 @@
+name: handbook
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: node packages/i18n/check-copy.mjs
+      - run: node packages/i18n/check-copy.mjs --self-test
+      - name: Parse OpenAPI
+        run: pip install pyyaml && python3 -c "import yaml; yaml.safe_load(open('contracts/openapi.yaml')); print('openapi ok')"

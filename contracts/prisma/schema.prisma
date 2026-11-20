@@ -1,0 +1,868 @@
+// YuklaGo database contract (Prisma ORM 7.10.1, PostgreSQL).
+// This file is the schema contract. It is not a running migration.
+// Connection URL lives in prisma.config.ts at implementation time (Prisma 7),
+// never in this file, and the database is in Uzbekistan.
+//
+// Money is Decimal. The API exposes money as decimal strings.
+// Personal data columns are marked in comments. Passport and ID images are
+// not a column anywhere: do not add one (ZRU-547; passport-as-biometric is [UNVERIFIED]).
+//
+// Three roles only (DEC-29):
+//   Account.role is always OWNER (the client signer).
+//   StaffAccount.role is SUPPORT or ADMIN.
+//   DPO is a duty on an Admin (isDpo), not a fourth role.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../../services/api/src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Identity
+// ---------------------------------------------------------------------------
+
+enum AccountRole {
+  OWNER
+}
+
+enum StaffRole {
+  SUPPORT
+  ADMIN
+}
+
+enum CompanyKind {
+  LLC
+  YATT
+  OTHER
+}
+
+enum OtpPurpose {
+  SIGN_IN
+  STEP_UP
+}
+
+enum StepUpTrigger {
+  NEW_DEVICE
+  SIGNER_CHANGE
+  SUPPORT_ACCESS
+  FULL_DATA_EXPORT
+  ACCOUNT_DELETION
+}
+
+enum SessionKind {
+  CLIENT
+  STAFF
+}
+
+model Account {
+  id            String      @id @default(uuid()) @db.Uuid
+  role          AccountRole @default(OWNER)
+  phoneE164     String      @unique
+  displayName   String
+  initials      String
+  locale        String      @default("uz")
+  /// PII. Deleted with the account, except where an audit row must keep a hash.
+  pinflHmac     String?
+  createdAt     DateTime    @default(now())
+  deletedAt     DateTime?
+  companyLinks  CompanyAccount[]
+  sessions      Session[]
+  devices       Device[]
+  stepUps       StepUpChallenge[]
+  consents      ConsentRecord[]
+  signerCerts   SignerCertificate[]
+  auditActors   AuditEvent[] @relation("AuditActorAccount")
+
+  @@index([deletedAt])
+}
+
+model StaffAccount {
+  id           String    @id @default(uuid()) @db.Uuid
+  role         StaffRole
+  /// Second approver for flags marked DPO. Allowed only when role = ADMIN.
+  isDpo        Boolean   @default(false)
+  email        String    @unique
+  passwordHash String
+  totpSecret   String
+  displayName  String
+  disabledAt   DateTime?
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+  grants       SupportGrant[] @relation("GrantStaff")
+  comments     SupportComment[]
+  flagRequests FlagChangeRequest[] @relation("FlagRequester")
+  flagDecisions FlagChangeRequest[] @relation("FlagDecider")
+  auditActors  AuditEvent[] @relation("AuditActorStaff")
+
+  @@index([role])
+}
+
+model Company {
+  id          String      @id @default(uuid()) @db.Uuid
+  /// Company STIR is not personal data for an LLC. A YaTT STIR is personal data.
+  stir        String
+  kind        CompanyKind
+  name        String
+  district    String?
+  createdAt   DateTime    @default(now())
+  accounts    CompanyAccount[]
+  shipments   Shipment[]
+  products    Product[]
+  history     CustomsHistoryEntry[]
+
+  @@unique([stir])
+}
+
+model CompanyAccount {
+  companyId String   @db.Uuid
+  accountId String   @db.Uuid
+  company   Company  @relation(fields: [companyId], references: [id])
+  account   Account  @relation(fields: [accountId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@id([companyId, accountId])
+}
+
+model Device {
+  id          String    @id @default(uuid()) @db.Uuid
+  accountId   String    @db.Uuid
+  account     Account   @relation(fields: [accountId], references: [id])
+  label       String
+  platform    String
+  firstSeenAt DateTime  @default(now())
+  lastSeenAt  DateTime  @default(now())
+  trustedAt   DateTime?
+  revokedAt   DateTime?
+  sessions    Session[]
+}
+
+model Session {
+  id           String      @id @default(uuid()) @db.Uuid
+  kind         SessionKind
+  accountId    String?     @db.Uuid
+  account      Account?    @relation(fields: [accountId], references: [id])
+  staffId      String?     @db.Uuid
+  staff        StaffAccount? @relation(fields: [staffId], references: [id])
+  deviceId     String?     @db.Uuid
+  device       Device?     @relation(fields: [deviceId], references: [id])
+  /// Hash of the refresh token. Raw token never stored.
+  refreshHash  String      @unique
+  createdAt    DateTime    @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  ipHash       String
+  userAgent    String
+
+  @@index([accountId, revokedAt])
+  @@index([staffId, revokedAt])
+}
+
+model StepUpChallenge {
+  id         String        @id @default(uuid()) @db.Uuid
+  accountId  String        @db.Uuid
+  account    Account       @relation(fields: [accountId], references: [id])
+  trigger    StepUpTrigger
+  /// Hash of the 6-digit code. Raw code never stored.
+  codeHash   String
+  phoneE164  String
+  attempts   Int           @default(0)
+  lockedUntil DateTime?
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime      @default(now())
+
+  @@index([accountId, trigger, consumedAt])
+}
+
+model SignerCertificate {
+  id              String    @id @default(uuid()) @db.Uuid
+  accountId       String    @db.Uuid
+  account         Account   @relation(fields: [accountId], references: [id])
+  /// HMAC-SHA256, key held in Uzbekistan. Raw PINFL, STIR and serial never stored.
+  pinflHmac       String
+  stirHmac        String
+  serialHmac      String
+  validUntil      DateTime
+  maskedPinfl     String
+  maskedInitials  String
+  confirmedAt     DateTime?
+  ed1Listed       Boolean
+  /// User-typed. YuklaGo does not read ed1 (CABINET_STATUS_READ=off).
+  authorityEndsOn DateTime?
+  authorityOpen   Boolean   @default(false)
+  replacedAt      DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@index([accountId, replacedAt])
+}
+
+model ConsentRecord {
+  id          String   @id @default(uuid()) @db.Uuid
+  accountId   String   @db.Uuid
+  account     Account  @relation(fields: [accountId], references: [id])
+  version     String
+  purposes    String[]
+  grantedAt   DateTime @default(now())
+  withdrawnAt DateTime?
+  textHash    String
+}
+
+// ---------------------------------------------------------------------------
+// Shipments and documents
+// ---------------------------------------------------------------------------
+
+enum ShipmentDirection {
+  IMPORT
+  EXPORT
+  TRANSIT
+}
+
+enum RegimeCode {
+  R10
+  R11
+  R12
+  R40
+  R41
+  R42
+  R51
+  R61
+  R70
+  R80
+}
+
+enum ShipmentStage {
+  DOCUMENTS
+  CHECK
+  REVIEW
+  FILL
+  STATUS
+  CLOSED
+}
+
+enum Provenance {
+  OFFICIAL
+  ESTIMATE
+  DOCUMENT
+  USER_CONFIRMED
+  SUGGESTION
+  MISSING
+  SAMPLE
+}
+
+model Shipment {
+  id              String            @id @default(uuid()) @db.Uuid
+  publicId        String            @unique
+  companyId       String            @db.Uuid
+  company         Company           @relation(fields: [companyId], references: [id])
+  createdById     String            @db.Uuid
+  direction       ShipmentDirection
+  regime          RegimeCode?
+  stage           ShipmentStage     @default(DOCUMENTS)
+  title           String
+  originCountry   String?
+  /// ISO numeric, grafa 34. "000" when unknown. Never a 2-letter code in the cabinet.
+  originNumeric   String?
+  presentationOn  DateTime?         @db.Date
+  postCode        String?
+  postCalendarVerified Boolean      @default(false)
+  preliminary     Boolean           @default(false)
+  incoterms       String?
+  invoiceCurrency String?
+  closedAt        DateTime?
+  deletedAt       DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  items           GoodsItem[]
+  documents       Document[]
+  findings        CheckFinding[]
+  draftFields     DraftField[]
+  calculations    Calculation[]
+  clocks          DeadlineClock[]
+  fillSessions    FillSession[]
+  grants          SupportGrant[]
+  questions       ClarifyingQuestion[]
+  comments        SupportComment[]
+  handoffs        HandoffPack[]
+
+  @@index([companyId, deletedAt])
+  @@index([stage])
+}
+
+model GoodsItem {
+  id              String   @id @default(uuid()) @db.Uuid
+  shipmentId      String   @db.Uuid
+  shipment        Shipment @relation(fields: [shipmentId], references: [id])
+  lineNo          Int
+  description     String
+  tnCode          String?
+  tnConfirmedById String?  @db.Uuid
+  tnConfirmedAt   DateTime?
+  qty             Decimal? @db.Decimal(18, 6)
+  qtyUnit         String?
+  grossKg         Decimal? @db.Decimal(18, 3)
+  netKg           Decimal? @db.Decimal(18, 3)
+  invoiceAmount   Decimal? @db.Decimal(18, 2)
+  currency        String?
+  ownNeeds        Int?
+  /// EK10 grafa 43: 1 produced by exporter, 0 not. Different meaning from IM40 ownNeeds.
+  ownProduction   Int?
+  sourceInvoiceLines Int[]
+  createdAt       DateTime @default(now())
+
+  @@unique([shipmentId, lineNo])
+}
+
+enum DocumentKind {
+  INVOICE
+  PACKING_LIST
+  CMR
+  AWB
+  BILL_OF_LADING
+  RAIL_BILL
+  CONTRACT
+  ORIGIN_CERTIFICATE
+  CONFORMITY
+  WAREHOUSE_ACT
+  FREIGHT_INVOICE
+  PERMIT
+  OTHER
+}
+
+model Document {
+  id          String       @id @default(uuid()) @db.Uuid
+  shipmentId  String       @db.Uuid
+  shipment    Shipment     @relation(fields: [shipmentId], references: [id])
+  kind        DocumentKind
+  filename    String
+  /// Object key in the Uzbekistan bucket. Not a public URL.
+  objectKey   String
+  sha256      String
+  bytes       Int
+  pageCount   Int?
+  uploadedById String      @db.Uuid
+  /// Passport/ID uploads are rejected before this row is written.
+  rejectedAsIdentityImage Boolean @default(false)
+  eArxivNumber String?
+  createdAt   DateTime     @default(now())
+  deletedAt   DateTime?
+  extractions Extraction[]
+
+  @@index([shipmentId])
+}
+
+model Extraction {
+  id          String   @id @default(uuid()) @db.Uuid
+  documentId  String   @db.Uuid
+  document    Document @relation(fields: [documentId], references: [id])
+  aiJobId     String?  @db.Uuid
+  aiJob       AiJob?   @relation(fields: [aiJobId], references: [id])
+  adapter     String
+  /// masked | failed_closed | skipped_no_consent
+  masking     String
+  rawKeptUntil DateTime?
+  createdAt   DateTime @default(now())
+  fields      ExtractedField[]
+}
+
+model ExtractedField {
+  id            String     @id @default(uuid()) @db.Uuid
+  extractionId  String     @db.Uuid
+  extraction    Extraction @relation(fields: [extractionId], references: [id])
+  name          String
+  value         String?
+  userValue     String?
+  confidence    Decimal?   @db.Decimal(5, 4)
+  page          Int?
+  bbox          Json?
+  provenance    Provenance
+  reviewedById  String?    @db.Uuid
+  reviewedAt    DateTime?
+
+  @@index([extractionId, name])
+}
+
+model HsSuggestion {
+  id           String   @id @default(uuid()) @db.Uuid
+  shipmentId   String   @db.Uuid
+  goodsItemId  String?  @db.Uuid
+  aiJobId      String?  @db.Uuid
+  aiJob        AiJob?   @relation(fields: [aiJobId], references: [id])
+  adapter      String
+  candidates   Json
+  answers      Json?
+  chosenCode   String?
+  chosenById   String?  @db.Uuid
+  createdAt    DateTime @default(now())
+}
+
+model ClarifyingQuestion {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  shipment    Shipment @relation(fields: [shipmentId], references: [id])
+  aiJobId     String?  @db.Uuid
+  source      String
+  promptUz    String
+  promptRu    String
+  answer      String?
+  answeredAt  DateTime?
+  createdAt   DateTime @default(now())
+}
+
+enum FindingSeverity {
+  INFO
+  WARNING
+  BLOCK
+}
+
+model CheckFinding {
+  id            String          @id @default(uuid()) @db.Uuid
+  shipmentId    String          @db.Uuid
+  shipment      Shipment        @relation(fields: [shipmentId], references: [id])
+  ruleId        String
+  severity      FindingSeverity
+  grafaRefs     String[]
+  messageUz     String
+  messageRu     String
+  proposalNotLaw Boolean        @default(false)
+  leftValue     String?
+  rightValue    String?
+  resolvedAt    DateTime?
+  resolvedById  String?         @db.Uuid
+  createdAt     DateTime        @default(now())
+
+  @@index([shipmentId, severity])
+}
+
+model DraftField {
+  id           String     @id @default(uuid()) @db.Uuid
+  shipmentId   String     @db.Uuid
+  shipment     Shipment   @relation(fields: [shipmentId], references: [id])
+  goodsItemId  String?    @db.Uuid
+  grafa        String
+  subfield     String     @default("")
+  value        String?
+  provenance   Provenance
+  sourceRef    String?
+  unverifiedOnEd2 Boolean @default(false)
+  confirmedById String?   @db.Uuid
+  confirmedAt  DateTime?
+
+  @@unique([shipmentId, goodsItemId, grafa, subfield])
+}
+
+model Calculation {
+  id                 String   @id @default(uuid()) @db.Uuid
+  shipmentId         String   @db.Uuid
+  shipment           Shipment @relation(fields: [shipmentId], references: [id])
+  ruleSetVersion     String
+  tariffEditionDate  DateTime @db.Date
+  fxDate             DateTime @db.Date
+  bhmValue           Decimal  @db.Decimal(18, 0)
+  bhmDate            DateTime @db.Date
+  flags              Json
+  completeness       String
+  isEstimate         Boolean
+  /// Decimal strings, never JSON floats, inside the trace.
+  trace              Json
+  stale              Boolean  @default(false)
+  createdAt          DateTime @default(now())
+
+  @@index([shipmentId, createdAt])
+}
+
+enum ClockKind {
+  FILE_BY
+  LEGAL_MAX
+  STORAGE
+  PRELIMINARY_LAPSE
+  EXPORT_BEFORE_DEPARTURE
+  CURRENCY_180
+  APPEAL_30
+  CORRECTION_1WD
+  CORRECTION_3Y
+  REEXPORT_TRANSIT_3WD
+  TEMP_IMPORT_2Y
+  TEMP_EXPORT_2Y
+  REIMPORT_3Y
+  PROCESSING_PERMIT
+  TRANSIT_DISTANCE
+}
+
+model DeadlineClock {
+  id          String    @id @default(uuid()) @db.Uuid
+  shipmentId  String    @db.Uuid
+  shipment    Shipment  @relation(fields: [shipmentId], references: [id])
+  kind        ClockKind
+  startsOn    DateTime? @db.Date
+  endsOn      DateTime? @db.Date
+  article     String
+  countingRule String
+  unverifiedCalendar Boolean @default(false)
+  labelUz     String
+  labelRu     String
+
+  @@index([shipmentId, kind])
+}
+
+model Product {
+  id          String   @id @default(uuid()) @db.Uuid
+  companyId   String   @db.Uuid
+  company     Company  @relation(fields: [companyId], references: [id])
+  name        String
+  tnCode      String
+  originCountry String?
+  lastRateSignature String?
+  needsReview Boolean  @default(false)
+  docs        Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyId, tnCode])
+}
+
+// ---------------------------------------------------------------------------
+// Cabinet fill (values stay on the device; server stores hashes)
+// ---------------------------------------------------------------------------
+
+enum FillTarget {
+  MOCK
+  ED2
+  CARGO
+}
+
+enum FillOutcome {
+  RUNNING
+  PAUSED
+  STOPPED_YOUR_TURN
+  STOPPED_MISMATCH
+  STOPPED_NOT_FOUND
+  STOPPED_PAGE_CHANGED
+  USER_MARKED_SIGNED
+  ABORTED
+}
+
+model FillSession {
+  id            String      @id @default(uuid()) @db.Uuid
+  shipmentId    String      @db.Uuid
+  shipment      Shipment    @relation(fields: [shipmentId], references: [id])
+  accountId     String      @db.Uuid
+  target        FillTarget
+  mappingId     String
+  mappingVersion String
+  speed         String
+  startedAt     DateTime    @default(now())
+  endedAt       DateTime?
+  outcome       FillOutcome @default(RUNNING)
+  userMarkedSignedAt DateTime?
+  registrationNumber String?
+  events        FillEvent[]
+
+  @@index([shipmentId, startedAt])
+}
+
+model FillEvent {
+  id          String      @id @default(uuid()) @db.Uuid
+  sessionId   String      @db.Uuid
+  session     FillSession @relation(fields: [sessionId], references: [id])
+  at          DateTime    @default(now())
+  actor       String
+  grafa       String?
+  action      String
+  readbackOk  Boolean?
+  /// SHA-256 of the value. Full value stays on the device (AC-43.9).
+  valueHash   String?
+  deviceId    String?     @db.Uuid
+
+  @@index([sessionId, at])
+}
+
+// ---------------------------------------------------------------------------
+// Support access
+// ---------------------------------------------------------------------------
+
+enum GrantStatus {
+  ACTIVE
+  REVOKED
+  EXPIRED
+}
+
+model SupportGrant {
+  id          String      @id @default(uuid()) @db.Uuid
+  shipmentId  String?     @db.Uuid
+  shipment    Shipment?   @relation(fields: [shipmentId], references: [id])
+  companyId   String      @db.Uuid
+  grantedById String      @db.Uuid
+  staffId     String?     @db.Uuid
+  staff       StaffAccount? @relation("GrantStaff", fields: [staffId], references: [id])
+  reason      String
+  startsAt    DateTime    @default(now())
+  endsAt      DateTime
+  status      GrantStatus @default(ACTIVE)
+  revokedAt   DateTime?
+  comments    SupportComment[]
+
+  @@index([status, endsAt])
+  @@index([companyId])
+}
+
+model SupportComment {
+  id         String       @id @default(uuid()) @db.Uuid
+  grantId    String       @db.Uuid
+  grant      SupportGrant @relation(fields: [grantId], references: [id])
+  shipmentId String       @db.Uuid
+  shipment   Shipment     @relation(fields: [shipmentId], references: [id])
+  staffId    String       @db.Uuid
+  staff      StaffAccount @relation(fields: [staffId], references: [id])
+  grafa      String?
+  body       String
+  kind       String
+  createdAt  DateTime     @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Audit (append-only, hash-chained). No UPDATE/DELETE grants on this table.
+// ---------------------------------------------------------------------------
+
+model AuditEvent {
+  id            String   @id @default(uuid()) @db.Uuid
+  at            DateTime @default(now())
+  actorAccountId String? @db.Uuid
+  actorAccount  Account? @relation("AuditActorAccount", fields: [actorAccountId], references: [id])
+  actorStaffId  String?  @db.Uuid
+  actorStaff    StaffAccount? @relation("AuditActorStaff", fields: [actorStaffId], references: [id])
+  actorRole     String
+  action        String
+  subjectType   String
+  subjectId     String?
+  deviceId      String?  @db.Uuid
+  /// Hash or category. Never a password, PIN, key, or a login/sign window.
+  valueHash     String?
+  prevHash      String
+  rowHash       String   @unique
+
+  @@index([at])
+  @@index([actorAccountId, at])
+  @@index([subjectType, subjectId])
+}
+
+// ---------------------------------------------------------------------------
+// Admin configuration (no foreign keys to client documents)
+// ---------------------------------------------------------------------------
+
+model FeatureFlag {
+  key         String   @id
+  value       Json
+  dpoLocked   Boolean  @default(false)
+  owner       String
+  updatedAt   DateTime @updatedAt
+}
+
+model FlagChangeRequest {
+  id           String   @id @default(uuid()) @db.Uuid
+  flagKey      String
+  oldValue     Json
+  newValue     Json
+  reason       String
+  requesterId  String   @db.Uuid
+  requester    StaffAccount @relation("FlagRequester", fields: [requesterId], references: [id])
+  deciderId    String?  @db.Uuid
+  decider      StaffAccount? @relation("FlagDecider", fields: [deciderId], references: [id])
+  status       String
+  createdAt    DateTime @default(now())
+  decidedAt    DateTime?
+}
+
+model TariffEdition {
+  id          String   @id @default(uuid()) @db.Uuid
+  code10      String
+  rateJson    Json
+  sourceAct   String
+  sourceUrl   String
+  editionDate DateTime @db.Date
+  status      String
+  note        String?
+  createdAt   DateTime @default(now())
+
+  @@index([code10, editionDate])
+}
+
+model CalendarEntry {
+  id        String   @id @default(uuid()) @db.Uuid
+  postCode  String?
+  onDate    DateTime @db.Date
+  name      String
+  sourceAct String
+  sourceDate DateTime @db.Date
+  createdAt DateTime @default(now())
+}
+
+model ToleranceSetting {
+  ruleId    String   @id
+  threshold Json
+  /// Fixed label. The admin tool must reject a write that clears it.
+  label     String   @default("Taklif, qonun emas")
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// AI jobs (founder-owned adapters; the queue contract is ours)
+// ---------------------------------------------------------------------------
+
+enum AiJobStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED_CLOSED
+  CANCELLED
+}
+
+model AiJob {
+  id           String      @id @default(uuid()) @db.Uuid
+  kind         String
+  shipmentId   String?     @db.Uuid
+  documentId   String?     @db.Uuid
+  status       AiJobStatus @default(QUEUED)
+  adapter      String
+  /// Hashes and ids only. No raw PII, no prompts in this column.
+  inputRef     Json
+  outputRef    Json?
+  errorCode    String?
+  createdAt    DateTime    @default(now())
+  finishedAt   DateTime?
+  extractions  Extraction[]
+  suggestions  HsSuggestion[]
+
+  @@index([status, createdAt])
+  @@index([kind, shipmentId])
+}
+
+// ---------------------------------------------------------------------------
+// Notifications, shares, later broker-replacement records
+// ---------------------------------------------------------------------------
+
+model NotificationPreference {
+  accountId   String @id @db.Uuid
+  pushEnabled Boolean @default(false)
+  smsEnabled  Boolean @default(true)
+  quietHours  Json?
+}
+
+model NotificationDelivery {
+  id        String   @id @default(uuid()) @db.Uuid
+  accountId String   @db.Uuid
+  channel   String
+  template  String
+  sentAt    DateTime @default(now())
+  /// No message body with secrets. Template id plus non-PII params only.
+  params    Json
+}
+
+model ShareLink {
+  id         String    @id @default(uuid()) @db.Uuid
+  shipmentId String    @db.Uuid
+  tokenHash  String    @unique
+  expiresAt  DateTime
+  openCount  Int       @default(0)
+  revokedAt  DateTime?
+  createdById String   @db.Uuid
+  createdAt  DateTime  @default(now())
+}
+
+model HandoffPack {
+  id         String   @id @default(uuid()) @db.Uuid
+  shipmentId String   @db.Uuid
+  shipment   Shipment @relation(fields: [shipmentId], references: [id])
+  reasonCode String
+  body       Json
+  createdAt  DateTime @default(now())
+}
+
+model CustomsHistoryEntry {
+  id         String   @id @default(uuid()) @db.Uuid
+  companyId  String   @db.Uuid
+  company    Company  @relation(fields: [companyId], references: [id])
+  kind       String
+  amount     Decimal? @db.Decimal(18, 2)
+  note       String?
+  /// Always "ed1 (siz kiritdingiz)" for cabinet figures. No scrape.
+  source     String
+  enteredById String  @db.Uuid
+  createdAt  DateTime @default(now())
+}
+
+model RequirementRule {
+  id         String   @id @default(uuid()) @db.Uuid
+  tnPrefix   String
+  reqType    String
+  status     String
+  sourceUrl  String?
+  checkedAt  DateTime?
+  body       Json
+}
+
+model StatusMessage {
+  id         String @id
+  group      String
+  pattern    String
+  meaningUz  String
+  meaningRu  String
+  nextStepUz String
+  nextStepRu String
+  grafaRefs  String[]
+  sourceRef  String
+}
+
+model ValuationCase {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  method      Int?
+  relatedParty Boolean @default(false)
+  evidence    Json?
+  blocked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model ArrivalEvent {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  kind        String
+  occurredOn  DateTime? @db.Date
+  note        String?
+  createdAt   DateTime @default(now())
+}
+
+model CorrectionCase {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  phase       String
+  createdAt   DateTime @default(now())
+}
+
+model AppealCase {
+  id           String    @id @default(uuid()) @db.Uuid
+  shipmentId   String    @db.Uuid
+  decisionOn   DateTime  @db.Date
+  deadlineOn   DateTime  @db.Date
+  createdAt    DateTime  @default(now())
+}
+
+model GuaranteeRecord {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  method      String?
+  amount      Decimal? @db.Decimal(18, 2)
+  enteredById String   @db.Uuid
+  createdAt   DateTime @default(now())
+}
+
+model RefundPack {
+  id          String   @id @default(uuid()) @db.Uuid
+  shipmentId  String   @db.Uuid
+  basis       String
+  clockArticle String
+  createdAt   DateTime @default(now())
+}

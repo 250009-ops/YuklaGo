@@ -1,0 +1,64 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "commercial_invoice",
+  "number": "MD-2026-118",
+  "date": "2026-10-28",
+  "seller": {
+    "name": "Foshan Mingde Furniture Co., Ltd. (SYNTHETIC)",
+    "address": "Longjiang Rd 88, Shunde, Foshan, Guangdong, China",
+    "tin": "91440606SYNTH0001",
+    "country_ru": "Китай"
+  },
+  "buyer": {
+    "name": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC)",
+    "address": "г. Ташкент, Чиланзарский р-н, ул. Бунёдкор, 1 (SYNTHETIC)",
+    "tin": "100000001",
+    "district_code": "1726294",
+    "phone": "+998 71 000 00 01",
+    "email": "info@uyjihoz.example"
+  },
+  "contract": {
+    "number": "15/2026",
+    "date": "2026-09-05"
+  },
+  "incoterms": "FCA Foshan (Incoterms 2010)",
+  "currency": "USD",
+  "payment_terms": "100% prepayment",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Dining table, solid rubberwood, 1600x900x750 mm, lacquered",
+      "brand": "MINGDE",
+      "model": "DT-1600",
+      "hs_code": "9403.60",
+      "origin": "China",
+      "qty": "40",
+      "unit": "pcs",
+      "unit_price": "145.00",
+      "amount": "5800.00",
+      "net_kg": "1520.000",
+      "gross_kg": "1760.000",
+      "packages": 80
+    },
+    {
+      "line": 2,
+      "description": "Sideboard / TV stand, solid pine, 1200x450x600 mm",
+      "brand": "MINGDE",
+      "model": "SB-1200",
+      "hs_code": "9403.60",
+      "origin": "China",
+      "qty": "30",
+      "unit": "pcs",
+      "unit_price": "210.00",
+      "amount": "6300.00",
+      "net_kg": "1560.000",
+      "gross_kg": "1740.000",
+      "packages": 30
+    }
+  ],
+  "total_amount": "12100.00",
+  "total_packages": 110,
+  "total_net_kg": "3080.000",
+  "total_gross_kg": "3500.000",
+  "notes": null
+}

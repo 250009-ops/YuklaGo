@@ -1,0 +1,12 @@
+{
+  "name": "yuklago",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Handbook and contracts. The application is not in this tree yet.",
+  "scripts": {
+    "lint:copy": "node packages/i18n/check-copy.mjs && node packages/i18n/check-copy.mjs --self-test"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

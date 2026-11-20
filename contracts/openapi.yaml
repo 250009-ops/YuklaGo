@@ -1,0 +1,1436 @@
+openapi: 3.1.0
+info:
+  title: YuklaGo API
+  version: 1.0.0
+  description: |
+    HTTP contract for every screen in docs/screens.md.
+    Money amounts are decimal strings. Three roles only.
+    Step-up header X-Step-Up is required when a response is STEP_UP_REQUIRED.
+    AI jobs return stub results until the founder sets the live adapter.
+servers:
+  - url: http://localhost:4000/v1
+tags:
+  - name: auth
+  - name: setup
+  - name: shipments
+  - name: documents
+  - name: calc
+  - name: draft
+  - name: fill
+  - name: status
+  - name: products
+  - name: support
+  - name: admin
+  - name: account
+  - name: reference
+security:
+  - bearer: []
+paths:
+  /auth/otp:
+    post:
+      operationId: requestOtp
+      tags: [auth]
+      security: []
+      summary: Send a sign-in code. A new device uses this same code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [phoneE164]
+              properties:
+                phoneE164: { type: string }
+                deviceLabel: { type: string }
+      responses:
+        "202":
+          description: Code sent
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [challengeId, newDevice]
+                properties:
+                  challengeId: { type: string, format: uuid }
+                  newDevice: { type: boolean }
+        "429": { $ref: "#/components/responses/Error" }
+  /auth/otp/verify:
+    post:
+      operationId: verifyOtp
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [challengeId, code]
+              properties:
+                challengeId: { type: string, format: uuid }
+                code: { type: string, pattern: "^[0-9]{6}$" }
+      responses:
+        "200":
+          description: Session, or step-up still required for a new device
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Session"
+                  - $ref: "#/components/schemas/StepUpRequired"
+        "401": { $ref: "#/components/responses/Error" }
+  /auth/step-up:
+    post:
+      operationId: requestStepUp
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [trigger]
+              properties:
+                trigger: { $ref: "#/components/schemas/StepUpTrigger" }
+      responses:
+        "202":
+          description: Challenge created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [challengeId]
+                properties:
+                  challengeId: { type: string, format: uuid }
+  /auth/step-up/verify:
+    post:
+      operationId: verifyStepUp
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [challengeId, code]
+              properties:
+                challengeId: { type: string, format: uuid }
+                code: { type: string }
+      responses:
+        "200":
+          description: Proof token for header X-Step-Up
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [proof, trigger]
+                properties:
+                  proof: { type: string }
+                  trigger: { $ref: "#/components/schemas/StepUpTrigger" }
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      responses:
+        "204": { description: Signed out }
+  /session:
+    get:
+      operationId: getSession
+      tags: [auth]
+      responses:
+        "200":
+          description: Current session
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /devices:
+    get:
+      operationId: listDevices
+      tags: [account]
+      responses:
+        "200":
+          description: Devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Device" }
+  /devices/{deviceId}:
+    delete:
+      operationId: revokeDevice
+      tags: [account]
+      parameters:
+        - $ref: "#/components/parameters/DeviceId"
+      responses:
+        "204": { description: Session ended }
+  /staff/login:
+    post:
+      operationId: staffLogin
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, expectedRole]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+                expectedRole: { type: string, enum: [SUPPORT, ADMIN] }
+      responses:
+        "200":
+          description: Password accepted, TOTP still required
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [staffChallengeId]
+                properties:
+                  staffChallengeId: { type: string, format: uuid }
+        "403": { $ref: "#/components/responses/Error" }
+  /staff/2fa:
+    post:
+      operationId: staffVerifyTotp
+      tags: [auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [staffChallengeId, code]
+              properties:
+                staffChallengeId: { type: string, format: uuid }
+                code: { type: string }
+      responses:
+        "200":
+          description: Staff session
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /me:
+    get:
+      operationId: getMe
+      tags: [account]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Me" }
+    patch:
+      operationId: patchMe
+      tags: [account]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                locale: { type: string, enum: [uz, ru] }
+                displayName: { type: string }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Me" }
+  /setup/stir:
+    post:
+      operationId: lookupStir
+      tags: [setup]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [stir]
+              properties:
+                stir: { type: string }
+      responses:
+        "200":
+          description: Found or not found. Not a cabinet scrape.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Company" }
+        "404": { $ref: "#/components/responses/Error" }
+  /setup/eri:
+    post:
+      operationId: saveEriStatus
+      tags: [setup]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hasKey]
+              properties:
+                hasKey: { type: boolean }
+      responses:
+        "200": { description: Saved }
+  /setup/signer:
+    post:
+      operationId: saveSigner
+      tags: [setup]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SignerInput" }
+      responses:
+        "200":
+          description: Saved. Filing may still be locked.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SignerState" }
+  /setup/complete:
+    post:
+      operationId: completeSetup
+      tags: [setup]
+      responses:
+        "200": { description: Set-up marked done }
+  /signer/certificate:
+    post:
+      operationId: compareCertificate
+      tags: [setup]
+      description: Public fields only. Server returns match or mismatch. Raw values are not stored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [pinfl, stir, serial, validUntil]
+              properties:
+                pinfl: { type: string }
+                stir: { type: string }
+                serial: { type: string }
+                validUntil: { type: string, format: date }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [result]
+                properties:
+                  result: { type: string, enum: [match, mismatch] }
+                  maskedInitials: { type: string }
+                  maskedPinfl: { type: string }
+  /consents:
+    get:
+      operationId: getConsent
+      tags: [documents]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Consent" }
+    put:
+      operationId: putConsent
+      tags: [documents]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [version, granted]
+              properties:
+                version: { type: string }
+                granted: { type: boolean }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Consent" }
+  /shipments:
+    get:
+      operationId: listShipments
+      tags: [shipments]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Shipment" }
+    post:
+      operationId: createShipment
+      tags: [shipments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [direction, title]
+              properties:
+                direction: { type: string, enum: [IMPORT, EXPORT, TRANSIT] }
+                title: { type: string }
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Shipment" }
+  /shipments/{shipmentId}:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    get:
+      operationId: getShipment
+      tags: [shipments]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Shipment" }
+    patch:
+      operationId: patchShipment
+      tags: [shipments]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                regime: { type: string }
+                preliminary: { type: boolean }
+                presentationOn: { type: string, format: date }
+                postCode: { type: string }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Shipment" }
+    delete:
+      operationId: deleteShipment
+      tags: [shipments]
+      responses:
+        "204": { description: Closed or deleted }
+  /shipments/{shipmentId}/documents:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    get:
+      operationId: listDocuments
+      tags: [documents]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Document" }
+    post:
+      operationId: uploadDocument
+      tags: [documents]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file: { type: string, format: binary }
+                kind: { type: string }
+      responses:
+        "201":
+          description: Stored. Not read until consent and enqueueRead.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Document" }
+        "409":
+          description: Consent missing or identity image rejected
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+  /shipments/{shipmentId}/read:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    post:
+      operationId: enqueueRead
+      tags: [documents]
+      responses:
+        "202":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AiJob" }
+        "409": { $ref: "#/components/responses/Error" }
+  /ai/jobs/{jobId}:
+    get:
+      operationId: getJob
+      tags: [documents]
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AiJob" }
+  /shipments/{shipmentId}/findings:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    get:
+      operationId: listFindings
+      tags: [draft]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Finding" }
+  /shipments/{shipmentId}/findings/{findingId}/resolve:
+    post:
+      operationId: resolveFinding
+      tags: [draft]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+        - name: findingId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200": { description: Resolved by the owner }
+  /shipments/{shipmentId}/questions:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    get:
+      operationId: listQuestions
+      tags: [documents]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Question" }
+  /shipments/{shipmentId}/questions/{questionId}/answer:
+    post:
+      operationId: answerQuestion
+      tags: [documents]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+        - name: questionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [answer]
+              properties:
+                answer: { type: string }
+      responses:
+        "200": { description: Answer stored }
+  /shipments/{shipmentId}/code-confirm:
+    post:
+      operationId: confirmCode
+      tags: [draft]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [goodsItemId, code10]
+              properties:
+                goodsItemId: { type: string, format: uuid }
+                code10: { type: string, pattern: "^[0-9]{10}$" }
+      responses:
+        "200": { description: User confirmed. The model cannot call this. }
+  /shipments/{shipmentId}/earxiv:
+    put:
+      operationId: putEarxiv
+      tags: [draft]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [documentId, number]
+              properties:
+                documentId: { type: string, format: uuid }
+                number: { type: string }
+      responses:
+        "200": { description: Grafa 44 number recorded }
+  /shipments/{shipmentId}/calc:
+    parameters:
+      - $ref: "#/components/parameters/ShipmentId"
+    get:
+      operationId: getCalc
+      tags: [calc]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Calculation" }
+    post:
+      operationId: recomputeCalc
+      tags: [calc]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Calculation" }
+  /shipments/{shipmentId}/clocks:
+    get:
+      operationId: getClocks
+      tags: [calc]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Clock" }
+  /shipments/{shipmentId}/pre-arrival:
+    post:
+      operationId: choosePreArrival
+      tags: [calc]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Calculation" }
+  /shipments/{shipmentId}/draft:
+    get:
+      operationId: getDraft
+      tags: [draft]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Draft" }
+  /shipments/{shipmentId}/draft/attest:
+    post:
+      operationId: attestDraft
+      tags: [draft]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [attested]
+              properties:
+                attested: { type: boolean }
+                sectionsViewed: { type: array, items: { type: string } }
+      responses:
+        "200": { description: Attestation stored }
+        "409": { description: Blockers still open }
+  /shipments/{shipmentId}/fill-sessions:
+    post:
+      operationId: createFillSession
+      tags: [fill]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [target]
+              properties:
+                target: { type: string, enum: [MOCK, ED2, CARGO] }
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FillSession" }
+        "409":
+          description: Flag off, blockers open, or attestation missing
+  /fill-sessions/{sessionId}:
+    get:
+      operationId: getFillSession
+      tags: [fill]
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FillSession" }
+  /fill-sessions/{sessionId}/events:
+    post:
+      operationId: appendFillEvents
+      tags: [fill]
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [events]
+              properties:
+                events:
+                  type: array
+                  items:
+                    type: object
+                    required: [action, valueHash]
+                    properties:
+                      grafa: { type: string }
+                      action: { type: string }
+                      readbackOk: { type: boolean }
+                      valueHash: { type: string }
+      responses:
+        "204": { description: Hashes stored. Values are not accepted. }
+  /fill-sessions/{sessionId}/mark-signed:
+    post:
+      operationId: markSigned
+      tags: [fill]
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200": { description: User said they signed. Not proof of filing. }
+  /shipments/{shipmentId}/registration:
+    put:
+      operationId: putRegistration
+      tags: [status]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [number]
+              properties:
+                number: { type: string }
+                paid: { type: boolean }
+      responses:
+        "200": { description: User-entered. Not read from the cabinet. }
+  /messages/explain:
+    post:
+      operationId: explainMessage
+      tags: [status]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text, locale]
+              properties:
+                text: { type: string }
+                locale: { type: string, enum: [uz, ru] }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [disclaimer]
+                properties:
+                  libraryId: { type: string, nullable: true }
+                  text: { type: string }
+                  grafaRefs: { type: array, items: { type: string } }
+                  disclaimer: { type: string, const: "YuklaGo izohi, rasmiy kod emas" }
+  /products:
+    get:
+      operationId: listProducts
+      tags: [products]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Product" }
+    post:
+      operationId: createProduct
+      tags: [products]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Product" }
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Product" }
+  /support-grants:
+    post:
+      operationId: createGrant
+      tags: [support]
+      parameters:
+        - $ref: "#/components/parameters/StepUpHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason, hours]
+              properties:
+                shipmentId: { type: string, format: uuid }
+                reason: { type: string }
+                hours: { type: integer, enum: [4, 24, 72] }
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Grant" }
+        "403":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StepUpRequired" }
+  /support-grants/{grantId}:
+    delete:
+      operationId: revokeGrant
+      tags: [support]
+      parameters:
+        - name: grantId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "204": { description: Revoked }
+  /staff/support/grants:
+    get:
+      operationId: listMyGrants
+      tags: [support]
+      responses:
+        "200":
+          description: Active grants only. No client search.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GrantMasked" }
+  /staff/support/grants/{grantId}:
+    get:
+      operationId: getGrantMasked
+      tags: [support]
+      parameters:
+        - name: grantId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GrantMasked" }
+        "410": { description: Grant ended. Body is empty of client fields. }
+  /staff/support/grants/{grantId}/comments:
+    post:
+      operationId: postComment
+      tags: [support]
+      parameters:
+        - name: grantId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [body, kind]
+              properties:
+                grafa: { type: string }
+                body: { type: string }
+                kind: { type: string, enum: [NOTE, SUGGESTION] }
+      responses:
+        "201": { description: Comment stored. Draft unchanged. }
+  /staff/support/sessions:
+    get:
+      operationId: listSupportSessions
+      tags: [support]
+      responses:
+        "200":
+          description: This staff member only
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/AuditEvent" }
+  /staff/admin/tariffs:
+    get:
+      operationId: listTariffs
+      tags: [admin]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/TariffRow" }
+    put:
+      operationId: putTariff
+      tags: [admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TariffRow" }
+      responses:
+        "200": { description: Saved only with source and date }
+        "422": { $ref: "#/components/responses/Error" }
+  /staff/admin/calendar:
+    get:
+      operationId: listCalendar
+      tags: [admin]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/CalendarEntry" }
+    post:
+      operationId: postCalendar
+      tags: [admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CalendarEntry" }
+      responses:
+        "201": { description: Created }
+        "422": { description: Source or date missing }
+  /staff/admin/tolerances:
+    get:
+      operationId: listTolerances
+      tags: [admin]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Tolerance" }
+    put:
+      operationId: putTolerance
+      tags: [admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Tolerance" }
+      responses:
+        "200": { description: Label stays Taklif, qonun emas }
+  /staff/admin/flags:
+    get:
+      operationId: listFlags
+      tags: [admin]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Flag" }
+  /staff/admin/flags/{key}/requests:
+    post:
+      operationId: requestFlagChange
+      tags: [admin]
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [value, reason]
+              properties:
+                value: {}
+                reason: { type: string }
+      responses:
+        "202": { description: Pending DPO when the flag is locked }
+        "200": { description: Applied immediately when the flag is not locked }
+  /staff/admin/approvals:
+    get:
+      operationId: listApprovals
+      tags: [admin]
+      responses:
+        "200":
+          description: DPO only
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/FlagRequest" }
+  /staff/admin/approvals/{requestId}:
+    post:
+      operationId: decideApproval
+      tags: [admin]
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: { type: string, enum: [approve, reject] }
+      responses:
+        "200": { description: Decided by a different person }
+        "409": { description: Self-approval blocked }
+  /staff/admin/journal:
+    get:
+      operationId: listConfigLog
+      tags: [admin]
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/AuditEvent" }
+  /exports:
+    post:
+      operationId: requestExport
+      tags: [account]
+      parameters:
+        - $ref: "#/components/parameters/StepUpHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [scope]
+              properties:
+                scope: { type: string, enum: [FULL, SHIPMENT_PACK, SECURITY_LOG] }
+                shipmentId: { type: string, format: uuid }
+      responses:
+        "202":
+          description: FULL requires step-up. The other scopes do not.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [exportId]
+                properties:
+                  exportId: { type: string, format: uuid }
+        "403":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StepUpRequired" }
+  /exports/{exportId}:
+    get:
+      operationId: downloadExport
+      tags: [account]
+      parameters:
+        - name: exportId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: File
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+  /me/deletion:
+    post:
+      operationId: requestDeletion
+      tags: [account]
+      parameters:
+        - $ref: "#/components/parameters/StepUpHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [confirm]
+              properties:
+                confirm: { type: string }
+      responses:
+        "202": { description: Deletion started }
+        "403":
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StepUpRequired" }
+  /audit:
+    get:
+      operationId: listAudit
+      tags: [account]
+      responses:
+        "200":
+          description: Owner sees the company by person. Support and admin are filtered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/AuditEvent" }
+  /shipments/{shipmentId}/handoff:
+    post:
+      operationId: createHandoff
+      tags: [shipments]
+      parameters:
+        - $ref: "#/components/parameters/ShipmentId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reasonCode]
+              properties:
+                reasonCode: { type: string }
+                note: { type: string }
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [packId, shareUrl]
+                properties:
+                  packId: { type: string, format: uuid }
+                  shareUrl: { type: string }
+                  expiresAt: { type: string, format: date-time }
+  /reference/sources/{act}:
+    get:
+      operationId: getSource
+      tags: [reference]
+      parameters:
+        - name: act
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  act: { type: string }
+                  date: { type: string }
+                  summary: { type: string }
+                  url: { type: string }
+                  disclaimer: { type: string }
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+  parameters:
+    ShipmentId:
+      name: shipmentId
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    DeviceId:
+      name: deviceId
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    StepUpHeader:
+      name: X-Step-Up
+      in: header
+      required: false
+      schema: { type: string }
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string }
+            message: { type: string }
+    StepUpTrigger:
+      type: string
+      enum: [NEW_DEVICE, SIGNER_CHANGE, SUPPORT_ACCESS, FULL_DATA_EXPORT, ACCOUNT_DELETION]
+    StepUpRequired:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, trigger]
+          properties:
+            code: { type: string, const: STEP_UP_REQUIRED }
+            trigger: { $ref: "#/components/schemas/StepUpTrigger" }
+            challengeId: { type: string, format: uuid }
+    Money:
+      type: object
+      required: [amount, currency, provenance]
+      properties:
+        amount: { type: string, pattern: "^-?\\d+(\\.\\d+)?$" }
+        currency: { type: string }
+        provenance:
+          type: string
+          enum: [official, estimate, document, user_confirmed, suggestion, missing, sample]
+        source: { type: string }
+        sourceDate: { type: string, format: date }
+    Session:
+      type: object
+      required: [role]
+      properties:
+        role: { type: string, enum: [OWNER, SUPPORT, ADMIN] }
+        accountId: { type: string, format: uuid }
+        staffId: { type: string, format: uuid }
+        isDpo: { type: boolean }
+        token: { type: string }
+    Device:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        label: { type: string }
+        platform: { type: string }
+        lastSeenAt: { type: string, format: date-time }
+    Me:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        displayName: { type: string }
+        phoneMasked: { type: string }
+        locale: { type: string }
+        company: { $ref: "#/components/schemas/Company" }
+        filingLocked: { type: boolean }
+        filingLockReason: { type: string }
+    Company:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        stir: { type: string }
+        name: { type: string }
+        kind: { type: string }
+    SignerInput:
+      type: object
+      required: [listed]
+      properties:
+        listed: { type: boolean }
+        authorityEndsOn: { type: string, format: date, nullable: true }
+        authorityOpen: { type: boolean }
+        notDirector: { type: boolean }
+    SignerState:
+      type: object
+      properties:
+        filingLocked: { type: boolean }
+        reason: { type: string }
+    Consent:
+      type: object
+      properties:
+        version: { type: string }
+        grantedAt: { type: string, format: date-time, nullable: true }
+        withdrawnAt: { type: string, format: date-time, nullable: true }
+    Shipment:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        publicId: { type: string, examples: ["YG-0412"] }
+        title: { type: string }
+        direction: { type: string }
+        regime: { type: string, nullable: true }
+        stage: { type: string }
+        landed: { $ref: "#/components/schemas/Money" }
+        deadlineChip: { type: string }
+        blockerCount: { type: integer }
+    Document:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        kind: { type: string }
+        filename: { type: string }
+        status: { type: string, enum: [queued, reading, recognised, error] }
+    AiJob:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, enum: [QUEUED, RUNNING, SUCCEEDED, FAILED_CLOSED, CANCELLED] }
+        adapter: { type: string, enum: [stub, live] }
+        errorCode: { type: string, nullable: true }
+    Finding:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        severity: { type: string, enum: [INFO, WARNING, BLOCK] }
+        ruleId: { type: string }
+        message: { type: string }
+        proposalNotLaw: { type: boolean }
+        grafaRefs:
+          type: array
+          items: { type: string }
+    Question:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        text: { type: string }
+        answer: { type: string, nullable: true }
+    Calculation:
+      type: object
+      required: [completeness, isEstimate, paymentsTotal, landed]
+      properties:
+        completeness: { type: string, enum: [complete, incomplete, refused] }
+        isEstimate: { type: boolean }
+        label: { type: string, examples: ["namuna"] }
+        paymentsTotal: { $ref: "#/components/schemas/Money" }
+        landed: { $ref: "#/components/schemas/Money" }
+        lines:
+          type: array
+          items: { $ref: "#/components/schemas/Money" }
+        traceId: { type: string, format: uuid }
+    Clock:
+      type: object
+      properties:
+        kind: { type: string }
+        endsOn: { type: string, format: date, nullable: true }
+        article: { type: string }
+        unverifiedCalendar: { type: boolean }
+        label: { type: string }
+    Draft:
+      type: object
+      properties:
+        regime: { type: string }
+        grafaCount: { type: integer }
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              grafa: { type: string }
+              value: { type: string, nullable: true }
+              provenance: { type: string }
+              unverifiedOnEd2: { type: boolean }
+    FillSession:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        target: { type: string }
+        outcome: { type: string }
+        mappingVersion: { type: string }
+    Product:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        tnCode: { type: string, pattern: "^[0-9]{10}$" }
+        needsReview: { type: boolean }
+    Grant:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string }
+        endsAt: { type: string, format: date-time }
+        hours: { type: integer }
+    GrantMasked:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        companyMasked: { type: string }
+        shipmentPublicId: { type: string }
+        reason: { type: string }
+        remaining: { type: string }
+        draft:
+          type: array
+          items:
+            type: object
+            properties:
+              grafa: { type: string }
+              valueMasked: { type: string }
+    TariffRow:
+      type: object
+      required: [code10, sourceAct, editionDate]
+      properties:
+        code10: { type: string }
+        rate: {}
+        sourceAct: { type: string }
+        sourceUrl: { type: string }
+        editionDate: { type: string, format: date }
+        status: { type: string, enum: [active, draft] }
+    CalendarEntry:
+      type: object
+      required: [onDate, name, sourceAct, sourceDate]
+      properties:
+        onDate: { type: string, format: date }
+        name: { type: string }
+        sourceAct: { type: string }
+        sourceDate: { type: string, format: date }
+        postCode: { type: string, nullable: true }
+    Tolerance:
+      type: object
+      properties:
+        ruleId: { type: string }
+        threshold: {}
+        label: { type: string, const: "Taklif, qonun emas" }
+    Flag:
+      type: object
+      properties:
+        key: { type: string }
+        value: {}
+        dpoLocked: { type: boolean }
+        owner: { type: string }
+    FlagRequest:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        flagKey: { type: string }
+        oldValue: {}
+        newValue: {}
+        reason: { type: string }
+        status: { type: string }
+    AuditEvent:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        at: { type: string, format: date-time }
+        actorName: { type: string }
+        actorRole: { type: string }
+        action: { type: string }
+        rowHash: { type: string }

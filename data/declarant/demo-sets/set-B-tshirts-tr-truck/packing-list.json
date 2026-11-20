@@ -1,0 +1,26 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "doc_type": "packing_list",
+  "number": "ANK-PL-0917",
+  "date": "2026-11-02",
+  "invoice_ref": "ANK-2026-0917",
+  "seller": "Anka Tekstil Sanayi ve Ticaret A.Ş. (SYNTHETIC)",
+  "buyer": "«MODA TEKSTIL TRADE» MChJ (SYNTHETIC)",
+  "lines": [
+    {
+      "line": 1,
+      "description": "Men's T-shirt, knitted single jersey, 100% cotton, 160 g/m2, sizes S-XXL, assorted colours",
+      "model": "AB-100",
+      "qty": "6000",
+      "unit": "pcs",
+      "packages": 120,
+      "package_type": "cartons, 50 pcs each",
+      "net_kg": "1260.000",
+      "gross_kg": "1344.000",
+      "carton_marks": "ANK 1-120"
+    }
+  ],
+  "total_packages": 120,
+  "total_net_kg": "1260.000",
+  "total_gross_kg": "1344.000"
+}

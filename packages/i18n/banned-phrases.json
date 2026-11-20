@@ -1,0 +1,15 @@
+{
+  "note": "UI ban list. Russian lines follow the screen hand-off. Spec §10 marks the Russian legal reading of three of them as pending Huquq. The UI still must not show them.",
+  "phrases": [
+    { "id": "broker-replaces", "forms": ["broker o‘rnini bosadi", "broker oʻrnini bosadi", "broker o'rnini bosadi"] },
+    { "id": "we-clear-for-you", "forms": ["rasmiylashtirib beramiz"] },
+    { "id": "customs-approved", "forms": ["bojxona tasdiqlagan"] },
+    { "id": "official-partner", "forms": ["rasmiy hamkor"] },
+    { "id": "hundred-guarantee", "forms": ["100% kafolat", "100 % kafolat"] },
+    { "id": "broker-replaces-ru", "forms": ["заменяет брокера"] },
+    { "id": "we-clear-for-you-ru", "forms": ["оформим за вас"] },
+    { "id": "customs-approved-ru", "forms": ["одобрено таможней"] },
+    { "id": "official-partner-ru", "forms": ["официальный партнёр", "официальный партнер"] },
+    { "id": "hundred-guarantee-ru", "forms": ["100% гарантия", "100 % гарантия"] }
+  ]
+}

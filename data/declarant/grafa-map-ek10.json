@@ -1,0 +1,1624 @@
+{
+  "meta": {
+    "title": "BYD (GTD) grafa map for EK10 – export",
+    "generated": "2026-11-18",
+    "tz": "Asia/Tashkent",
+    "synthetic_examples": "All example values are SYNTHETIC (fictitious exporter «PAXTA TEKS», buyer in Almaty, TINs, plates, numbers). Exchange rate is an EXAMPLE, not CBU data.",
+    "source": {
+      "name_ru": "Инструкция о порядке заполнения грузовой таможенной декларации (рег. № 2773 от 06.04.2016)",
+      "name_uz": "Божхона юк декларациясини тўлдириш тартиби тўғрисидаги йўриқнома (рўйхат рақами 2773, 06.04.2016)",
+      "url_uz": "https://lex.uz/uz/docs/2924955",
+      "url_ru": "https://lex.uz/docs/2924953",
+      "edition_read": "Edition with latest change dated 22.07.2026 (amendment 2773-15, https://www.lex.uz/ru/pdfs/8344992) – read 2026-11-18",
+      "chapter": "Ch. 4 (points 20–22) – export",
+      "chapter_url_ru": "https://lex.uz/docs/2924953#2925168",
+      "chapter_url_uz": "https://lex.uz/uz/docs/2924955#2925089",
+      "point20_url_ru": "https://lex.uz/docs/2924953#2925169",
+      "point20_url_uz": "https://lex.uz/uz/docs/2924955#2925742",
+      "point21_list_url_ru": "https://lex.uz/docs/2924953#4303369",
+      "point21_list_url_uz": "https://lex.uz/uz/docs/2924955#4294922",
+      "point22_url_ru": "https://lex.uz/docs/2924953#3908316",
+      "point22_url_uz": "https://lex.uz/uz/docs/2924955#3854674",
+      "customs_filled_point89_url_ru": "https://lex.uz/docs/2924953#5095336",
+      "regime_code_annex3_ru": "https://lex.uz/docs/2924953#2928883"
+    },
+    "point21_list": "1, 2, 3, 5, 7 (post code), 8, 9, 11, 12, 13, 14, 17, 17a, 18, 19, 20, 22, 23, 24, 25, 26, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 54, «С»",
+    "related_law": {
+      "export_regime": "Customs Code Arts. 29–31 (export regime, conditions, documents) – https://lex.uz/docs/2876354",
+      "export_documents": "Customs Code Art. 19 (documents on exit) – https://lex.uz/docs/2876354",
+      "export_valuation": "Customs Code Arts. 315–317 – https://lex.uz/docs/2876354"
+    },
+    "anchor_note": "URL fragments are lex.uz element ids taken from the page HTML (same format lex.uz uses for its own internal links). If an anchor fails, open the doc and search for the grafa heading.",
+    "uz_latin_note": "name_uz_cyrl is the official Uzbek (Cyrillic) heading; name_uz_latn is a mechanical transliteration, not an official text.",
+    "subpoint_note": "Point 22 sub-points 17, 31 and 47 are absent in the edition read (numbering jumps 16→18, 30→32, 46→48); presumably repealed or empty ⚠️."
+  },
+  "general_rules_note": "General rules of ch.1 (points 4–14: one GTD per transport document, ≤100 items, item definition, Latin script, etc.) apply as in grafa-map.json (IM40).",
+  "grafas": [
+    {
+      "grafa": "1",
+      "name_uz_cyrl": "Декларация тури",
+      "name_uz_latn": "Deklaratsiya turi",
+      "name_ru": "Тип декларации",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "3 subfields: [ЭК] [2-digit regime code] [empty]",
+      "rule_en": "Subfield 1: direction 'ЭК'. Subfield 2: two-digit regime code per Annex 3 (export = 10). Subfield 3 is not filled.",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": "Annex 3 – customs regimes (10 = export; https://lex.uz/docs/2924953#2928883)",
+      "example": "ЭК | 10 |",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "different",
+        "difference": "Direction 'ЭК' instead of 'ИМ'; regime 10 instead of 40."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 1",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925183",
+        "url_ru": "https://lex.uz/docs/2924953#2925480"
+      }
+    },
+    {
+      "grafa": "2",
+      "name_uz_cyrl": "Экспортчи/юкни жўнатувчи",
+      "name_uz_latn": "Eksportchi/yukni joʻnatuvchi",
+      "name_ru": "Экспортер/грузоотправитель",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "free text, e-GTD separate fields + upper-right code after № + bottom: № TIN/PINFL / district code",
+      "rule_en": "Consignor AND exporter (Uzbek side). Same person: individual – full name, permanent address, phone; legal entity – short name, legal address, phone, e-mail (if any). A branch acting for the exporter: branch details, then the legal entity's details. Different persons (consignor ships on the exporter's instruction): consignor name, address, phone, then 'по поручению' + exporter name and address; if grafa 9 already shows the exporter, it need not be repeated here. Upper-right after '№': 00000001 resident individual, 00000002 non-resident individual, 00000003 organisation with state share, 99999999 diplomatic/consular, 88888888 international/government organisation offices, otherwise empty. Bottom after '№': consignor TIN (PINFL for an individual; branch TIN if a branch acts) '/' district (city) code per Annex 15 by legal address; no TIN/PINFL → 999999999. Not filled on additional paper sheets.",
+      "source_documents": [
+        "contract",
+        "invoice",
+        "company_profile"
+      ],
+      "classifier": "Annex 15 – districts and cities",
+      "example": "«PAXTA TEKS» MChJ (SYNTHETIC), Ташкентская обл., Ташкентский р-н, ул. Навои 1, тел. +998 71 000 00 00 | № 100000009/1727265",
+      "cross_checks": [
+        "= seller in contract and invoice",
+        "TIN 9 digits / PINFL 14 digits",
+        "district code exists in Annex 15"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa 2 = FOREIGN consignor (no TIN/district). In EK10 grafa 2 is the UZBEK consignor/exporter with the upper-right status code and the bottom TIN/PINFL + district code (those fields sit in grafa 8 for IM40)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 2",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925190",
+        "url_ru": "https://lex.uz/docs/2924953#2925489"
+      }
+    },
+    {
+      "grafa": "3",
+      "name_uz_cyrl": "Қўшимча варақлар",
+      "name_uz_latn": "Qoʻshimcha varaqlar",
+      "name_ru": "Добавочные листы",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "\"n/N\" integers",
+      "rule_en": "Sheet number / total sheets incl. main and additional. Paper: main sheet holds 1 item, each additional sheet holds 3 items (point 17), max 33 additional sheets. E-GTD: show the numbers as if printed. No additional sheets → '1/1'.",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": null,
+      "example": "1/1 (1 item)",
+      "cross_checks": [
+        "N = 1 + ceil((items-1)/3)"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 3",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925238",
+        "url_ru": "https://lex.uz/docs/2924953#2925531"
+      }
+    },
+    {
+      "grafa": "5",
+      "name_uz_cyrl": "Товарлар номларининг умумий сони",
+      "name_uz_latn": "Tovarlar nomlarining umumiy soni",
+      "name_ru": "Всего наименований товаров",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "integer",
+      "rule_en": "Total number of goods items = number of filled grafa 31 entries. Max 100 items per GTD (point 6).",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": null,
+      "example": "1",
+      "cross_checks": [
+        "= count(items)",
+        "<= 100"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 4",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925746",
+        "url_ru": "https://lex.uz/docs/2924953#2925535"
+      }
+    },
+    {
+      "grafa": "7",
+      "name_uz_cyrl": "БЮДнинг рўйхат рақами",
+      "name_uz_latn": "BYUDning roʻyxat raqami",
+      "name_ru": "Регистрационный номер ГТД",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant+customs",
+      "format": "5-digit post code (declarant); customs appends /DD.MM.YYYY/serial",
+      "rule_en": "5-digit code (Annex 4) of the customs post where the GTD WILL BE filed. Customs completes the registration number (point 90).",
+      "source_documents": [
+        "user_input"
+      ],
+      "classifier": "Annex 4 – customs posts",
+      "example": "26010 (declarant)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same as IM40."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 5",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925240",
+        "url_ru": "https://lex.uz/docs/2924953#2925537"
+      }
+    },
+    {
+      "grafa": "8",
+      "name_uz_cyrl": "Импортчи/юкни қабул қилувчи",
+      "name_uz_latn": "Importchi/yukni qabul qiluvchi",
+      "name_ru": "Импортер/грузополучатель",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "free text; e-GTD separate fields per party",
+      "rule_en": "Person named as consignee in the transport documents (foreign buyer side): individual – full name, residence (country short name per Annex 5 + address); legal entity – short name and location (country short name + address). If the consignee receives on behalf of another person: consignee first, then 'по поручению' + that person. E-GTD: consignee, the person on whose behalf it receives (the contract party with the grafa-9 person) and other persons from the accompanying documents each in its own field. Not filled on additional paper sheets.",
+      "source_documents": [
+        "cmr",
+        "contract",
+        "invoice"
+      ],
+      "classifier": null,
+      "example": "TOO «Almaty Textile Trade» (SYNTHETIC), Казахстан, г. Алматы, пр. Абая 100",
+      "cross_checks": [
+        "= CMR box 2 consignee",
+        "= buyer in contract (or 'по поручению' chain)"
+      ],
+      "notes": null,
+      "uncertain": "Whether the live ed2 form still shows a TIN field for the foreign consignee – not described in point 22 ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa 8 = Uzbek importer with status code and TIN/district. EK10 grafa 8 = FOREIGN consignee: name + country + address only – the text read has NO TIN/district bottom part and no upper-right status code."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 6",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925242",
+        "url_ru": "https://lex.uz/docs/2924953#2925539"
+      }
+    },
+    {
+      "grafa": "9",
+      "name_uz_cyrl": "Молиявий тартибга солиш учун жавобгар шахс",
+      "name_uz_latn": "Moliyaviy tartibga solish uchun javobgar shaxs",
+      "name_ru": "Лицо, ответственное за финансовое урегулирование",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "free text + upper code + bottom: № TIN/PINFL / district code",
+      "rule_en": "Person who concluded the foreign-trade contract and is responsible for settlements: name, legal address, phone, e-mail (legal entity) or full name, residence, phone (individual). Upper '№' codes as in grafa 8 (00000001/00000002/00000003/99999999/88888888 or empty). Bottom: TIN (PINFL for an individual) / district code (Annex 15); none → 999999999. Not filled for gratuitous supplies.",
+      "source_documents": [
+        "contract",
+        "company_profile"
+      ],
+      "classifier": null,
+      "example": "«PAXTA TEKS» MChJ (SYNTHETIC) | № 100000009/1727265",
+      "cross_checks": [
+        "= seller/exporter in contract",
+        "= grafa 2 exporter (if same person)"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40; in practice this is the Uzbek exporter (contract party)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 7",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925259",
+        "url_ru": "https://lex.uz/docs/2924953#2925563"
+      }
+    },
+    {
+      "grafa": "11",
+      "name_uz_cyrl": "Савдо қилинаётган мамлакат",
+      "name_uz_latn": "Savdo qilinayotgan mamlakat",
+      "name_ru": "Торгующая страна",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "left: 3-digit country code; right: 1 or 2",
+      "rule_en": "Left: numeric code (Annex 5) of the country where the counterparty that signed the contract with the grafa-9 person is registered/resides. If no contract – per accompanying documents. Right: '1' if that country/territory is on the offshore list approved by MoJ reg. No. 2467 of 12.06.2013, otherwise '2'.",
+      "source_documents": [
+        "contract"
+      ],
+      "classifier": "Annex 5 – countries; offshore list reg. No. 2467",
+      "example": "398 | 2",
+      "cross_checks": [
+        "buyer country in contract = code"
+      ],
+      "notes": "Offshore list must be loaded as a separate reference table (not in this file).",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text; here it is the BUYER's country."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 8",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925264",
+        "url_ru": "https://lex.uz/docs/2924953#2925570"
+      }
+    },
+    {
+      "grafa": "12",
+      "name_uz_cyrl": "Умумий божхона қиймати",
+      "name_uz_latn": "Umumiy bojxona qiymati",
+      "name_ru": "Общая таможенная стоимость",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "decimal(2), currency of grafa 22",
+      "rule_en": "Total customs value = sum of grafa 45 of all items, in the grafa-22 currency.",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": null,
+      "example": null,
+      "cross_checks": [
+        "= Σ grafa 45 (exact)"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 9",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925268",
+        "url_ru": "https://lex.uz/docs/2924953#2925577"
+      }
+    },
+    {
+      "grafa": "13",
+      "name_uz_cyrl": "(untitled) USD/UZS rate",
+      "name_uz_latn": "(untitled) USD/UZS rate",
+      "name_ru": "(untitled) USD/UZS rate",
+      "untitled_in_official_text": true,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "decimal: UZS per 1 USD",
+      "rule_en": "US dollar rate to UZS set by the Central Bank on the date the GTD is accepted for clearance.",
+      "source_documents": [
+        "cbu_rate"
+      ],
+      "classifier": null,
+      "example": null,
+      "cross_checks": [],
+      "notes": "Rate date = acceptance date, which the product cannot know in advance → recompute at filing (Customs Code Art. 326).",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 10",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925270",
+        "url_ru": "https://lex.uz/docs/2924953#2925580"
+      }
+    },
+    {
+      "grafa": "14",
+      "name_uz_cyrl": "Декларант/божхона брокери",
+      "name_uz_latn": "Deklarant/bojxona brokeri",
+      "name_ru": "Декларант/таможенный брокер",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "free text + upper: № TIN/PINFL",
+      "rule_en": "Customs broker or declarant (legal entity) that filled in and files the GTD: short name, legal address, phone, e-mail; individual declarant: full name, address, phone, e-mail. Upper '№': TIN (PINFL for an individual). For YuklaGo self-filing this is the importer itself.",
+      "source_documents": [
+        "company_profile"
+      ],
+      "classifier": null,
+      "example": "«PAXTA TEKS» MChJ (SYNTHETIC) | № 100000009",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 11",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925272",
+        "url_ru": "https://lex.uz/docs/2924953#2925583"
+      }
+    },
+    {
+      "grafa": "17",
+      "name_uz_cyrl": "Келиб тушадиган мамлакат",
+      "name_uz_latn": "Kelib tushadigan mamlakat",
+      "name_ru": "Страна назначения",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "country short name (Annex 5)",
+      "rule_en": "Short name of the country of destination = the last country to which the goods are to be delivered.",
+      "source_documents": [
+        "contract",
+        "cmr"
+      ],
+      "classifier": "Annex 5 – countries",
+      "example": "Казахстан",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "ek10_only",
+        "difference": "Not used for IM40 (IM40 uses 15/15a country of dispatch instead)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 12",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925275",
+        "url_ru": "https://lex.uz/docs/2924953#2925588"
+      }
+    },
+    {
+      "grafa": "17a",
+      "name_uz_cyrl": "Келиб тушадиган мамлакат коди",
+      "name_uz_latn": "Kelib tushadigan mamlakat kodi",
+      "name_ru": "Код страны назначения",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "3-digit numeric (Annex 5)",
+      "rule_en": "Numeric code of the destination country.",
+      "source_documents": [
+        "contract",
+        "cmr"
+      ],
+      "classifier": "Annex 5 – countries",
+      "example": "398",
+      "cross_checks": [
+        "= code of grafa 17 name"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "ek10_only",
+        "difference": "Not used for IM40."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 13",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925279",
+        "url_ru": "https://lex.uz/docs/2924953#2925593"
+      }
+    },
+    {
+      "grafa": "18",
+      "name_uz_cyrl": "Жўнатиш/етказиб бериш вақтидаги транспорт воситаси",
+      "name_uz_latn": "Joʻnatish/yetkazib berish vaqtidagi transport vositasi",
+      "name_ru": "Транспортное средство при отправлении/прибытии",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "left: \"<count> <TRANSPORT>: plate[/trailer]; ...\"; right: country code; e-GTD extra fields",
+      "rule_en": "Vehicle(s) on which the goods are loaded for delivery to the border crossing point (or, if transhipped before the border, to the transhipment place). Left: number of vehicles, space, short transport name (Annex 6), colon, identifiers separated by ';' (vessel name, flight, wagon no., plate …); road trains: trailers after '/'. Right: numeric country code of the vehicle (of the tractor unit for road trains); several countries → '999' (paper: 'см. на обороте'; e-GTD: no reference, all data in fields). Pipeline / power line: 'ТРУБОПРОВОД' / 'ЛЭП'. Additionally (e-GTD separate fields): gross kg of goods in the vehicle; 2-digit vehicle type code (10 car ≤8 seats, 21 truck ≤10 t, 22 truck 10–20 t, 23 truck >20 t, 31/32/33 buses by seats, 40 minibus, 50 tractor, 60 motorcycle, 70 special); VIN; numeric code of the country where carriage ends; carrier (individual: full name, PINFL, passport series/no.; legal entity: name, TIN) and driver (full name, PINFL, passport). Non-resident carrier/driver without TIN/PINFL → '99999999999999'.",
+      "source_documents": [
+        "cmr",
+        "transport_order",
+        "user_input"
+      ],
+      "classifier": "Annex 6 – transport types; Annex 5 – countries",
+      "example": "1 АВТО: 10A123BC/10XY456 | 860; extra: 18450.000 кг; 23; VIN XTC00000000000000; 398; carrier «TRANS YO'L» MChJ (SYNTHETIC) TIN 100000010; driver Rahimov Bobur (SYNTHETIC), PINFL 30000000000000, AA0000000",
+      "cross_checks": [
+        "plate = CMR box 25",
+        "gross in vehicle ≥ Σ grafa 35 of this GTD"
+      ],
+      "notes": null,
+      "uncertain": "The vehicle-type code list in the text read ends at '70'; check ed2 for further codes ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa 18 = vehicle that carried the goods inside Uzbekistan to the clearing post, without the extra carrier/driver/VIN/vehicle-type fields. EK10 adds gross-in-vehicle, vehicle type code, VIN, end-of-carriage country, carrier and driver identity (sub-point 14 as amended by 2773-9, 2023)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 14",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925281",
+        "url_ru": "https://lex.uz/docs/2924953#2925597"
+      }
+    },
+    {
+      "grafa": "19",
+      "name_uz_cyrl": "Контейнер",
+      "name_uz_latn": "Konteyner",
+      "name_ru": "Контейнер",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "0 or 1",
+      "rule_en": "'0' – not in a container; '1' – in a container or the container itself is declared as goods.",
+      "source_documents": [
+        "cmr",
+        "packing_list"
+      ],
+      "classifier": null,
+      "example": "0",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 15",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925294",
+        "url_ru": "https://lex.uz/docs/2924953#2925610"
+      }
+    },
+    {
+      "grafa": "20",
+      "name_uz_cyrl": "Етказиб бериш шартлари",
+      "name_uz_latn": "Yetkazib berish shartlari",
+      "name_ru": "Условия поставки",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "3 subfields: [numeric Incoterms code] [letter code + place] [settlement form/dispatch form]",
+      "rule_en": "1st: numeric delivery-terms code (Annex 7). 2nd: letter code + geographic place. 3rd (per contract): 2-digit settlement form, '/', 2-digit dispatch form (separate e-GTD fields). Settlement form: 10 prepayment; 20 letter of credit; 30 bank guarantee; 40 export-contract insurance policy (political & commercial risks); 50 payment after export; 60 consignment; 70 barter; 80 free-of-charge. Mixed forms → the one with the largest absolute amount. Dispatch form: 01 goods sent directly to the contract party; 02 not sent directly to the contract party. Gratuitous supplies: terms from accompanying documents.",
+      "source_documents": [
+        "contract",
+        "invoice"
+      ],
+      "classifier": "Annex 7 – delivery terms",
+      "example": "02 | FCA Ташкентский р-н | 10/01",
+      "cross_checks": [
+        "Incoterms = contract = invoice",
+        "settlement form consistent with contract payment terms"
+      ],
+      "notes": null,
+      "uncertain": "No Annex 7 code for Incoterms 2020 DPU (same issue as IM40) ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "EK10-only third subfield: settlement-form code + dispatch-form code. IM40 grafa 20 has no such subfield."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 16",
+        "url_uz": "https://lex.uz/uz/docs/2924955#5092363",
+        "url_ru": "https://lex.uz/docs/2924953#5094580"
+      }
+    },
+    {
+      "grafa": "22",
+      "name_uz_cyrl": "Валюта ва товарларнинг умумий фактура қиймати",
+      "name_uz_latn": "Valyuta va tovarlarning umumiy faktura qiymati",
+      "name_ru": "Валюта и общая фактурная стоимость товаров",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "left: 3-digit currency code; right: decimal(2)",
+      "rule_en": "Left: numeric code (Annex 8) of the contract currency (currency in which goods are priced). Right: total invoice value of the consignment = Σ grafa 42.",
+      "source_documents": [
+        "contract",
+        "invoice"
+      ],
+      "classifier": "Annex 8 – currencies (840 USD, 156 CNY, 949 TRY, 860 UZS)",
+      "example": "840 | 24000.00",
+      "cross_checks": [
+        "= Σ grafa 42 (exact)",
+        "= invoice total",
+        "currency = contract currency"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 18",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925331",
+        "url_ru": "https://lex.uz/docs/2924953#2925659"
+      }
+    },
+    {
+      "grafa": "23",
+      "name_uz_cyrl": "Валюта курси",
+      "name_uz_latn": "Valyuta kursi",
+      "name_ru": "Курс валюты",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "\"<nominal>/<rate>\" with comma decimals",
+      "rule_en": "CBU rate of the grafa-22 currency to UZS on the date of GTD acceptance, written as nominal/rate, e.g. '1/63,41', '10/220,09'; UZS contract → '1/1'.",
+      "source_documents": [
+        "cbu_rate"
+      ],
+      "classifier": null,
+      "example": "1/12100,00 (EXAMPLE rate, not CBU)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 19",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925339",
+        "url_ru": "https://lex.uz/docs/2924953#2925665"
+      }
+    },
+    {
+      "grafa": "24",
+      "name_uz_cyrl": "Битим хусусияти",
+      "name_uz_latn": "Bitim xususiyati",
+      "name_ru": "Характер сделки",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "left: transaction-nature code; right: 3-digit settlement currency",
+      "rule_en": "Left: transaction nature code per Annex 9 (01 = ordinary trade with settlement in national or foreign currency). Right: numeric code of the currency in which the grafa-9 party settles with the counterparty.",
+      "source_documents": [
+        "contract"
+      ],
+      "classifier": "Annex 9 – nature of transaction",
+      "example": "01 | 840",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 20",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925349",
+        "url_ru": "https://lex.uz/docs/2924953#2925676"
+      }
+    },
+    {
+      "grafa": "25",
+      "name_uz_cyrl": "Чегарадаги транспорт тури",
+      "name_uz_latn": "Chegaradagi transport turi",
+      "name_ru": "Вид транспорта на границе",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "2-digit code (Annex 6)",
+      "rule_en": "Transport type code of the vehicle on which the goods WILL actually cross the Uzbek customs border.",
+      "source_documents": [
+        "cmr",
+        "user_input"
+      ],
+      "classifier": "Annex 6 – transport types",
+      "example": "30",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40: code of the grafa-21 vehicle that DID cross (not filled for change of regime). EK10 has no grafa 21; grafa 25 is the planned border-crossing vehicle type."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 21",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925358",
+        "url_ru": "https://lex.uz/docs/2924953#2925681"
+      }
+    },
+    {
+      "grafa": "26",
+      "name_uz_cyrl": "Мамлакат ичкарисидаги транспорт тури",
+      "name_uz_latn": "Mamlakat ichkarisidagi transport turi",
+      "name_ru": "Вид транспорта внутри страны",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "2-digit code",
+      "rule_en": "Transport type code (Annex 6) of the grafa-18 vehicle.",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": "Annex 6",
+      "example": "30",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 22",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925365",
+        "url_ru": "https://lex.uz/docs/2924953#2925686"
+      }
+    },
+    {
+      "grafa": "28",
+      "name_uz_cyrl": "Молия ва банк маълумотлари",
+      "name_uz_latn": "Moliya va bank maʼlumotlari",
+      "name_ru": "Финансовые и банковские сведения",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "TIN/PINFL",
+      "rule_en": "TIN (PINFL for an individual) of the payer of customs payments; if a non-resident pays – TIN/PINFL of the broker or declarant.",
+      "source_documents": [
+        "company_profile"
+      ],
+      "classifier": null,
+      "example": null,
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 23",
+        "url_uz": "https://lex.uz/uz/docs/2924955#7471899",
+        "url_ru": "https://lex.uz/docs/2924953#7472607"
+      }
+    },
+    {
+      "grafa": "29",
+      "name_uz_cyrl": "Чегарадаги божхона",
+      "name_uz_latn": "Chegaradagi bojxona",
+      "name_ru": "Таможня на границе",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "5-digit code + name (Annex 4)",
+      "rule_en": "Code and name of the customs post through which the goods WILL leave Uzbekistan. Pipeline / power line: the control post.",
+      "source_documents": [
+        "user_input",
+        "cmr"
+      ],
+      "classifier": "Annex 4 – customs posts",
+      "example": "27001 Яллама",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40: entry post (already crossed). EK10: planned exit post."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 24",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925385",
+        "url_ru": "https://lex.uz/docs/2924953#2925700"
+      }
+    },
+    {
+      "grafa": "30",
+      "name_uz_cyrl": "Товарлар турган жой",
+      "name_uz_latn": "Tovarlar turgan joy",
+      "name_ru": "Местонахождение товаров",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "text + (e-GTD) district code",
+      "rule_en": "Location of goods at filing: customs or free warehouse / duty-free shop → number and date of its licence; place without customs-warehouse status → postal address (no postcode); railway station → its name. E-GTD: separate field with district (city) code per Annex 15.",
+      "source_documents": [
+        "transit_declaration",
+        "user_input"
+      ],
+      "classifier": "Annex 15",
+      "example": "Ташкентская обл., Ташкентский р-н, ул. Навои 1 (склад экспортёра) (SYNTHETIC) | 1727265",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 25",
+        "url_uz": "https://lex.uz/uz/docs/2924955#4628859",
+        "url_ru": "https://lex.uz/docs/2924953#4631100"
+      }
+    },
+    {
+      "grafa": "31",
+      "name_uz_cyrl": "Юк жойлари ва товар тавсифи / Маркировка ва миқдор — контейнерлар рақами — товар тавсифи",
+      "name_uz_latn": "Yuk joylari va tovar tavsifi / Markirovka va miqdor — konteynerlar raqami — tovar tavsifi",
+      "name_ru": "Грузовые места и описание товара / Маркировка и количество — номера контейнеров — описание товара",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "numbered lines 1–5 + bottom-left producer TIN/district + bottom-right supplementary quantity",
+      "rule_en": "Description sufficient for unambiguous 10-digit classification; each element on a new numbered line. 1: trade name, trademark/brand, model, article, grade, standards, technical and commercial characteristics, composition (e-GTD: brand in separate field; 'без марки'/'без бренда' if none); parameters in other units and production date if needed for payments or prohibitions/restrictions. The generic heading text of the TN VED is not allowed. 2: packages – number of packages, packing type and number of packings ('часть коробки' if not whole); bulk: 01 насыпью, 02 навалом, 03 наливом; not filled for pipeline/power line. 3: container numbers ('часть' if partly). 4: excise stamps – series, numbers (ranges with hyphen) and quantity. 5: pipeline/power line: 'Поставка в период с … по …'. Bottom-left (separate field): TIN (PINFL) of the PRODUCER (manufacturer/grower) '/' district code (Annex 15) by legal address; for HS 07, 08, 0904, 1202, 1008, 1207409000, 2008191900 the district where the produce was GROWN per the phytosanitary certificate – one item per district if several. Producer unknown or several producers → consignor's TIN (PINFL) and territory code. Bottom-right: quantity in supplementary unit + symbol (code in grafa 41; e-GTD quantity only); 2 decimals, <0.01 → 6 decimals; kg-only codes → empty.",
+      "source_documents": [
+        "invoice",
+        "packing_list",
+        "classification",
+        "company_profile",
+        "phytosanitary_certificate"
+      ],
+      "classifier": null,
+      "example": "1) Футболка мужская трикотажная, 100% хлопок, модель PT-01, бренд PAXTA TEKS\n2) 200 мест, картонные коробки\n | 100000009/1727265 | 4000 шт",
+      "cross_checks": [
+        "packages = packing list = CMR",
+        "quantity = invoice = packing list",
+        "producer TIN present"
+      ],
+      "notes": null,
+      "uncertain": "Lines 6–11 of IM40 are absent from point 22 in the edition read; confirm ed2 does not require them for EK10 ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa 31 has lines 1–11 (incl. energy-efficiency class etc.) and the bottom-left shows the importer/consumer side. EK10: lines 1–5; bottom-left = PRODUCER TIN/district (growing district for listed agri codes)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 26",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925407",
+        "url_ru": "https://lex.uz/docs/2924953#2925712"
+      }
+    },
+    {
+      "grafa": "32",
+      "name_uz_cyrl": "Товар №",
+      "name_uz_latn": "Tovar №",
+      "name_ru": "Товар №",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "integer",
+      "rule_en": "Sequential number of the item declared in grafa 31; single item → '1'.",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": null,
+      "example": "1",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 27",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925453",
+        "url_ru": "https://lex.uz/docs/2924953#2925732"
+      }
+    },
+    {
+      "grafa": "33",
+      "name_uz_cyrl": "Товар коди",
+      "name_uz_latn": "Tovar kodi",
+      "name_ru": "Код товара",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "10 digits, no spaces",
+      "rule_en": "10-digit TN VED (TIF TN) code of the grafa-31 goods, written without spaces or separators (left part).",
+      "source_documents": [
+        "classification",
+        "invoice"
+      ],
+      "classifier": null,
+      "example": "6109100000",
+      "cross_checks": [
+        "code exists in the TN VED",
+        "first 6 digits vs invoice HS – warn on mismatch"
+      ],
+      "notes": "Right part of grafa 33 is not described in point 22 for EK10 – leave empty unless the cabinet requires it ⚠️.",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 28",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925462",
+        "url_ru": "https://lex.uz/docs/2924953#2925735"
+      }
+    },
+    {
+      "grafa": "34",
+      "name_uz_cyrl": "Келиб чиқиш мамлакати коди",
+      "name_uz_latn": "Kelib chiqish mamlakati kodi",
+      "name_ru": "Код страны происхождения",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "3-digit numeric (or \"EU\", \"000\")",
+      "rule_en": "Left: numeric origin-country code (Annex 5). Unknown at clearance → '000'. Certificate naming only the European Union → 'EU' (Latin).",
+      "source_documents": [
+        "certificate_of_origin",
+        "invoice"
+      ],
+      "classifier": "Annex 5",
+      "example": "860",
+      "cross_checks": [
+        "= certificate of origin (702 СПТЭК) country, if issued",
+        "= invoice origin"
+      ],
+      "notes": "For own-produced Uzbek goods normally 860 (UZ).",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 29",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925468",
+        "url_ru": "https://lex.uz/docs/2924953#2925737"
+      }
+    },
+    {
+      "grafa": "35",
+      "name_uz_cyrl": "Брутто вазн (кг)",
+      "name_uz_latn": "Brutto vazn (kg)",
+      "name_ru": "Вес брутто (кг)",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "decimal(3) kg",
+      "rule_en": "Gross mass in kg of the grafa-31 goods: total mass incl. all packaging needed to keep goods intact until they enter circulation, EXCLUDING containers and other transport equipment. Round mathematically to 3 decimals (<1 g → 6 decimals).",
+      "source_documents": [
+        "packing_list",
+        "cmr"
+      ],
+      "classifier": null,
+      "example": "2150.000",
+      "cross_checks": [
+        "Σ grafa 35 vs CMR gross (box 11)",
+        "Σ grafa 35 = packing list gross",
+        "gross ≥ net"
+      ],
+      "notes": "Gross excludes containers and other transport equipment (sub-point 30); pallets not stated ⚠️.",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 30",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925474",
+        "url_ru": "https://lex.uz/docs/2924953#2925741"
+      }
+    },
+    {
+      "grafa": "37",
+      "name_uz_cyrl": "Процедура",
+      "name_uz_latn": "Protsedura",
+      "name_ru": "Процедура",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "7 digits",
+      "rule_en": "Procedure code = declared regime (2 digits, Annex 3) + previous regime (2 digits; '00' if none) + movement-feature code (3 digits, Annex 11).",
+      "source_documents": [
+        "calculated"
+      ],
+      "classifier": "Annex 3, Annex 11",
+      "example": "1000000",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": "'000' = no movement feature is our reading of Annex 11 (as for IM40) ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "Starts with 10 instead of 40. The IM40 text's remark that customs transit counts as 'no previous regime' is not repeated in point 22 (sub-point 32)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 32",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925801",
+        "url_ru": "https://lex.uz/docs/2924953#2926444"
+      }
+    },
+    {
+      "grafa": "38",
+      "name_uz_cyrl": "Нетто вазн (кг)",
+      "name_uz_latn": "Netto vazn (kg)",
+      "name_ru": "Вес нетто (кг)",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "decimal(3) kg",
+      "rule_en": "Net mass in kg: without any packaging, except primary packaging in which goods are sold at retail and/or which cannot be separated before use without loss of consumer properties (e.g. coffee in a can). Bulk goods → total mass. Round to 3 decimals.",
+      "source_documents": [
+        "packing_list",
+        "invoice"
+      ],
+      "classifier": null,
+      "example": "2000.000",
+      "cross_checks": [
+        "net ≤ gross",
+        "= packing list net",
+        "= invoice net"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 33",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925806",
+        "url_ru": "https://lex.uz/docs/2924953#2926453"
+      }
+    },
+    {
+      "grafa": "39",
+      "name_uz_cyrl": "Квота",
+      "name_uz_latn": "Kvota",
+      "name_ru": "Квота",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "quantity + unit",
+      "rule_en": "Only for goods under quantitative restrictions: remaining quota per licence, not counting the goods now declared.",
+      "source_documents": [
+        "license"
+      ],
+      "classifier": null,
+      "example": "(empty)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 34",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925830",
+        "url_ru": "https://lex.uz/docs/2924953#2926470"
+      }
+    },
+    {
+      "grafa": "40",
+      "name_uz_cyrl": "Умумий декларация/аввалги ҳужжат",
+      "name_uz_latn": "Umumiy deklaratsiya/avvalgi hujjat",
+      "name_ru": "Общая декларация/предшествующий документ",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "\"ГТД post/date/number — item — gross kg — net kg — supp qty\"",
+      "rule_en": "Only if the goods were under ANOTHER customs regime before export: code 'ГТД', previous GTD registration number, item number (grafa 32), gross kg, net kg, supplementary quantity + symbol. Goods previously split over several GTDs → one line per GTD. Example from the text: 'ГТД 14010/31.03.2012/0353761 — 2 — 5980 кг — 5900 кг — 250,2 м3'.",
+      "source_documents": [
+        "previous_gtd"
+      ],
+      "classifier": null,
+      "example": "(empty – own production, no previous regime)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": "'Empty when no previous regime' is our reading of 'Если товары до заявляемого таможенного режима были помещены…' – confirm on ed2 ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa 40 almost always holds the transit document (ТД …) or delivery-control book (ККДГ/МДП). EK10 grafa 40 only refers to a previous GTD; for goods produced in Uzbekistan it stays empty (our reading)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 35",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925846",
+        "url_ru": "https://lex.uz/docs/2924953#2926476"
+      }
+    },
+    {
+      "grafa": "41",
+      "name_uz_cyrl": "Қўшимча ўлчов бирлиги",
+      "name_uz_latn": "Qoʻshimcha oʻlchov birligi",
+      "name_ru": "Дополнительная единица измерения",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "unit code",
+      "rule_en": "Code of the supplementary unit (TN VED 'table of units') for the quantity in grafa 31 bottom-right; empty if only kg applies.",
+      "source_documents": [
+        "classification"
+      ],
+      "classifier": null,
+      "example": "796 (шт) ⚠️ verify unit code",
+      "cross_checks": [],
+      "notes": "Supplementary unit per code is in data/tariff/tiftn_codes_pq181_annex1.csv; the numeric unit code table is not in this file ⚠️.",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 36",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925873",
+        "url_ru": "https://lex.uz/docs/2924953#2926489"
+      }
+    },
+    {
+      "grafa": "42",
+      "name_uz_cyrl": "Товарнинг фактура қиймати",
+      "name_uz_latn": "Tovarning faktura qiymati",
+      "name_ru": "Фактурная стоимость товара",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "decimal(2), contract currency",
+      "rule_en": "Invoice value of the item actually paid or payable (or compensated by counter-deliveries) per the contract, in contract currency; gratuitous/no contract → per accompanying documents. Round to 2 decimals.",
+      "source_documents": [
+        "invoice"
+      ],
+      "classifier": null,
+      "example": "24000.00",
+      "cross_checks": [
+        "= Σ invoice lines for this item",
+        "Σ = grafa 22"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 37",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925877",
+        "url_ru": "https://lex.uz/docs/2924953#2926492"
+      }
+    },
+    {
+      "grafa": "43",
+      "name_uz_cyrl": "(untitled) own-production flag",
+      "name_uz_latn": "(untitled) own-production flag",
+      "name_ru": "(untitled) own-production flag",
+      "untitled_in_official_text": true,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "0 or 1",
+      "rule_en": "'0' – the consignor exports goods NOT of its own production; '1' – the consignor exports goods of its OWN production.",
+      "source_documents": [
+        "company_profile",
+        "user_input"
+      ],
+      "classifier": null,
+      "example": "1",
+      "cross_checks": [
+        "if 1: grafa 31 bottom-left producer TIN should equal grafa 2 TIN"
+      ],
+      "notes": null,
+      "uncertain": "The rule speaks of the 'грузоотправитель' (consignor); if consignor ≠ exporter, which party's production counts is not stated ⚠️.",
+      "vs_im40": {
+        "status": "different",
+        "difference": "Same box, different meaning: IM40 '1' = imported for own needs / '0' = not for own needs. EK10 '1' = exporter is the manufacturer / '0' = not the manufacturer."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 38",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925888",
+        "url_ru": "https://lex.uz/docs/2924953#2926497"
+      }
+    },
+    {
+      "grafa": "44",
+      "name_uz_cyrl": "Қўшимча маълумотлар/тақдим этилаётган ҳужжатлар",
+      "name_uz_latn": "Qoʻshimcha maʼlumotlar/taqdim etilayotgan hujjatlar",
+      "name_ru": "Дополнительная информация/представляемые документы",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "one document per line: \"<code> <short> № ... от DD.MM.YYYY\"",
+      "rule_en": "Documents for each item with Annex-12 code (each on a new line): a) licence (101 ЛИЦЕНЗИЯ … срок); b) transport and commercial documents (e.g. 202 СМР, 205 АВИА, 220 ИНВ); c) contract (301 КНТ) and the transport contract with a non-resident carrier + its e-system ID; d) permits/certificates of other authorities (417 ССТ, 419 ФТСС phytosanitary …); e) registration of the contract / individual-entrepreneur certificate (501, 502); f) benefit: '6' + payment code (Annex 13) + Annex-14 act code (empty if no exemption or no rate); g) certificate of origin – export example 702 СПТЭК; h) other documents (deferral, commission/pledge contract, fine decision or 'form-2', etc.).",
+      "source_documents": [
+        "contract",
+        "invoice",
+        "cmr",
+        "certificates",
+        "certificate_of_origin"
+      ],
+      "classifier": "Annex 12 – document types; Annex 13; Annex 14",
+      "example": "202 СМР № UZ-KZ-0001 от 10.12.2026\n220 ИНВ № PT-2026-001 от 09.12.2026\n301 КНТ № PT-KZ/01 от 01.10.2026\n702 СПТЭК № UZKZ00000000 от 09.12.2026 (SYNTHETIC)",
+      "cross_checks": [
+        "contract, invoice and CMR present",
+        "certificate of origin present if buyer needs preference"
+      ],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "similar",
+        "difference": "Same lettered structure a)–h) as IM40; export-specific examples: 702 СПТЭК (export certificate of origin) instead of 701 СПТИМ, 419 ФТСС phytosanitary certificate. Code 904 МЕТОД: see grafa-map.json (IM40) note – not mentioned for EK10 either ⚠️."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 39",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925897",
+        "url_ru": "https://lex.uz/docs/2924953#2926501"
+      }
+    },
+    {
+      "grafa": "45",
+      "name_uz_cyrl": "Божхона қиймати",
+      "name_uz_latn": "Bojxona qiymati",
+      "name_ru": "Таможенная стоимость",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "decimal(2), contract currency (right subfield)",
+      "rule_en": "Right subfield: customs value of the item in the contract currency (gratuitous / no contract → currency of accompanying documents), determined under the Customs Code. Rounded to 2 decimals.",
+      "source_documents": [
+        "invoice",
+        "calculated"
+      ],
+      "classifier": null,
+      "example": "24000.00",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": "Left subfield not described (as for IM40) ⚠️.",
+      "vs_im40": {
+        "status": "similar",
+        "difference": "Same format; for export the Customs Code rules for EXPORTED goods apply – our pointer: Arts. 315–317 (https://lex.uz/docs/2876354), not the import methods 302–313."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 40",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925968",
+        "url_ru": "https://lex.uz/docs/2924953#2926538"
+      }
+    },
+    {
+      "grafa": "46",
+      "name_uz_cyrl": "Статистик қиймат",
+      "name_uz_latn": "Statistik qiymat",
+      "name_ru": "Статистическая стоимость",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "decimal(3), thousand USD",
+      "rule_en": "Statistical value in thousand USD, converted from grafa 45 at the CBU rate on the GTD acceptance date, rounded to 3 decimals.",
+      "source_documents": [
+        "calculated",
+        "cbu_rate"
+      ],
+      "classifier": null,
+      "example": "24.000",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same rule as IM40 (wording differs slightly)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 41",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925980",
+        "url_ru": "https://lex.uz/docs/2924953#2926543"
+      }
+    },
+    {
+      "grafa": "47",
+      "name_uz_cyrl": "Божхона тўловларининг ҳисоби",
+      "name_uz_latn": "Bojxona toʻlovlarining hisobi",
+      "name_ru": "Исчисление таможенных платежей",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "table rows: Вид | Основа начисления | Ставка | Сумма | СП",
+      "rule_en": "Per item and per payment type; the clearance fee always on the main sheet / item 1. 'Вид' = Annex 13 code – for export typically 10 (clearance fee); 25 export customs duty and 28 excise on exported goods only where a rate is set. 'Основа' in UZS (grafa 12/45 at CBU rate on acceptance date) unless set in foreign currency or non-money units. 'Ставка' = applied rate. 'Сумма' in UZS (or foreign currency if law requires). 'СП' codes as IM40 (БН, КТ, … ОП deferral, РП instalments, ВЗ VAT offset, ОО no payment). No row if no rate, zero rate, or the regime creates no obligation.",
+      "source_documents": [
+        "calculated",
+        "fee_table"
+      ],
+      "classifier": "Annex 13 – customs payments",
+      "example": "10 | 1 ГТД | <fee per VM 55 band> | … | БН",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": "Export clearance fee band/amount not re-checked here – use data/tariff/fees.json and confirm it applies to export ⚠️.",
+      "vs_im40": {
+        "status": "similar",
+        "difference": "Same columns/СП codes. Payment codes differ: import duty 20/21, import excise 27 and VAT 29 do not arise for export; export duty 25 / export excise 28 only where rates exist (Annex 13: https://lex.uz/docs/2924953#8356110)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 42",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2925997",
+        "url_ru": "https://lex.uz/docs/2924953#2926546"
+      }
+    },
+    {
+      "grafa": "48",
+      "name_uz_cyrl": "Тўловларни кечиктириш",
+      "name_uz_latn": "Toʻlovlarni kechiktirish",
+      "name_ru": "Отсрочка платежей",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "\"XX.DD.MM.YYYY\" per payment; instalments \"ПН.ХХ.ДД.ММ.ГГГГ.СУММА\"",
+      "rule_en": "Deferral: payment code + final due date per payment type, one line each. Instalments: month no., payment code, due date, amount per instalment, one line each.",
+      "source_documents": [
+        "customs_decision"
+      ],
+      "classifier": null,
+      "example": "(empty)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same scheme as IM40 (amendments 2773-10 / 2773-12)."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 43",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2926016",
+        "url_ru": "https://lex.uz/docs/2924953#2926568"
+      }
+    },
+    {
+      "grafa": "49",
+      "name_uz_cyrl": "Омбор номи",
+      "name_uz_latn": "Ombor nomi",
+      "name_ru": "Наименование склада",
+      "untitled_in_official_text": null,
+      "level": "item",
+      "filled_by": "declarant",
+      "format": "licence number and date",
+      "rule_en": "Number and date of the customs/free warehouse licence if the goods were previously placed under a regime involving storage there; otherwise not filled.",
+      "source_documents": [
+        "user_input"
+      ],
+      "classifier": null,
+      "example": "(empty)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 44",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2926298",
+        "url_ru": "https://lex.uz/docs/2924953#2926574"
+      }
+    },
+    {
+      "grafa": "50",
+      "name_uz_cyrl": "Ишонч билдирган шахс",
+      "name_uz_latn": "Ishonch bildirgan shaxs",
+      "name_ru": "Доверитель",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "fixed sentence + full name, position, phone, PINFL (+ power of attorney)",
+      "rule_en": "Text: 'Ответственность за представленные документы и сведения несет …' + full name, position, phone, PINFL (separate e-GTD field) of the person responsible – the declarant or its authorised person. Non-resident without PINFL → 14 nines. If an authorised person: number, date and validity of the contract/power of attorney.",
+      "source_documents": [
+        "company_profile",
+        "user_input"
+      ],
+      "classifier": null,
+      "example": null,
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 45",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2926304",
+        "url_ru": "https://lex.uz/docs/2924953#2926577"
+      }
+    },
+    {
+      "grafa": "54",
+      "name_uz_cyrl": "Жой ва сана",
+      "name_uz_latn": "Joy va sana",
+      "name_ru": "Место и дата",
+      "untitled_in_official_text": null,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "numbered lines 1–5; GTD own number PINFL/DD.MM.YYYY/serial",
+      "rule_en": "Declaring person filing on behalf of the grafa-14 person: 1 place of filling; 2 full name + e-mail; 3 phone; 4 (broker only) number/date of broker–client contract; 5 declarant's own GTD number '99999999999999/99.99.9999/999999' = PINFL / filling date / serial number increasing within the year (restarts each year, never repeated). E-GTD authenticity is certified by the declaring person's ЭЦП (ERI).",
+      "source_documents": [
+        "company_profile",
+        "calculated"
+      ],
+      "classifier": null,
+      "example": null,
+      "cross_checks": [
+        "serial unique within year"
+      ],
+      "notes": "'Declaring person' = declarant filing itself or a customs-clearance specialist employed by the declarant/broker (point 1).",
+      "uncertain": null,
+      "vs_im40": {
+        "status": "same",
+        "difference": "Same text as IM40 (ch.5 p.25), apart from cross-references."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 46",
+        "url_uz": "https://lex.uz/uz/docs/2924955#3903135",
+        "url_ru": "https://lex.uz/docs/2924953#3908942"
+      }
+    },
+    {
+      "grafa": "C",
+      "name_uz_cyrl": "«С» (untitled)",
+      "name_uz_latn": "«S» (untitled)",
+      "name_ru": "«С» (untitled)",
+      "untitled_in_official_text": true,
+      "level": "header",
+      "filled_by": "declarant",
+      "format": "line 1 only",
+      "rule_en": "1: identification number of the foreign-trade contract in the Unified Electronic Information System of Foreign Trade Operations.",
+      "source_documents": [
+        "contract"
+      ],
+      "classifier": null,
+      "example": "1) 0000000000 (SYNTHETIC)",
+      "cross_checks": [],
+      "notes": null,
+      "uncertain": null,
+      "vs_im40": {
+        "status": "different",
+        "difference": "IM40 grafa C has a 2nd line (date of import = border stamp date). EK10 has only line 1."
+      },
+      "legal_source": {
+        "doc": "Instruction No. 2773 (06.04.2016) on filling the BYD/GTD",
+        "point": "Ch.4, point 22, sub-point 48",
+        "url_uz": "https://lex.uz/uz/docs/2924955#2926362",
+        "url_ru": "https://lex.uz/docs/2924953#2926601"
+      }
+    }
+  ],
+  "diff_vs_im40": {
+    "only_im40": [
+      "15",
+      "21",
+      "15a"
+    ],
+    "only_ek10": [
+      "17",
+      "17a"
+    ],
+    "changed": [
+      {
+        "grafa": "1",
+        "difference": "Direction 'ЭК' instead of 'ИМ'; regime 10 instead of 40."
+      },
+      {
+        "grafa": "2",
+        "difference": "IM40 grafa 2 = FOREIGN consignor (no TIN/district). In EK10 grafa 2 is the UZBEK consignor/exporter with the upper-right status code and the bottom TIN/PINFL + district code (those fields sit in grafa 8 for IM40)."
+      },
+      {
+        "grafa": "8",
+        "difference": "IM40 grafa 8 = Uzbek importer with status code and TIN/district. EK10 grafa 8 = FOREIGN consignee: name + country + address only – the text read has NO TIN/district bottom part and no upper-right status code."
+      },
+      {
+        "grafa": "18",
+        "difference": "IM40 grafa 18 = vehicle that carried the goods inside Uzbekistan to the clearing post, without the extra carrier/driver/VIN/vehicle-type fields. EK10 adds gross-in-vehicle, vehicle type code, VIN, end-of-carriage country, carrier and driver identity (sub-point 14 as amended by 2773-9, 2023)."
+      },
+      {
+        "grafa": "20",
+        "difference": "EK10-only third subfield: settlement-form code + dispatch-form code. IM40 grafa 20 has no such subfield."
+      },
+      {
+        "grafa": "25",
+        "difference": "IM40: code of the grafa-21 vehicle that DID cross (not filled for change of regime). EK10 has no grafa 21; grafa 25 is the planned border-crossing vehicle type."
+      },
+      {
+        "grafa": "29",
+        "difference": "IM40: entry post (already crossed). EK10: planned exit post."
+      },
+      {
+        "grafa": "31",
+        "difference": "IM40 grafa 31 has lines 1–11 (incl. energy-efficiency class etc.) and the bottom-left shows the importer/consumer side. EK10: lines 1–5; bottom-left = PRODUCER TIN/district (growing district for listed agri codes)."
+      },
+      {
+        "grafa": "37",
+        "difference": "Starts with 10 instead of 40. The IM40 text's remark that customs transit counts as 'no previous regime' is not repeated in point 22 (sub-point 32)."
+      },
+      {
+        "grafa": "40",
+        "difference": "IM40 grafa 40 almost always holds the transit document (ТД …) or delivery-control book (ККДГ/МДП). EK10 grafa 40 only refers to a previous GTD; for goods produced in Uzbekistan it stays empty (our reading)."
+      },
+      {
+        "grafa": "43",
+        "difference": "Same box, different meaning: IM40 '1' = imported for own needs / '0' = not for own needs. EK10 '1' = exporter is the manufacturer / '0' = not the manufacturer."
+      },
+      {
+        "grafa": "44",
+        "difference": "Same lettered structure a)–h) as IM40; export-specific examples: 702 СПТЭК (export certificate of origin) instead of 701 СПТИМ, 419 ФТСС phytosanitary certificate. Code 904 МЕТОД: see grafa-map.json (IM40) note – not mentioned for EK10 either ⚠️."
+      },
+      {
+        "grafa": "45",
+        "difference": "Same format; for export the Customs Code rules for EXPORTED goods apply – our pointer: Arts. 315–317 (https://lex.uz/docs/2876354), not the import methods 302–313."
+      },
+      {
+        "grafa": "47",
+        "difference": "Same columns/СП codes. Payment codes differ: import duty 20/21, import excise 27 and VAT 29 do not arise for export; export duty 25 / export excise 28 only where rates exist (Annex 13: https://lex.uz/docs/2924953#8356110)."
+      },
+      {
+        "grafa": "C",
+        "difference": "IM40 grafa C has a 2nd line (date of import = border stamp date). EK10 has only line 1."
+      }
+    ],
+    "same": [
+      "3",
+      "5",
+      "7",
+      "9",
+      "11",
+      "12",
+      "13",
+      "14",
+      "19",
+      "22",
+      "23",
+      "24",
+      "26",
+      "28",
+      "30",
+      "32",
+      "33",
+      "34",
+      "35",
+      "38",
+      "39",
+      "41",
+      "42",
+      "46",
+      "48",
+      "49",
+      "50",
+      "54"
+    ]
+  },
+  "not_filled_by_declarant_for_ek10": "Every grafa not in the point-21 list (e.g. 4, 6, 10, 15, 15a, 16, 21, 27, 36, 51–53) is not filled by the declaring person for EK10.",
+  "customs_only": [
+    {
+      "grafa": "7 (number part)",
+      "rule": "99999/DD.MM.YYYY/9999999 – post code / acceptance date / serial number of the post's GTDs in the year"
+    },
+    {
+      "grafa": "A",
+      "rule": "paper additional sheets only: registration number from grafa 7"
+    },
+    {
+      "grafa": "B",
+      "rule": "e-GTD only: per payment code, total amount over all items; exemptions shown with 'без оплаты'"
+    },
+    {
+      "grafa": "D",
+      "rule": "customs decision marks; filling grafa D completes clearance (point 13)"
+    }
+  ],
+  "classifiers": [
+    {
+      "annex": 3,
+      "name": "Customs regimes",
+      "where": "Annex 3 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 4,
+      "name": "Customs posts (edition 2773-14 of 04.02.2026)",
+      "where": "Annex 4 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 5,
+      "name": "Countries of the world",
+      "where": "Annex 5 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 6,
+      "name": "Transport types",
+      "where": "Annex 6 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 7,
+      "name": "Delivery terms",
+      "where": "Annex 7 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 8,
+      "name": "Currencies",
+      "where": "Annex 8 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 9,
+      "name": "Nature of transaction",
+      "where": "Annex 9 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 11,
+      "name": "Movement features",
+      "where": "Annex 11 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 12,
+      "name": "Document types for grafa 44",
+      "where": "Annex 12 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 13,
+      "name": "Customs payments",
+      "where": "Annex 13 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 14,
+      "name": "Benefit legal acts for grafa 44",
+      "where": "Annex 14 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 15,
+      "name": "Districts and cities of Uzbekistan",
+      "where": "Annex 15 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    },
+    {
+      "annex": 16,
+      "name": "Main spheres (technological equipment)",
+      "where": "Annex 16 to Instruction No. 2773 – https://lex.uz/docs/2924953 (ru) / https://lex.uz/uz/docs/2924955 (uz)"
+    }
+  ]
+}

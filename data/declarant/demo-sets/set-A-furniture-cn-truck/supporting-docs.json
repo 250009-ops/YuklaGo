@@ -1,0 +1,62 @@
+{
+  "_synthetic": "SYNTHETIC DEMO DATA – fictitious companies, people, TINs, PINFLs, plates and document numbers. Not real. Do not file.",
+  "contract": {
+    "number": "15/2026",
+    "date": "2026-09-05",
+    "e_system_id": "2026-UZ-000000123 (SYNTHETIC)",
+    "seller": "Foshan Mingde Furniture Co., Ltd. (SYNTHETIC)",
+    "buyer": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC)",
+    "incoterms": "FCA Foshan (Incoterms 2010)",
+    "currency": "USD",
+    "settlement_currency": "USD",
+    "payment_form": "10/01"
+  },
+  "certificate_of_origin": {
+    "code": "701 СПТИМ",
+    "number": "CCPIT-SYN-2026-0001",
+    "date": "2026-10-30",
+    "country": "China",
+    "note": "SYNTHETIC"
+  },
+  "other_certificates": [],
+  "transit_declaration": {
+    "number": "03002/10.11.2026/0012345",
+    "type": "ТД",
+    "from_post": "03002",
+    "to_post": "26010",
+    "item_for": {
+      "1": 1,
+      "2": 1
+    },
+    "note": "SYNTHETIC; one TD item for code 9403601000"
+  },
+  "freight": {
+    "carrier_invoice": "TSL-2026-559 (SYNTHETIC)",
+    "total_usd": "4600.00",
+    "to_border_usd": "3900.00",
+    "border_to_tashkent_usd": "700.00",
+    "insurance": "none paid"
+  },
+  "arrival": {
+    "destination_post": {
+      "code": "26010",
+      "name": "Сергели"
+    },
+    "presented_on": "2026-11-12",
+    "delivery_confirmed": "2026-11-12T10:40+05:00"
+  },
+  "importer_profile": {
+    "name": "«UYJIHOZ SAVDO» MChJ (SYNTHETIC)",
+    "address": "г. Ташкент, Чиланзарский р-н, ул. Бунёдкор, 1 (SYNTHETIC)",
+    "tin": "100000001",
+    "district_code": "1726294",
+    "phone": "+998 71 000 00 01",
+    "email": "info@uyjihoz.example"
+  },
+  "responsible_person": {
+    "name": "Каримов Азиз Бахромович (SYNTHETIC)",
+    "position": "директор",
+    "phone": "+998 90 000 00 01",
+    "pinfl": "30000000000001"
+  }
+}
